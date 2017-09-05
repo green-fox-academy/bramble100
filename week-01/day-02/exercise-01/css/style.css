@@ -1,0 +1,38 @@
+body {
+    margin: 0px;
+}
+
+main {
+    padding: 10%;
+    /*background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cat_poster_1.jpg/1280px-Cat_poster_1.jpg');*/
+    background-image: topography.jpg;
+}
+
+nav {
+    background-color: #333333;
+    padding: 20px 20px 20px 20px;
+    font-family: 'Roboto Slab', serif;
+}
+
+nav#links {
+    text-align: right;
+}
+strong {
+    color: #ff0099;
+}
+
+a {
+    color: #ff0099;
+    text-transform: uppercase;
+}
+
+h1,h2, strong {
+    font-family: 'Merriweather', serif;
+}
+p#triple-slash {
+    text-align: center;
+}
+
+h2#wiki-header {
+    text-align: center;
+}
