@@ -8,6 +8,6 @@ Slack: @colonel
 
 Cohort: Pallida
 
-Class: Alpaga[see why](http://bada55.io/419464)
+Class: Alpaga [see why](http://bada55.io/419464)
 
 [Our syllabus on GitHub](https://github.com/greenfox-academy/alpaga-syllabus)
