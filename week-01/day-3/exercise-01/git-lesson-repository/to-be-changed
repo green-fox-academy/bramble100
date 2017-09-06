@@ -1,0 +1,9 @@
+total 8
+-rw-r--r-- 1 arnol 197610 143 Sep  6 13:35 about.html
+drwxr-xr-x 1 arnol 197610   0 Sep  6 15:03 css/
+drwxr-xr-x 1 arnol 197610   0 Sep  6 15:03 images/
+-rw-r--r-- 1 arnol 197610 143 Sep  6 13:35 index.html
+-rw-r--r-- 1 arnol 197610 233 Sep  6 13:35 README.md
+-rw-r--r-- 1 arnol 197610 145 Sep  6 13:35 tasks.txt
+drwxr-xr-x 1 arnol 197610   0 Sep  6 15:04 temp_images/
+-rw-r--r-- 1 arnol 197610   0 Sep  6 15:33 to-be-changed
