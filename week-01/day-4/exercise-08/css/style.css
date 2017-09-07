@@ -1,0 +1,30 @@
+div,p {
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+}
+
+div.upper {
+    border: 1px solid #4285f4;
+}
+
+div.upper p {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-color: #4285f4;
+    border: 1px solid blue;
+}
+
+div.lower {
+    border: 1px solid #4285f4;
+    background-color: #ff6347;    
+}
+
+div.lower p {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-color: #643579;
+    border: 1px solid blue;
+}
