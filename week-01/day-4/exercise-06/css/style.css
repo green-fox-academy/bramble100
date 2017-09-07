@@ -1,0 +1,22 @@
+div {
+    width: 500px;
+}
+
+p {
+    background-color: #0cebde;
+    padding: 45px 55px;
+    border-radius: 100%;
+    text-align: center;
+    color: white;
+    font: 36px sans-serif;
+    margin: 10px;
+    display: inline-block;
+}
+
+p:first-of-type {
+    background-color: #b90ced;
+}
+
+p:last-of-type {
+    background-color: #ebbe0c;
+}
