@@ -3,13 +3,18 @@ div {
     margin: 0px;
     padding: 15px;
     background-color: rgb(66, 133, 244);
+    /*position: relative;*/
 }
 
 p {
+    /*position: absolute;*/
+    top: 50%;
     margin: 0px;
-    padding: 0px;
-    height: 143px;
+    padding: 50px 0px;
+    
+/*    height: 143px;*/
     text-align: center;
+    vertical-align: middle;
     color: white;
     font: 36px sans-serif;
 }
