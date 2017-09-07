@@ -1,10 +1,11 @@
 p {
-    color: rgb(0, 85, 102);
-    border-width: 5px;
-    border-color: rgb(125, 206, 148);
-    background-color: rgb(14, 145, 161);
     width: 358px;
     height: 143px;
-    font-size: 36px;
     padding: 15px 20px 15px 15px;
+    background-color: rgb(14, 145, 161);
+    
+    border: 5px solid rgb(125, 206, 148);
+
+    color: rgb(0, 85, 102);
+    font: 36px sans-serif;
 }
