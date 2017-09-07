@@ -1,0 +1,22 @@
+body {
+    width: 300px;
+}
+
+#b325, 
+div.b326 {
+    color: black;
+    border: 1px solid green;
+    font-weight: bold;
+}
+
+.big {
+    color: blue;
+}
+
+p.big {
+    background-color: yellow;
+}
+
+.b329 {
+    font-weight: bold;
+}
