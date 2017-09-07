@@ -1,0 +1,24 @@
+div {
+    width: 380px;
+    margin: none;
+    padding: 15px 15px 15px 15px;
+    background-color: rgb(66, 133, 244);
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+    height: 143px;
+    text-align: center;
+    color: white;
+    font: 36px sans-serif;
+}
+
+p {
+    background-color: rgb(230, 118, 118);
+}
+/*
+p {
+    background-color: rgb(242, 240, 98);    
+}
+*/
