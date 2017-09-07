@@ -1,7 +1,7 @@
 div {
     width: 380px;
-    margin: none;
-    padding: 15px 15px 15px 15px;
+    margin: 0px;
+    padding: 15px;
     background-color: rgb(66, 133, 244);
 }
 
@@ -14,11 +14,18 @@ p {
     font: 36px sans-serif;
 }
 
-p {
+p:nth-child(1) {
     background-color: rgb(230, 118, 118);
 }
-/*
-p {
-    background-color: rgb(242, 240, 98);    
+
+p:nth-child(2) {
+    background-color: rgb(240,240,98);
 }
-*/
+
+p:nth-child(3) {
+    background-color: rgb(169, 230, 230);
+}
+
+p:nth-child(4) {
+    background-color: rgb(118, 146, 228);
+}
