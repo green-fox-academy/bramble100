@@ -5,7 +5,6 @@
 
 body {
     background-color: white;
-    padding: auto;
 }
 
 div {
@@ -20,6 +19,22 @@ form {
     width: 620px;
     height: 280px;
     margin: auto;
-    /*border: 100px solid #dcd6cd;*/
     background-color: #127731;
+}
+
+form div {
+    width: auto;
+    height: auto;
+    background-color: #ff1200;
+    padding: 10px;
+}
+
+div.yellow {
+    background-color: #ffe42e;    
+    margin: 0px;
+    padding: 1px;    
+}
+form p {
+    margin: 0px;
+    padding: 1px;
 }
