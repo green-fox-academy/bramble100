@@ -1,0 +1,25 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: white;
+    padding: auto;
+}
+
+div {
+    /*box-sizing: border-box;*/
+    width: 820px;
+    padding: 50px;
+    margin: auto;
+    background-color: #dcd6cd;
+}
+
+form {
+    width: 620px;
+    height: 280px;
+    margin: auto;
+    /*border: 100px solid #dcd6cd;*/
+    background-color: #127731;
+}
