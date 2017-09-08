@@ -1,0 +1,135 @@
+* {
+    margin: 0px;   
+    width: 1200px;
+    color: #444444;
+}
+
+body {
+    padding: 10px 100px;
+}
+
+div.header {
+    height: 300 px;
+    background: darkgray;   
+}
+
+div.header h1, h2 {
+    padding: 10px;
+    font-family: 'Bree Serif', serif;
+    display: inline;
+}
+
+div.header h1 {
+    font-size: 48px;
+}
+
+div.header h1 {
+    font-size: 36px;
+}
+
+main {
+    height: 500px;
+    padding-top: 100px;
+    background: linear-gradient(-90deg,#80bd9e, #89da59);
+    text-align: center;
+}
+
+p.link {
+    height: 80px;
+    font-family: 'Bree Serif', serif;
+    font-size: 36px;
+    text-decoration: none;
+}
+
+a.main {
+    font-family: 'Bree Serif', serif;
+    font-size: 36px;
+    text-decoration: none;
+    transition: font-size 2s, color 2s;
+    vertical-align: middle;
+}
+
+a:hover {
+    font-size: 48px;
+    color: tomato;
+}
+
+div.footer {
+    background-color: darkgray;
+    font-family: 'Bree Serif', serif;
+    font-size: 36px;    
+}
+
+/* 2nd slide */
+.bash div {
+    width: 898px;
+    margin: 0px;
+    background-color: darkgray;
+}
+    
+.bash div:nth-child(1) {
+    height: 90px;
+    background-image: url('../images/git-bash-green-1header.png');
+}
+
+.bash div:nth-child(2):hover {
+    height: 21px;
+    background-image: url('../images/git-bash-peter-fetch-magnified.png');
+}
+
+.bash div:nth-child(2) {
+    height: 17px;
+    background-image: url('../images/git-bash-green-2fetch.png');
+    transition: height 2s, background-image 2s;
+}
+
+.bash div:nth-child(3) {
+    height: 17px;
+    background-image: url('../images/git-bash-green-3push.png');
+}
+
+.bash div:nth-child(4) {
+    height: 70px;
+    background-image: url('../images/git-bash-green-4footer.png');
+}
+
+/*.bash div:nth-child(2) {
+    height: 17px;
+    background-image: url('../images/git-bash-green-2fetch.png');
+    transition: height 2s, background-image 2s;
+}*/
+
+/* GitHub demo bash sliced */
+
+.magnified div {
+    width: 898px;
+    margin: 0px;
+    background-color: darkgray;
+    margin: 10px;
+}
+    
+.magnified div:nth-child(1) {
+    height: 90px;
+    background-image: url('../images/git-bash-green-1header.png');
+}
+
+.magnified div:nth-child(2):hover {
+    height: 21px;
+    background-image: url('../images/git-bash-peter-fetch-magnified.png');
+}
+
+.magnified div:nth-child(2) {
+    height: 17px;
+    background-image: url('../images/git-bash-green-2fetch.png');
+    transition: height 2s, background-image 2s;
+}
+
+.magnified div:nth-child(3) {
+    height: 17px;
+    background-image: url('../images/git-bash-green-3push.png');
+}
+
+.magnified div:nth-child(4) {
+    height: 70px;
+    background-image: url('../images/git-bash-green-4footer.png');
+}

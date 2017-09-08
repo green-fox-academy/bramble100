@@ -1,0 +1,55 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: white;
+}
+
+div {
+    /*box-sizing: border-box;*/
+    width: 820px;
+    padding: 50px;
+    margin: auto;
+    background-color: #dcd6cd;
+}
+
+form {
+    width: 620px;
+    height: 280px;
+    margin: auto;
+    background-color: #127731;
+    padding: 10px 0px;
+    color:#127731;
+}
+
+form div {
+    width: auto;
+    height: auto;
+    background-color: #ff1200;
+    color: #127731;
+    padding: 10px;
+    margin: 0px 0px 10px 0px;
+}
+
+form div.yellow {
+    background-color: #ffe42e;   
+    margin: 100px; 
+}
+
+form div.header {
+    margin: 0px;
+    padding: 0px;    
+}
+
+form div.body {
+    margin: 0px;
+    padding: 0px;    
+    display: inline-block;
+}
+
+form p {
+    margin: 0px;
+    padding: 0px;
+}
