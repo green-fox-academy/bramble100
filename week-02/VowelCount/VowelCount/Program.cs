@@ -12,12 +12,12 @@ namespace VowelCount
         {
             Console.WriteLine("Vowel Count");
             Console.WriteLine("Enter a string:");
-            string string1 = Console.ReadLine();
+            string userInput = Console.ReadLine();
 
             Dictionary<char, int> foundVowels = new Dictionary<char, int>();
             HashSet<char> vowels = new HashSet<char>() { 'a', 'e', 'i', 'o', 'u' };
 
-            foreach (char c in string1)
+            foreach (char c in userInput)
             {
                 if (!vowels.Contains(c))
                 {
