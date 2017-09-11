@@ -18,10 +18,11 @@ namespace Anagram
             string string2 = Console.ReadLine();
 
 
-            Console.WriteLine("The first string is \"{0}\", the second string is \"{1}\", and they are {2}anagrams.",
+            Console.WriteLine("The first string is \"{0}\", the second string is \"{1}\", and they are {2}anagrams, and they are {3}palindroms.",
                 string1,
                 string2,
-                TheyAreAnagrams(string1,string2) ? "" : "not ");
+                TheyAreAnagrams(string1, string2) ? "" : "not ",
+                TheyArePalindroms(string1, string2) ? "" : "not ");
 
             Console.ReadKey();
         }
@@ -65,25 +66,10 @@ namespace Anagram
                 return false;
             }
 
-            for
-            Hashtable lettersInString1 = new Hashtable();
-
-            foreach (char character in string1)
+            int length = string1.Length;
+            for(int i = 0; i < length; i++)
             {
-                lettersInString1[character] = lettersInString1.ContainsKey(character) ? Int32.Parse(lettersInString1[character].ToString()) + 1 : 1;
-            }
-            foreach (char character in string2)
-            {
-                Console.WriteLine("Nr of character \'{0}\': {1}", character, lettersInString1[character]);
-                if (lettersInString1.ContainsKey(character))
-                {
-                    lettersInString1[character] = Int32.Parse(lettersInString1[character].ToString()) - 1;
-                    if (Int32.Parse(lettersInString1[character].ToString()) == 0)
-                    {
-                        lettersInString1.Remove(character);
-                    }
-                }
-                else
+                if( string1[i] != string2[length - i - 1])
                 {
                     return false;
                 }
