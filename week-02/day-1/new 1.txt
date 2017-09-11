@@ -1,0 +1,10 @@
+GreenFox
+
+C:\Users\Public\Documents\test1\bramble100\week-02\day-1\
+
+Exercise-2
+
+Console.WriteLine();
+Console.ReadLine();
+
+Console.ReadKey();
