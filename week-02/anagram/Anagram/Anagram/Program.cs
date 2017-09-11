@@ -22,26 +22,39 @@ namespace Anagram
 
             foreach (char character in string1)
             {
-                lettersInString1[character] = lettersInString1.ContainsKey(character) ? lettersInString1[character] : 1;
+                lettersInString1[character] = lettersInString1.ContainsKey(character) ? Int32.Parse(lettersInString1[character].ToString()) + 1 : 1;
             }
 
-            foreach(char character in string2)
+            if (string1.Length != string2.Length)
             {
-                if(lettersInString1.ContainsKey(character))
+                theyAreAnagrams = false;
+            }
+            else
+            {
+                foreach (char character in string2)
                 {
-                    lettersInString1[character] = Int32.Parse(lettersInString1[character].ToString()) - 1;
-                }
-                else
-                {
-                    theyAreAnagrams = false;
-                    break;
+                    Console.WriteLine("Nr of character \'{0}\': {1}, anagram: {2}", character, lettersInString1[character], theyAreAnagrams);
+                    if (lettersInString1.ContainsKey(character))
+                    {
+                        lettersInString1[character] = Int32.Parse(lettersInString1[character].ToString()) - 1;
+                        if (Int32.Parse(lettersInString1[character].ToString()) == 0)
+                        {
+                            lettersInString1.Remove(character);
+                        }
+
+                    }
+                    else
+                    {
+                        theyAreAnagrams = false;
+                        break;
+                    }
                 }
             }
 
             Console.WriteLine("The first string is \"{0}\", the second string is \"{1}\", and they are {2}anagrams.",
                 string1,
                 string2,
-                theyAreAnagrams? "":"not ");
+                theyAreAnagrams ? "" : "not ");
 
             Console.ReadKey();
         }
