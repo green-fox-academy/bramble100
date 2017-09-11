@@ -14,16 +14,26 @@ namespace BetValidator
         {
             string textMessage = "12 90 3 44 2";
             List<long> gameType = new List<long> { 5, 90 };
-            /*HashSet<int> userInput = userInputProcessor(textMessage);*/
 
-            foreach ( long bet in UserInputProcessor(textMessage))
+            Console.WriteLine("The user input for this game type is: " + textMessage);
+
+            SortedSet<long> userInput = ProcessedUserInput(textMessage);
+            Console.WriteLine("The user input for this game type is {0}.", BetIsValid(gameType, userInput) ? "valid" : "invalid");
+
+            if (BetIsValid(gameType, userInput))
             {
-                Console.WriteLine(bet);
+                foreach(long bet in userInput)
+                {
+                    Console.WriteLine(bet);
+                }
+                
             }
+            
+
             Console.ReadKey();
         }
 
-        static SortedSet<long> UserInputProcessor(string userInput)
+        static SortedSet<long> ProcessedUserInput(string userInput)
         {
             SortedSet<long> returnList = new SortedSet<long>();
             foreach (string segment in userInput.Split(' ', ','))
@@ -33,11 +43,9 @@ namespace BetValidator
             return returnList;
         }
 
-        static bool BetIsValid(List<int> gameType, SortedSet<long> bet)
+        static bool BetIsValid(List<long> gameType, SortedSet<long> bet)
         {
-            if 
-            foreach(long uniqueBetin bet)
-
+            return (bet.Count == gameType[0] && bet.Max <= gameType[1]);
         }
     }
 }
