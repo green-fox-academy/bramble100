@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortablePokerHands", "SortablePokerHands\SortablePokerHands.csproj", "{FBA1360C-A1C5-4918-A755-3CC02974F3EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBA1360C-A1C5-4918-A755-3CC02974F3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA1360C-A1C5-4918-A755-3CC02974F3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA1360C-A1C5-4918-A755-3CC02974F3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA1360C-A1C5-4918-A755-3CC02974F3EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59F9CDC0-95A0-400C-8585-85492ED2BECE}
+	EndGlobalSection
+EndGlobal

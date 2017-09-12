@@ -52,6 +52,7 @@ namespace BetValidator
             }
             return true;
         }
+
         static SortedSet<long> ProcessedUserInput(string userInput)
         {
             SortedSet<long> returnList = new SortedSet<long>();
