@@ -11,9 +11,14 @@ namespace SortablePokerHands
         static void Main(string[] args)
         {
             string hand1 = "KS 2h 5C JD TD";
-            PokerHand hand = new PokerHand(hand1);
-
-            Console.WriteLine(hand.HandIsValid(hand1));
+            try
+            {
+                PokerHand hand = new PokerHand(hand1);
+                Console.WriteLine(hand.HandIsValid(hand1));
+            }
+            catch (ArgumentException e){
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
@@ -34,24 +39,25 @@ namespace SortablePokerHands
 
         public bool HandIsValid(string hand)
         {
-            foreach(char c in hand.ToUpper())
+            foreach (char c in hand.ToUpper())
             {
-                if (!(Ranks.Contains(c) || Suits.Contains(c) || c==Separator))
+                if (!(Ranks.Contains(c) || Suits.Contains(c) || c == Separator))
                 {
                     return false;
                 }
             }
 
             HashSet<string> handStrings = new HashSet<string>();
-            foreach(string card in hand.Split(Separator))
+            foreach (string card in hand.Split(Separator))
             {
-                if(card.Length != 2)
+                if (!(card.Length == 2) || !(Ranks.Contains(card[0]) || Suits.Contains(card[1])))
                 {
                     return false;
                 }
                 handStrings.Add(card);
             }
-            return handStrings.Count != 5;
+            return handStrings.Count == 5;
+            //return true;
         }
     }
 }
