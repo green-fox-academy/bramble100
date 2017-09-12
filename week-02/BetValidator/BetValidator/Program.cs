@@ -23,12 +23,12 @@ namespace BetValidator
             {
                 Console.WriteLine("The text message for this game type is valid.");
                 SortedSet<long> userInput = ProcessedUserInput(textMessage);
-                Console.WriteLine("The cleaned and sorted user input is:");
+                Console.Write("The cleaned and sorted user input is: ");
                 foreach (long bet in userInput)
                 {
                     Console.Write("{0} ", bet);
                 }
-
+                Console.WriteLine();
                 Console.WriteLine("The cleaned used input for this game type is {0}.", BetIsValid(gameType, userInput) ? "valid" : "invalid");
             }
             else
@@ -41,9 +41,11 @@ namespace BetValidator
 
         static bool TextMessageIsValid(string userInput)
         {
+            char[] acceptedChars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', ' ' };
+
             foreach(char c in userInput)
             {
-                if (!Byte.TryParse(c.ToString(), out byte result) && !c.ToString().Contains(",") && !c.ToString().Contains(" "))
+                if (!acceptedChars.Contains(c))
                 {
                     return false;
                 }
