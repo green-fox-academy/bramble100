@@ -13,18 +13,22 @@ namespace SortablePokerHands
     {
         static void Main(string[] args)
         {
-            string hand1 = "KS 2H 5C JD TD";
+            string hand1 = "KS 2H 5C JD Tx";
              //hand1 = "KS 2H 5C JD";
             try
             {
                 PokerHand hand = new PokerHand(hand1);
-                Console.WriteLine(hand.HandIsValid(hand1));
-                hand.Sort();
-                Console.WriteLine(hand.ToString());
+                Console.WriteLine("Original user output \"{0}\", it is considered {1}.", hand1, hand.HandIsValid(hand1) ? "valid" : "invalid");
+                if (hand.HandIsValid(hand1))
+                {
+                    hand.Sort();
+                    Console.WriteLine("Sorted hand is \"{0}\"", hand.ToString());
+                }
             }
             catch (ArgumentException e){
                 Console.WriteLine(e.Message);
             }
+            Console.ReadKey();
         }
     }
 
@@ -33,43 +37,74 @@ namespace SortablePokerHands
         char[] Ranks = { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
         char[] Suits = { 'S', 'H', 'D', 'C' };
         char Separator = ' ';
-        string[] Hand = new string[5];
+        string[] Hand = { };
         int validNumberOfCards = 5;
 
-        public PokerHand(string hand)
+        public PokerHand(string userInput)
         {
-            if (!HandIsValid(hand))
+            userInput = userInput.ToUpper();
+
+            if (HandIsValid(userInput))
             {
-                throw new ArgumentException("Invalid poker hand string");
+                Hand = userInput.ToUpper().Split(Separator);
             }
-            Hand = hand.ToUpper().Split(Separator);        
+            Hand = userInput.Split(Separator);
         }
 
-        public bool HandIsValid(string hand)
+        public bool HandIsValid(string handString)
         {
-            foreach (char c in hand.ToUpper())
+            string[] cardsToCheck = handString.Split(Separator);
+            HashSet<string> cardsToCheckSet = new HashSet<string>(cardsToCheck); // remove duplicates
+
+            if (cardsToCheckSet.Count != validNumberOfCards)
             {
-                if (!(Ranks.Contains(c) || Suits.Contains(c) || c == Separator))
+                return false;
+            }
+
+            foreach (string card in cardsToCheckSet)
+            {
+                if (!CardIsValid(card))
                 {
                     return false;
                 }
             }
-
-            HashSet<string> cards = new HashSet<string>();
-            foreach (string card in hand.Split(Separator))
-            {
-                if (!(card.Length == 2) || !(Ranks.Contains(card[0]) || Suits.Contains(card[1])))
-                {
-                    return false;
-                }
-                cards.Add(card);
-            }
-            return cards.Count == validNumberOfCards;
+            return true;
         }
 
-        public void Sort(int outerCounter = 100)
+        private bool CardIsValid(string card)
         {
-            if (outerCounter == 100)
+            return (!(card.Length == 2) || !(Ranks.Contains(card[0]) || Suits.Contains(card[1])));
+        }
+
+        private bool CardIsValid_VeryLongMethod(string card)
+        {
+            if (card.Length != 2)
+            {
+                return false;
+            }
+            if (!Ranks.Contains(card[0]))
+            {
+                return false;
+            }
+            if (!Suits.Contains(card[1]))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool CardIsValid_LongMethod(string card)
+        {
+            if (card.Length != 2 || !Ranks.Contains(card[0]) || !Suits.Contains(card[1]))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void Sort(int outerCounter = Int32.MaxValue)
+        {
+            if (outerCounter == Int32.MaxValue)
             {
                 outerCounter = validNumberOfCards - 1;
             }
@@ -82,12 +117,17 @@ namespace SortablePokerHands
             {
                 if (FirstIsSmaller(Hand[innerCounter], Hand[innerCounter + 1]))
                 {
-                    string temp = Hand[innerCounter];
-                    Hand[innerCounter] = Hand[innerCounter + 1];
-                    Hand[innerCounter + 1] = temp;
+                    SwapCardWithNext(innerCounter);
                 }
             }
             Sort(outerCounter - 1);
+        }
+
+        private void SwapCardWithNext(int innerCounter)
+        {
+            string temp = Hand[innerCounter];
+            Hand[innerCounter] = Hand[innerCounter + 1];
+            Hand[innerCounter + 1] = temp;
         }
 
         private bool FirstIsSmaller(string card1, string card2)
