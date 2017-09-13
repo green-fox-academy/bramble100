@@ -13,11 +13,13 @@ namespace SortablePokerHands
     {
         static void Main(string[] args)
         {
-            string hand1 = "KS 2H 5C JD Tx";
+            const int validNumberOfCards = 5;
+
+            string hand1 = "KS 2H 5C JD TD";
              //hand1 = "KS 2H 5C JD";
             try
             {
-                PokerHand hand = new PokerHand(hand1);
+                PokerHand hand = new PokerHand(hand1, validNumberOfCards);
                 Console.WriteLine("Original user output \"{0}\", it is considered {1}.", hand1, hand.HandIsValid(hand1) ? "valid" : "invalid");
                 if (hand.HandIsValid(hand1))
                 {
@@ -38,11 +40,12 @@ namespace SortablePokerHands
         char[] Suits = { 'S', 'H', 'D', 'C' };
         char Separator = ' ';
         string[] Hand = { };
-        int validNumberOfCards = 5;
+        int validNumberOfCards;
 
-        public PokerHand(string userInput)
+        public PokerHand(string userInput, int validNumberOfCards)
         {
             userInput = userInput.ToUpper();
+            this.validNumberOfCards = validNumberOfCards;
 
             if (HandIsValid(userInput))
             {
@@ -73,7 +76,7 @@ namespace SortablePokerHands
 
         private bool CardIsValid(string card)
         {
-            return (!(card.Length == 2) || !(Ranks.Contains(card[0]) || Suits.Contains(card[1])));
+            return !(!(card.Length == 2) || !(Ranks.Contains(card[0]) || !Suits.Contains(card[1])));
         }
 
         private bool CardIsValid_VeryLongMethod(string card)
@@ -104,10 +107,8 @@ namespace SortablePokerHands
 
         public void Sort(int outerCounter = Int32.MaxValue)
         {
-            if (outerCounter == Int32.MaxValue)
-            {
-                outerCounter = validNumberOfCards - 1;
-            }
+            outerCounter = outerCounter == Int32.MaxValue ? validNumberOfCards - 1 : outerCounter;
+
             if (outerCounter == 0)
             {
                 return;
