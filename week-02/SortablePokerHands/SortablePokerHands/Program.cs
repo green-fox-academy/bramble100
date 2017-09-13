@@ -14,47 +14,83 @@ namespace SortablePokerHands
         static void Main(string[] args)
         {
             const int validNumberOfCards = 5;
+            char[] Ranks = { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
+            char[] Suits = { 'S', 'H', 'D', 'C' };
+            char Separator = ' ';
 
             string hand1 = "KS 2H 5C JD TD";
-             //hand1 = "KS 2H 5C JD";
-            try
+
+            Console.WriteLine("Test suite");
+
+            CardValidatorTest("2H", true, Ranks, Suits);
+            CardValidatorTest("td", true, Ranks, Suits);
+            CardValidatorTest("c9", false, Ranks, Suits);
+            CardValidatorTest("c99", false, Ranks, Suits);
+            CardValidatorTest("", false, Ranks, Suits);
+
+            Console.WriteLine();
+
+            HandValidatorTest("KS 2H 5C JD TD", true, Ranks, Suits, validNumberOfCards, Separator);
+            HandValidatorTest("KS 2H 5C JD", false, Ranks, Suits, validNumberOfCards, Separator);
+            HandValidatorTest("KS2H5CJDTD", false, Ranks, Suits, validNumberOfCards, Separator);
+            HandValidatorTest("KS,2H,5C,JD:TD", false, Ranks, Suits, validNumberOfCards, Separator);
+            HandValidatorTest("KS KS 5C JD TD", false, Ranks, Suits, validNumberOfCards, Separator);
+
+            Console.WriteLine();
+
+            PokerHand hand = new PokerHand(hand1, Ranks, Suits, validNumberOfCards, Separator);
+            Console.WriteLine("Original user output \"{0}\", it is considered {1}.", hand1, PokerHand.IsValid(hand1, Ranks, Suits, validNumberOfCards, Separator) ? "valid" : "invalid");
+            if (PokerHand.IsValid(hand1, Ranks, Suits, validNumberOfCards, Separator))
             {
-                PokerHand hand = new PokerHand(hand1, validNumberOfCards);
-                Console.WriteLine("Original user output \"{0}\", it is considered {1}.", hand1, hand.HandIsValid(hand1) ? "valid" : "invalid");
-                if (hand.HandIsValid(hand1))
-                {
-                    hand.Sort();
-                    Console.WriteLine("Sorted hand is \"{0}\"", hand.ToString());
-                }
-            }
-            catch (ArgumentException e){
-                Console.WriteLine(e.Message);
+                hand.Sort(Ranks, Suits, validNumberOfCards);
+                Console.WriteLine("Sorted hand is \"{0}\"", hand.ToString());
             }
             Console.ReadKey();
+        }
+
+        private static void HandValidatorTest(string sampleHand, 
+            bool expectedResult, 
+            char[] Ranks, 
+            char[] Suits, 
+            int validNumberOfCards, 
+            char Separator
+            )
+        {
+            bool actualResult = PokerHand.IsValid(sampleHand, Ranks, Suits, validNumberOfCards, Separator);
+            Console.WriteLine("Testing hand validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
+                sampleHand,
+                expectedResult,
+                actualResult,
+                actualResult == expectedResult);
+        }
+
+        public static void CardValidatorTest(string sampleCard, bool expectedResult, char[] Ranks, char[] Suits)
+        {
+            bool actualResult = PokerHand.CardIsValid(sampleCard, Ranks, Suits);
+            Console.WriteLine("Testing card validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
+                sampleCard,
+                expectedResult,
+                actualResult,
+                actualResult == expectedResult);
         }
     }
 
     public class PokerHand
     {
-        char[] Ranks = { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
-        char[] Suits = { 'S', 'H', 'D', 'C' };
-        char Separator = ' ';
         string[] Hand = { };
-        int validNumberOfCards;
 
-        public PokerHand(string userInput, int validNumberOfCards)
+        public PokerHand(string userInput, char[] Ranks, char[] Suits, int validNumberOfCards, char Separator)
         {
             userInput = userInput.ToUpper();
-            this.validNumberOfCards = validNumberOfCards;
 
-            if (HandIsValid(userInput))
+            if (IsValid(userInput, Ranks, Suits, validNumberOfCards, Separator))
             {
                 Hand = userInput.ToUpper().Split(Separator);
             }
             Hand = userInput.Split(Separator);
         }
 
-        public bool HandIsValid(string handString)
+        public static bool IsValid(string handString, char[] Ranks, char[] Suits, int validNumberOfCards, char Separator)
         {
             string[] cardsToCheck = handString.Split(Separator);
             HashSet<string> cardsToCheckSet = new HashSet<string>(cardsToCheck); // remove duplicates
@@ -66,7 +102,7 @@ namespace SortablePokerHands
 
             foreach (string card in cardsToCheckSet)
             {
-                if (!CardIsValid(card))
+                if (!CardIsValid(card, Ranks, Suits))
                 {
                     return false;
                 }
@@ -74,13 +110,25 @@ namespace SortablePokerHands
             return true;
         }
 
-        private bool CardIsValid(string card)
+        public static bool CardIsValid(string card, char[] Ranks, char[] Suits)
         {
-            return !(!(card.Length == 2) || !(Ranks.Contains(card[0]) || !Suits.Contains(card[1])));
+            card = card.ToUpper();
+            return !(!(card.Length == 2) || !(Ranks.Contains(card[0])) || !(Suits.Contains(card[1])));
         }
 
-        private bool CardIsValid_VeryLongMethod(string card)
+        public static bool CardIsValid_LongMethod(string card, char[] Ranks, char[] Suits)
         {
+            card = card.ToUpper();
+            if (card.Length != 2 || !Ranks.Contains(card[0]) || !Suits.Contains(card[1]))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool CardIsValid_VeryLongMethod(string card, char[] Ranks, char[] Suits)
+        {
+            card = card.ToUpper();
             if (card.Length != 2)
             {
                 return false;
@@ -96,16 +144,7 @@ namespace SortablePokerHands
             return true;
         }
 
-        private bool CardIsValid_LongMethod(string card)
-        {
-            if (card.Length != 2 || !Ranks.Contains(card[0]) || !Suits.Contains(card[1]))
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public void Sort(int outerCounter = Int32.MaxValue)
+        public void Sort(char[] Ranks, char[] Suits, int validNumberOfCards, int outerCounter = Int32.MaxValue)
         {
             outerCounter = outerCounter == Int32.MaxValue ? validNumberOfCards - 1 : outerCounter;
 
@@ -116,12 +155,12 @@ namespace SortablePokerHands
                
             for (int innerCounter = 0; innerCounter < outerCounter; innerCounter++)
             {
-                if (FirstIsSmaller(Hand[innerCounter], Hand[innerCounter + 1]))
+                if (FirstIsSmaller(Hand[innerCounter], Hand[innerCounter + 1], Ranks, Suits))
                 {
                     SwapCardWithNext(innerCounter);
                 }
             }
-            Sort(outerCounter - 1);
+            Sort(Ranks, Suits, outerCounter - 1);
         }
 
         private void SwapCardWithNext(int innerCounter)
@@ -131,7 +170,7 @@ namespace SortablePokerHands
             Hand[innerCounter + 1] = temp;
         }
 
-        private bool FirstIsSmaller(string card1, string card2)
+        public bool FirstIsSmaller(string card1, string card2, char[] Ranks, char[] Suits)
         {
             if (Array.IndexOf(Ranks, card1[0]) < Array.IndexOf(Ranks, card2[0]))
             {
@@ -144,7 +183,7 @@ namespace SortablePokerHands
             return (Array.IndexOf(Suits, card1[1]) < Array.IndexOf(Suits, card2[1]));
         }
 
-        override public string ToString()
+        public string ToString(char Separator)
         {
             return String.Join(Separator.ToString(), Hand);
         }
