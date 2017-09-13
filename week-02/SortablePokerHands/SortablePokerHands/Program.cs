@@ -15,7 +15,7 @@ namespace SortablePokerHands
         {
             const int validNumberOfCards = 5;
             char[] Ranks = { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
-            char[] Suits = { 'S', 'H', 'D', 'C' };
+            char[] Suits = { 'C', 'D', 'H', 'S' };
             char Separator = ' ';
 
             string hand1 = "KS 2H 5C JD TD";
@@ -38,6 +38,20 @@ namespace SortablePokerHands
 
             Console.WriteLine();
 
+            SortingTest("KS 2H", "KS 2H", Ranks, Suits, 2, Separator);
+            SortingTest("2H KS", "KS 2H", Ranks, Suits, 2, Separator);
+            SortingTest("KS 2H 5C", "KS 5C 2H", Ranks, Suits, 3, Separator);
+            SortingTest("AS AH AD AC", "AS AH AD AC", Ranks, Suits, 4, Separator);
+
+            Console.WriteLine();
+
+            FirstIsSmallerTest("KS", "2S", Ranks, Suits, false);
+            FirstIsSmallerTest("2S", "KS", Ranks, Suits, true);
+            FirstIsSmallerTest("AS", "AH", Ranks, Suits, false);
+            FirstIsSmallerTest("AH", "AS", Ranks, Suits, true);
+
+            Console.WriteLine();
+
             PokerHand hand = new PokerHand(hand1, Ranks, Suits, validNumberOfCards, Separator);
             Console.WriteLine("Original user output \"{0}\", it is considered {1}.", hand1, PokerHand.IsValid(hand1, Ranks, Suits, validNumberOfCards, Separator) ? "valid" : "invalid");
             if (PokerHand.IsValid(hand1, Ranks, Suits, validNumberOfCards, Separator))
@@ -46,6 +60,34 @@ namespace SortablePokerHands
                 Console.WriteLine("Sorted hand is \"{0}\"", hand.ToString());
             }
             Console.ReadKey();
+        }
+
+        private static void FirstIsSmallerTest(string card1, string card2, char[] ranks, char[] suits, bool expectedResult)
+        {
+            bool actualResult = PokerHand.FirstIsSmaller(card1, card2, ranks, suits);
+            Console.WriteLine("Testing FirstIsSmallerTest, input cards: {0} and {1}, expected result: {2}, actual result {3}, succeded: {4}",
+                card1,
+                card2,
+                expectedResult,
+                actualResult,
+                actualResult == expectedResult);
+        }
+
+        private static void SortingTest(string unsortedHand, 
+            string expectedSortedHand, 
+            char[] ranks, 
+            char[] suits, 
+            int validNumberOfCards, 
+            char separator)
+        {
+            PokerHand hand = new PokerHand(unsortedHand, ranks, suits, validNumberOfCards, separator);
+            hand.Sort(ranks, suits, validNumberOfCards);
+            string actualResult = hand.ToString(separator);
+            Console.WriteLine("Testing hand sorting, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
+                unsortedHand,
+                expectedSortedHand,
+                actualResult,
+                actualResult == expectedSortedHand);
         }
 
         private static void HandValidatorTest(string sampleHand, 
@@ -148,12 +190,13 @@ namespace SortablePokerHands
         {
             outerCounter = outerCounter == Int32.MaxValue ? validNumberOfCards - 1 : outerCounter;
 
-            if (outerCounter == 0)
+            if (outerCounter <= 0)
             {
                 return;
             }
                
-            for (int innerCounter = 0; innerCounter < outerCounter; innerCounter++)
+            for (
+                int innerCounter = 0; innerCounter < outerCounter; innerCounter++)
             {
                 if (FirstIsSmaller(Hand[innerCounter], Hand[innerCounter + 1], Ranks, Suits))
                 {
@@ -170,7 +213,7 @@ namespace SortablePokerHands
             Hand[innerCounter + 1] = temp;
         }
 
-        public bool FirstIsSmaller(string card1, string card2, char[] Ranks, char[] Suits)
+        public static bool FirstIsSmaller(string card1, string card2, char[] Ranks, char[] Suits)
         {
             if (Array.IndexOf(Ranks, card1[0]) < Array.IndexOf(Ranks, card2[0]))
             {
