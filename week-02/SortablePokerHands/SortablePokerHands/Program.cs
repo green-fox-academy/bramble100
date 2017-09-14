@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SortablePokerHands
@@ -19,6 +20,9 @@ namespace SortablePokerHands
             char Separator = ' ';
 
             string hand1 = "KS 2H 5C JD TD";
+
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Blue;
 
             Console.WriteLine("Test suite");
 
@@ -65,7 +69,7 @@ namespace SortablePokerHands
         private static void FirstIsSmallerTest(string card1, string card2, char[] ranks, char[] suits, bool expectedResult)
         {
             bool actualResult = PokerHand.FirstIsSmaller(card1, card2, ranks, suits);
-            Console.WriteLine("Testing FirstIsSmallerTest, input cards: {0} and {1}, expected result: {2}, actual result {3}, succeded: {4}",
+            Console.WriteLine(" Testing FirstIsSmallerTest, input cards: {0} and {1}, expected result: {2}, actual result {3}, succeded: {4}",
                 card1,
                 card2,
                 expectedResult,
@@ -83,7 +87,7 @@ namespace SortablePokerHands
             PokerHand hand = new PokerHand(unsortedHand, ranks, suits, validNumberOfCards, separator);
             hand.Sort(ranks, suits, validNumberOfCards);
             string actualResult = hand.ToString(separator);
-            Console.WriteLine("Testing hand sorting, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
+            Console.WriteLine(" Testing hand sorting, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
                 unsortedHand,
                 expectedSortedHand,
                 actualResult,
@@ -99,17 +103,20 @@ namespace SortablePokerHands
             )
         {
             bool actualResult = PokerHand.IsValid(sampleHand, Ranks, Suits, validNumberOfCards, Separator);
-            Console.WriteLine("Testing hand validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
+            Console.WriteLine(" Testing hand validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
                 sampleHand,
                 expectedResult,
                 actualResult,
                 actualResult == expectedResult);
         }
 
-        public static void CardValidatorTest(string sampleCard, bool expectedResult, char[] Ranks, char[] Suits)
+        public static void CardValidatorTest(string sampleCard, 
+            bool expectedResult, 
+            char[] Ranks, 
+            char[] Suits)
         {
-            bool actualResult = PokerHand.CardIsValid(sampleCard, Ranks, Suits);
-            Console.WriteLine("Testing card validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
+            bool actualResult = PokerHand.CardIsValid_WithRegex(sampleCard, Ranks, Suits);
+            Console.WriteLine(" Testing card validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
                 sampleCard,
                 expectedResult,
                 actualResult,
@@ -129,13 +136,11 @@ namespace SortablePokerHands
             {
                 Hand = userInput.ToUpper().Split(Separator);
             }
-            Hand = userInput.Split(Separator);
         }
 
         public static bool IsValid(string handString, char[] Ranks, char[] Suits, int validNumberOfCards, char Separator)
         {
-            string[] cardsToCheck = handString.Split(Separator);
-            HashSet<string> cardsToCheckSet = new HashSet<string>(cardsToCheck); // remove duplicates
+            HashSet<string> cardsToCheckSet = new HashSet<string>(handString.ToUpper().Split(Separator)); // remove duplicates
 
             if (cardsToCheckSet.Count != validNumberOfCards)
             {
@@ -155,8 +160,18 @@ namespace SortablePokerHands
         public static bool CardIsValid(string card, char[] Ranks, char[] Suits)
         {
             card = card.ToUpper();
-            return !(!(card.Length == 2) || !(Ranks.Contains(card[0])) || !(Suits.Contains(card[1])));
+            return !((card.Length != 2 || !Ranks.Contains(card[0]) || !Suits.Contains(card[1])));
         }
+
+        public static bool CardIsValid_WithRegex(string card, char[] Ranks, char[] Suits)
+        {
+            string pattern = @"^([2-9]|[T|J|Q|K|A]){1}([2-9])|([S|H|D|C]){1}$";
+            Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
+            return r.IsMatch(card); ;
+        }
+
+        public static bool CardIsValid_WithLambda(string card, char[] Ranks, char[] Suits) =>
+            !((card.Length != 2 || !Ranks.Contains(card.ToUpper()[0]) || !Suits.Contains(card.ToUpper()[1])));
 
         public static bool CardIsValid_LongMethod(string card, char[] Ranks, char[] Suits)
         {
@@ -194,9 +209,8 @@ namespace SortablePokerHands
             {
                 return;
             }
-               
-            for (
-                int innerCounter = 0; innerCounter < outerCounter; innerCounter++)
+
+            for (int innerCounter = 0; innerCounter < outerCounter; innerCounter++)
             {
                 if (FirstIsSmaller(Hand[innerCounter], Hand[innerCounter + 1], Ranks, Suits))
                 {
@@ -206,11 +220,11 @@ namespace SortablePokerHands
             Sort(Ranks, Suits, outerCounter - 1);
         }
 
-        private void SwapCardWithNext(int innerCounter)
+        private void SwapCardWithNext(int i)
         {
-            string temp = Hand[innerCounter];
-            Hand[innerCounter] = Hand[innerCounter + 1];
-            Hand[innerCounter + 1] = temp;
+            string temp = Hand[i];
+            Hand[i] = Hand[i + 1];
+            Hand[i + 1] = temp;
         }
 
         public static bool FirstIsSmaller(string card1, string card2, char[] Ranks, char[] Suits)
