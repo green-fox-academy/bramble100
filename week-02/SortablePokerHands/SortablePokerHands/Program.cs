@@ -26,10 +26,12 @@ namespace SortablePokerHands
 
             Console.WriteLine("Test suite");
 
-            CardValidatorTest("2H", true, Ranks, Suits);
-            CardValidatorTest("td", true, Ranks, Suits);
-            CardValidatorTest("c9", false, Ranks, Suits);
-            CardValidatorTest("c99", false, Ranks, Suits);
+            CardValidatorTest("2H", true, Ranks, Suits); // good uppercase
+            CardValidatorTest("td", true, Ranks, Suits); // good lowercase
+            CardValidatorTest("cD", false, Ranks, Suits); // wrong rank
+            CardValidatorTest("3x", false, Ranks, Suits); // wrong rank
+            CardValidatorTest("4", false, Ranks, Suits); // missing suit
+            CardValidatorTest("c99", false, Ranks, Suits); // wrong suit
             CardValidatorTest("", false, Ranks, Suits);
 
             Console.WriteLine();
@@ -102,7 +104,7 @@ namespace SortablePokerHands
             char Separator
             )
         {
-            bool actualResult = PokerHand.IsValid(sampleHand, Ranks, Suits, validNumberOfCards, Separator);
+            bool actualResult = PokerHand.IsValid_WithRegex(sampleHand, Ranks, Suits, validNumberOfCards, Separator);
             Console.WriteLine(" Testing hand validator, input string: {0}, expected to be {1}, result: {2}, succeded: {3}",
                 sampleHand,
                 expectedResult,
@@ -157,6 +159,15 @@ namespace SortablePokerHands
             return true;
         }
 
+        public static bool IsValid_WithRegex(string handString, char[] Ranks, char[] Suits, int validNumberOfCards, char Separator)
+        {
+            // BUGGY for "KS KS 5C JD TD" !!! guess why ???
+            string pattern = @"^([2-9TJQKA]{1}[SHDC]{1}[ ]){4}[2-9TJQKA]{1}[SHDC]{1}$";
+            Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
+            return r.IsMatch(handString); ;
+
+        }
+
         public static bool CardIsValid(string card, char[] Ranks, char[] Suits)
         {
             card = card.ToUpper();
@@ -165,7 +176,7 @@ namespace SortablePokerHands
 
         public static bool CardIsValid_WithRegex(string card, char[] Ranks, char[] Suits)
         {
-            string pattern = @"^([2-9]|[T|J|Q|K|A]){1}([2-9])|([S|H|D|C]){1}$";
+            string pattern = @"^[23456789TJQKA]{1}[SHDC]{1}$";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
             return r.IsMatch(card); ;
         }
