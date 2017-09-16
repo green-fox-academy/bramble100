@@ -20,74 +20,32 @@ namespace Calculator
             testString = Console.ReadLine();
             Console.WriteLine(testString);
             MyCalculator Calc = new MyCalculator(testString);
-            Console.WriteLine(MyCalculator2(testString));
+            Console.WriteLine(MyCalculator(testString));
             Console.ReadKey();
         }
 
         static double MyCalculator(string CalculatorString)
         {
-            char[] enabledOperators = { '+' };
-            Queue<string> calculatorStringQueue = new Queue<string>(CalculatorString.Split(' '));
-            double result = GetNextNumber();
-
-            while (calculatorStringQueue.Count >= 2)
-            {
-                char nextOperator = GetNextOperator();
-                double number = GetNextNumber();
-                if (nextOperator=='+')
-                {
-                    result += number;
-                }
-                else if (nextOperator == '-')
-                {
-                    result -= number;
-                }
-            }
-            return result;
-
-            double GetNextNumber()
-            {
-                try
-                {
-                    return Double.Parse(calculatorStringQueue.Dequeue());
-                }
-                catch (FormatException)
-                {
-                    throw new ArgumentException("Invalid number in string");
-                }
-                
-            }
-
-            char GetNextOperator()
-            {
-                try
-                {
-                    return Char.Parse(calculatorStringQueue.Dequeue());
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-        }
-
-        static double MyCalculator2(string CalculatorString)
-        {
+            string[] operators = { "*", "/", "+", "-" };
             List<string> calculatorStringList = new List<string>(CalculatorString.Split(' '));
-            int cursor = FindNextMultiplication(0);
-            while (cursor != 0)
+            int cursor;
+            foreach (var op in operators)
             {
-                CalculateNextMultiplication(cursor);
-                cursor = FindNextMultiplication(cursor);
+                cursor = FindNextOperator(0, op);
+                while (cursor != 0)
+                {
+                    CalculateNextOperation(cursor, op);
+                    cursor = FindNextOperator(cursor, op);
+                }
             }
 
             return Double.Parse(calculatorStringList.First());
 
-            int FindNextMultiplication(int startPosition)
+            int FindNextOperator(int startPosition, string op)
             {
                 for (int i = startPosition; i < calculatorStringList.Count; i++)
                 {
-                    if (calculatorStringList[i] == "*")
+                    if (calculatorStringList[i] == op)
                     {
                         return i;
                     }
@@ -95,9 +53,24 @@ namespace Calculator
                 return 0;
             }
 
-            void CalculateNextMultiplication(int localCursor)
+            void CalculateNextOperation(int localCursor, string op)
             {
-                calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) * Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                if (op == "*")
+                {
+                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) * Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                }
+                if (op == "/")
+                {
+                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) / Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                }
+                if (op == "+")
+                {
+                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) + Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                }
+                if (op == "-")
+                {
+                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) - Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                }
                 if (calculatorStringList.Count > localCursor + 1)
                 {
                     calculatorStringList.RemoveRange(localCursor, 2);
