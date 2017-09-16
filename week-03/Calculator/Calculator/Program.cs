@@ -16,40 +16,150 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            string testString = "3 + 4 + 54";
+            string testString = "6 + 4 + 54 + 4.5 - 5";
+            testString = Console.ReadLine();
             Console.WriteLine(testString);
-            Console.WriteLine(MyCalculator(testString));
+            MyCalculator Calc = new MyCalculator(testString);
+            Console.WriteLine(MyCalculator2(testString));
             Console.ReadKey();
         }
 
         static double MyCalculator(string CalculatorString)
         {
             char[] enabledOperators = { '+' };
-            string[] calculatorStringArray = CalculatorString.Split(' ');
-            Queue<string> calculatorStringList = new Queue<string>(calculatorStringArray);
-            double number1 = GetNextNumber();
-            double result = number1;
+            Queue<string> calculatorStringQueue = new Queue<string>(CalculatorString.Split(' '));
+            double result = GetNextNumber();
 
-            while (calculatorStringList.Count >= 2)
+            while (calculatorStringQueue.Count >= 2)
             {
                 char nextOperator = GetNextOperator();
-                double number2 = GetNextNumber();
+                double number = GetNextNumber();
                 if (nextOperator=='+')
                 {
-                    result += number2;
+                    result += number;
+                }
+                else if (nextOperator == '-')
+                {
+                    result -= number;
                 }
             }
             return result;
 
             double GetNextNumber()
             {
-                return Int32.Parse(calculatorStringList.Dequeue());
+                try
+                {
+                    return Double.Parse(calculatorStringQueue.Dequeue());
+                }
+                catch (FormatException)
+                {
+                    throw new ArgumentException("Invalid number in string");
+                }
+                
             }
 
             char GetNextOperator()
             {
-                return Char.Parse(calculatorStringList.Dequeue());
+                try
+                {
+                    return Char.Parse(calculatorStringQueue.Dequeue());
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
+
+        static double MyCalculator2(string CalculatorString)
+        {
+            List<string> calculatorStringList = new List<string>(CalculatorString.Split(' '));
+            int cursor = FindNextMultiplication(0);
+            while (cursor != 0)
+            {
+                CalculateNextMultiplication(cursor);
+                cursor = FindNextMultiplication(cursor);
+            }
+
+            return Double.Parse(calculatorStringList.First());
+
+            int FindNextMultiplication(int startPosition)
+            {
+                for (int i = startPosition; i < calculatorStringList.Count; i++)
+                {
+                    if (calculatorStringList[i] == "*")
+                    {
+                        return i;
+                    }
+                }
+                return 0;
+            }
+
+            void CalculateNextMultiplication(int localCursor)
+            {
+                calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) * Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                if (calculatorStringList.Count > localCursor + 1)
+                {
+                    calculatorStringList.RemoveRange(localCursor, 2);
+                }
+            }
+        }
+
     }
+
+    public class MyCalculator
+    {
+        private string stringToCalculate;
+        string validDigits = "0123456789.";
+        string validOperators = "*/-+";
+
+        public MyCalculator(string stringToCalculate)
+        {
+            if (IsValid(stringToCalculate))
+            {
+                this.stringToCalculate = stringToCalculate;
+            }
+        }
+
+        private bool IsValid(string stringToCalculate)
+        {
+            string validCharacters = validDigits + validOperators + " ";
+
+            foreach (var character in stringToCalculate)
+            {
+                if (!validCharacters.Contains(character))
+                {
+                    throw new ArgumentException("Invalid character in input string");
+                }
+            }
+            return true;
+        }
+
+        private bool ContainsOnlyValidCharacters(string stringToValidate)
+        {
+            string validCharacters = validDigits + validOperators + " ";
+            foreach (var character in stringToValidate)
+            {
+                if (!validCharacters.Contains(character))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool IsSyntacticallyCorrect(string stringToValidate)
+        {
+            bool operandCanCome = true;
+            bool operatorCanCome = false;
+
+            List<string> calculatorStringList = new List<string>(stringToValidate.Split(' '));
+            foreach (var item in calculatorStringList)
+            {
+            }
+            return true;
+        }
+
+    }
+
 }
