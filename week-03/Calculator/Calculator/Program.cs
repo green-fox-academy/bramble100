@@ -55,21 +55,23 @@ namespace Calculator
 
             void CalculateNextOperation(int localCursor, string op)
             {
+                double number1 = Double.Parse(calculatorStringList[localCursor - 1]);
+                double number2 = Double.Parse(calculatorStringList[localCursor + 1]);
                 if (op == "*")
                 {
-                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) * Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                    calculatorStringList[localCursor - 1] = (number1 * number2).ToString();
                 }
                 if (op == "/")
                 {
-                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) / Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                    calculatorStringList[localCursor - 1] = (number1 / number2).ToString();
                 }
                 if (op == "+")
                 {
-                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) + Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                    calculatorStringList[localCursor - 1] = (number1 + number2).ToString();
                 }
                 if (op == "-")
                 {
-                    calculatorStringList[localCursor - 1] = (Double.Parse(calculatorStringList[localCursor - 1]) - Double.Parse(calculatorStringList[localCursor + 1])).ToString();
+                    calculatorStringList[localCursor - 1] = (number1 - number2).ToString();
                 }
                 if (calculatorStringList.Count > localCursor + 1)
                 {
