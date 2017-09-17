@@ -8,6 +8,8 @@ namespace Calculator
 {
     class CalculatorEngine
     {
+        private string stringToCalculate;
+        string validDigits = "0123456789.";
+        string validOperators = "*/-+";
     }
-
 }
