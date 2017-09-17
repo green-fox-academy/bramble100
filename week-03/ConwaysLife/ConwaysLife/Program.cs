@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Conway's Game of Life - Unlimited Edition
+// https://www.codewars.com/kata/conways-game-of-life-unlimited-edition/train/csharp
+
 namespace ConwaysLife
 {
     class Program
@@ -64,7 +67,7 @@ namespace ConwaysLife
             {
                 for (int width = 0; width < universe.GetLength(1); width++)
                 {
-                    byte numberOfNeighbors = GetNumberOfNeighbors(height, width);
+                    byte numberOfNeighbors = GetNumberOfNeighbors2(height, width);
                     if (universe[height, width])
                     {
                         futureUniverse[height, width] = numberOfNeighbors == 2 || numberOfNeighbors == 3;
@@ -130,6 +133,63 @@ namespace ConwaysLife
             }
 
             return numberOfNeighbors;
+        }
+
+        private byte GetNumberOfNeighbors2(int height, int width)
+        {
+            byte numberOfNeighbors = 0;
+
+            // N
+            numberOfNeighbors += (byte)(IsOneNeighborAlive(height, width, -1, 0) ? 1 : 0);
+            // NE
+            if (height > 0 && width < universe.GetLength(1) - 1)
+            {
+                numberOfNeighbors += (byte)(universe[height - 1, width + 1] ? 1 : 0);
+            }
+            // E
+            if (width < universe.GetLength(1) - 1)
+            {
+                numberOfNeighbors += (byte)(universe[height, width + 1] ? 1 : 0);
+            }
+            // SE
+            if (height < universe.GetLength(0) - 1 && width < universe.GetLength(1) - 1)
+            {
+                numberOfNeighbors += (byte)(universe[height + 1, width + 1] ? 1 : 0);
+            }
+            // S
+            if (height < universe.GetLength(0) - 1)
+            {
+                numberOfNeighbors += (byte)(universe[height + 1, width] ? 1 : 0);
+            }
+            // SW
+            if (height < universe.GetLength(0) - 1 && width > 0)
+            {
+                numberOfNeighbors += (byte)(universe[height + 1, width - 1] ? 1 : 0);
+            }
+            // W
+            if (width > 0)
+            {
+                numberOfNeighbors += (byte)(universe[height, width - 1] ? 1 : 0);
+            }
+            // NW
+            if (height > 0 && width > 0)
+            {
+                numberOfNeighbors += (byte)(universe[height - 1, width - 1] ? 1 : 0);
+            }
+
+            return numberOfNeighbors;
+        }
+
+        private bool IsOneNeighborAlive(int height, int width, int offsetHeight, int offsetWidth)
+        {
+            try
+            {
+                return universe[height + offsetHeight, width + offsetWidth];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
         }
     }
 }
