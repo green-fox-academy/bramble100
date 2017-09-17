@@ -18,9 +18,8 @@ namespace Calculator
         {
             string testString = "6 + 4 + 54 + 4.5 - 5";
             testString = Console.ReadLine();
-            Console.WriteLine(testString);
             MyCalculator Calc = new MyCalculator(testString);
-            Console.WriteLine(MyCalculator(testString));
+            MyCalculator(testString);
             Console.ReadKey();
         }
 
@@ -35,10 +34,11 @@ namespace Calculator
                 while (cursor != 0)
                 {
                     CalculateNextOperation(cursor, op);
+                    DisplaycalculatorStringList();
                     cursor = FindNextOperator(cursor, op);
                 }
             }
-
+            DisplaycalculatorStringList();
             return Double.Parse(calculatorStringList.First());
 
             int FindNextOperator(int startPosition, string op)
@@ -61,15 +61,15 @@ namespace Calculator
                 {
                     calculatorStringList[localCursor - 1] = (number1 * number2).ToString();
                 }
-                if (op == "/")
+                else if (op == "/")
                 {
                     calculatorStringList[localCursor - 1] = (number1 / number2).ToString();
                 }
-                if (op == "+")
+                else if (op == "+")
                 {
                     calculatorStringList[localCursor - 1] = (number1 + number2).ToString();
                 }
-                if (op == "-")
+                else if (op == "-")
                 {
                     calculatorStringList[localCursor - 1] = (number1 - number2).ToString();
                 }
@@ -78,8 +78,16 @@ namespace Calculator
                     calculatorStringList.RemoveRange(localCursor, 2);
                 }
             }
-        }
 
+            void DisplaycalculatorStringList()
+            {
+                foreach (var item in calculatorStringList)
+                {
+                    Console.Write(item);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 
     public class MyCalculator
@@ -136,5 +144,4 @@ namespace Calculator
         }
 
     }
-
 }
