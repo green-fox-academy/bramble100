@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace NameFromEmail
 {
@@ -13,5 +17,15 @@ namespace NameFromEmail
             Console.WriteLine(NameFromEmail("elek.viz@exam.com"));
             Console.ReadLine();
         }
+
+        private static string NameFromEmail(string v)
+        {
+            string[] nameStringArray = v.Split('@')[0].Split('.');
+
+            return $"{FirstLetterToUppercase(nameStringArray[1])} {FirstLetterToUppercase(nameStringArray[0])}";
+        }
+
+        private static string FirstLetterToUppercase(string word) => $"{word[0].ToString().ToUpper()}{word.Substring(1, word.Length - 1)}";
+
     }
 }

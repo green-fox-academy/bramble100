@@ -33,4 +33,6 @@ The application is accepted if:
 
 ###  What is the difference between id and class in CSS? [2p]
 #### Your answer: 
-[add your answer here]
+Both are *hooks*, but 
+- ID's are _unique_ (means each element can have only one ID, and each page can have only one element with that ID)
+- Classes are _NOT unique_ (means you can use the same class on multiple elements, and you can use multiple classes on the same element)

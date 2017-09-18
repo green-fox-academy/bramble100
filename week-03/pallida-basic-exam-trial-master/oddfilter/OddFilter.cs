@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OddFilter
 {
@@ -17,6 +20,11 @@ namespace OddFilter
             Console.ReadLine();
         }
 
+        private static List<int> OddFilter(List<int> list)
+        {
+            return new List<int>(list.Where(x => x % 2 != 0));
+        }
+
         private static void PrintList(List<int> list)
         {
             foreach (int element in list)
@@ -24,5 +32,6 @@ namespace OddFilter
                 Console.Write("{0} ", element);
             }
         }
+
     }
 }

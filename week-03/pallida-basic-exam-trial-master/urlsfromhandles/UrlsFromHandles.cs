@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace UrlsFromHandles
 {
@@ -13,7 +16,18 @@ namespace UrlsFromHandles
             // example:
             // input: ["ghhandle1", "ghhandle2"]
             // output: ["https://github.com/greenfox-academy/ghhandle1", "https://github.com/greenfox-academy/ghhandle2"]
-            List<string> gitHubUrls = UrlsFromHandles(new List<string> {"ghhandle1", "ghhandle2"});
+            List<string> gitHubUrls = UrlsFromHandles(new List<string> { "ghhandle1", "ghhandle2" });
+            Console.ReadKey();
+        }
+
+        private static List<string> UrlsFromHandles(List<string> list)
+        {
+            List<string> result = new List<string>();
+            foreach (string gitHandle in list)
+            {
+                result.Add($"https://github.com/greenfox-academy/{gitHandle}");
+            }
+            return result;
         }
     }
 }
