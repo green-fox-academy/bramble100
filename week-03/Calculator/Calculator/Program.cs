@@ -18,8 +18,9 @@ namespace Calculator
         {
             string testString = "6 + 4 + 54 + 4.5 - 5";
             testString = Console.ReadLine();
-            MyCalculator Calc = new MyCalculator(testString);
-            MyCalculator(testString);
+            CalculatorEngine Calc = new CalculatorEngine(testString);
+            Console.WriteLine(Calc.Perform());
+            //MyCalculator(testString);
             Console.ReadKey();
         }
 
@@ -34,9 +35,9 @@ namespace Calculator
                 while (cursor != 0)
                 {
                     CalculateNextOperation(cursor, op);
-                    DisplaycalculatorStringList();
                     cursor = FindNextOperator(cursor, op);
                 }
+                DisplaycalculatorStringList();
             }
             DisplaycalculatorStringList();
             return Double.Parse(calculatorStringList.First());
