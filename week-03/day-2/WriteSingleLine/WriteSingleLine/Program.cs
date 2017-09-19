@@ -16,16 +16,17 @@ namespace WriteSingleLine
             // If the program is unable to write the file,
             // then it should print an error message like: "Unable to write file: my-file.txt"
             string path = @"./my-file.txt";
-            using (StreamWriter writer = new StreamWriter(path))
+            StreamWriter writerOld = new StreamWriter(path);
+            try
             {
-                try
+                using (StreamWriter writer = new StreamWriter(path))
                 {
                     writer.WriteLine("Arnold Barna is the fox!");
                 }
-                catch (IOException)
-                {
-                    Console.WriteLine("Unable to write file: my-file.txt"); ;
-                }
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Unable to write file: my-file.txt"); ;
             }
             Console.ReadKey();
         }
