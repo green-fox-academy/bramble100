@@ -18,7 +18,6 @@ namespace Lottery
                 Console.WriteLine(number);
             }
             Console.ReadKey();
-
         }
 
         private static IEnumerable<int> LotteryData(string path)
@@ -27,17 +26,18 @@ namespace Lottery
             string[] fileContent = LoadFromFile(path);
             Dictionary<int, int> winningNumbers = WinningNumbersFromFile(fileContent);
             List<int> topWinningNumbers = TopWinningNumbers(winningNumbers);
-            return new List<int>();
+            return topWinningNumbers;
         }
 
         private static List<int> TopWinningNumbers(Dictionary<int, int> winningNumbers)
         {
-            //Dictionary<int, int> topWinningNumbers = winningNumbers.OrderByDescending<int,int>(x => x.Value).Take(5);
-            foreach (int winningNumber in winningNumbers.Keys)
+            List<KeyValuePair<int,int>> topWinningNumbers = winningNumbers.OrderByDescending(x => x.Value).Take(5).ToList();
+            List<int> topWinningNumbersList = new List<int>();
+            foreach (var topwinningNumber in topWinningNumbers)
             {
-
+                topWinningNumbersList.Add(topwinningNumber.Key);
             }
-            return new List<int>();
+            return topWinningNumbersList;
         }
 
         private static Dictionary<int, int> WinningNumbersFromFile(string[] fileContent)
