@@ -20,14 +20,13 @@ namespace JosephusProblem
         private static int FindSurvivorSeat(int numberOfParticipants)
         {
             // value: original pos
-            var gamers = new List<int>(Enumerable.Range(1, numberOfParticipants));
+            var gamers = new Queue<int>(Enumerable.Range(1, numberOfParticipants));
             while (gamers.Count > 1)
             {
-                gamers.RemoveAt(1);
-                gamers.Add(gamers.First());
-                gamers.RemoveAt(0);
+                gamers.Enqueue(gamers.Dequeue());
+                gamers.Dequeue();
             }
-            return gamers.First();
+            return gamers.Dequeue();
         }
     }
 }

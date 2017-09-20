@@ -32,6 +32,8 @@ namespace SortablePokerHands
             CardValidatorTest("3x", false, Ranks, Suits); // wrong rank
             CardValidatorTest("4", false, Ranks, Suits); // missing suit
             CardValidatorTest("c99", false, Ranks, Suits); // wrong suit
+            CardValidatorTest("22H", false, Ranks, Suits); // wrong suit
+            CardValidatorTest("2HH", false, Ranks, Suits); // wrong suit
             CardValidatorTest("", false, Ranks, Suits);
 
             Console.WriteLine();
@@ -159,13 +161,16 @@ namespace SortablePokerHands
             return true;
         }
 
-        public static bool IsValid_WithRegex(string handString, char[] Ranks, char[] Suits, int validNumberOfCards, char Separator)
+        public static bool IsValid_WithRegex(string handString, 
+            char[] Ranks, 
+            char[] Suits, 
+            int validNumberOfCards, 
+            char Separator)
         {
             // BUGGY for "KS KS 5C JD TD" !!! guess why ???
             string pattern = @"^([2-9TJQKA]{1}[SHDC]{1}[ ]){4}[2-9TJQKA]{1}[SHDC]{1}$";
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
             return r.IsMatch(handString); ;
-
         }
 
         public static bool CardIsValid(string card, char[] Ranks, char[] Suits)
@@ -176,8 +181,7 @@ namespace SortablePokerHands
 
         public static bool CardIsValid_WithRegex(string card, char[] Ranks, char[] Suits)
         {
-            string pattern = @"^[23456789TJQKA]{1}[SHDC]{1}$";
-            Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
+            Regex r = new Regex(@"^[2-9TJQKA][SHDC]$", RegexOptions.IgnoreCase);
             return r.IsMatch(card); ;
         }
 

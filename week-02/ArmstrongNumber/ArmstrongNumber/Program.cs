@@ -10,10 +10,13 @@ namespace ArmstrongNumber
     {
         static void Main(string[] args)
         {
-            int number = 1634;
-            Console.WriteLine("{0} is {1}an Armstrong number.", number, IsArmstrongNumber(number) ? "" : "NOT ");
+            int number;
+
+            number = 1634;
+            Console.WriteLine("{0} is {1}an Armstrong number.", number, IsArmstrongNumber_V2(number) ? "" : "NOT ");
             number = 153;
-            Console.WriteLine("{0} is {1}an Armstrong number.", number, IsArmstrongNumber(number) ? "" : "NOT ");
+            Console.WriteLine("{0} is {1}an Armstrong number.", number, IsArmstrongNumber_V2(number) ? "" : "NOT ");
+
             Console.ReadKey();
         }
 
@@ -33,5 +36,21 @@ namespace ArmstrongNumber
             }
             return result == originalNumber;
         }
+
+        private static bool IsArmstrongNumber_V2(int number)
+        {
+            int numberOfDigits = number.ToString().Length;
+            int result = 0;
+            int actualTenDivider = (int)Math.Pow(10, numberOfDigits - 1);
+            int originalNumber = number;
+            for (int i = 0; i < numberOfDigits; i++)
+            {
+                result += (int)Math.Pow((number / actualTenDivider), numberOfDigits);
+                number %= actualTenDivider;
+                actualTenDivider /= 10;
+            }
+            return result == originalNumber;
+        }
+
     }
 }
