@@ -30,7 +30,7 @@ namespace Calculator
             Parse();
         }
 
-        internal double Perform()
+        internal double PerformCalculation()
         {
             int cursor;
             foreach (var op in validOperators.ToArray())
