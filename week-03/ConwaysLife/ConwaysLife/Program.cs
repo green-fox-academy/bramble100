@@ -16,11 +16,13 @@ namespace ConwaysLife
             ConsoleKeyInfo key;
             Universe Universe = new Universe();
             Universe.Display();
+            Console.WriteLine("Press ESC to exit, any other key to refresh.");
             key = Console.ReadKey();
             while (key.Key != ConsoleKey.Escape)
             {
                 Universe.Update();
                 Universe.Display();
+                Console.WriteLine("Press ESC to exit, any other key to refresh.");
                 key = Console.ReadKey();
             }
         }
