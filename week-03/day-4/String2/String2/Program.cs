@@ -11,28 +11,20 @@ namespace String2
         static void Main(string[] args)
         {
             // Given a string, compute recursively a new string where all the 'x' chars have been removed.
-            string input = "Xerxes got X-rayed by Xanthippe.";
+            string input = "Xerxes got X-rayed by Xanthippe x times.x";
             Console.WriteLine(DeXize(input));
             Console.ReadKey();
         }
 
         private static string DeXize(string input)
         {
-            return input.Length < 2 ? 
-                input : 
-                input[0].ToString().ToLower() == "x" ? 
-                    DeXize(input.Substring(1)) : 
-                    $"{input[0]}{DeXize(input.Substring(1))}";
+            return input.Length < 2 ? input[0].ToString().ToLower() == "x" ? "" : input : input[0].ToString().ToLower() == "x" ? DeXize(input.Substring(1)) : $"{input[0]}{DeXize(input.Substring(1))}";
 
-            //if(input.Length < 2)
+            //if (input.Length < 2)
             //{
-            //    return input;
+            //    return input[0].ToString().ToLower() == "x" ? "" : input;
             //}
-            //if (input[0].ToString().ToLower() == "x")
-            //{
-            //    return DeXize(input.Substring(1));
-            //}
-            //return $"{input[0]}{DeXize(input.Substring(1))}";
+            //return input[0].ToString().ToLower() == "x" ? DeXize(input.Substring(1)) : $"{input[0]}{DeXize(input.Substring(1))}";
         }
     }
 }
