@@ -126,9 +126,7 @@ namespace ConwaysLife
             return numberOfNeighbors;
         }
 
-        private bool IsOneNeighborAlive(int height, int width, int offsetHeight, int offsetWidth)
-        {
-            return universe[height + offsetHeight, width + offsetWidth];
-        }
+        private bool IsOneNeighborAlive(int height, int width, int offsetHeight, int offsetWidth) =>
+            universe[height + offsetHeight, width + offsetWidth];
     }
 }
