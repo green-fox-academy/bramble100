@@ -43,6 +43,12 @@ namespace ConwaysLife
         {
             bool[,] futureUniverse = new bool[universe.GetLength(0), universe.GetLength(1)];
 
+            CalculateChanges(futureUniverse);
+            FixChanges(futureUniverse);
+        }
+
+        private void CalculateChanges(bool[,] futureUniverse)
+        {
             for (int height = 0; height < universe.GetLength(0); height++)
             {
                 for (int width = 0; width < universe.GetLength(1); width++)
@@ -58,7 +64,6 @@ namespace ConwaysLife
                     }
                 }
             }
-            FixChanges(futureUniverse);
         }
 
         private void FixChanges(bool[,] futureUniverse)
