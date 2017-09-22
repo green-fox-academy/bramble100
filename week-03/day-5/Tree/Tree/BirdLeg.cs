@@ -30,8 +30,8 @@ namespace Tree
             this.isRandom = isRandom;
             this.numberOfToes = numberOfToes;
             this.isRandomColored = isRandomColored;
-            foxDraw.FillColor(Colors.BurlyWood);
-            foxDraw.StrokeColor(Colors.BurlyWood);
+            foxDraw.FillColor(Colors.FloralWhite);
+            foxDraw.StrokeColor(Colors.FloralWhite);
             foxDraw.DrawRectangle(0, 0, canvas.Width, canvas.Height);
         }
         /// <summary>
@@ -50,16 +50,17 @@ namespace Tree
             {
                 return;
             }
-            foxDraw.FillColor(Colors.Firebrick);
-            foxDraw.StrokeColor(Colors.Firebrick);
+            foxDraw.FillColor(isRandomColored ? Helper.RandomColor(random) : Colors.Firebrick);
+            foxDraw.StrokeColor(isRandomColored ? Helper.RandomColor(random) : Colors.Firebrick);
             Point endPoint = Helper.CalculatePointOffset(startPoint, length, direction);
             //sole
             foxDraw.DrawLine(startPoint, endPoint);
             // toes
-            double newLength = 2.0 * length / 3.0;
-            Draw(endPoint, direction - 20, newLength, depth - 1);
-            Draw(endPoint, direction, newLength, depth - 1);
-            Draw(endPoint, direction + 20, newLength, depth - 1);
+            double newLength = length * 2.0 / (isRandom ? random.NextDouble()/2.0 + 2.75 : 3.0);
+            double baseDirection = direction + (isRandom ?  random.Next(40) - 20:0);
+            Draw(endPoint, baseDirection - 20, newLength, depth - 1);
+            Draw(endPoint, baseDirection, newLength, depth - 1);
+            Draw(endPoint, baseDirection + 20, newLength, depth - 1);
         }
     }
 }
