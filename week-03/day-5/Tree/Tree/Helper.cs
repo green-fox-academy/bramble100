@@ -36,5 +36,14 @@ namespace GreenFox
                 new Point(xPosition - edge / 2, yPosition - edge * 0.866) // 0
             });
         }
+
+        internal static Point CalculatePointOffset(Point startPoint,
+            double length,
+            double directionInDegrees)
+        {
+            double directionInRadian = Math.PI * directionInDegrees / 180.0;
+            return new Point(startPoint.X + length * Math.Cos(directionInRadian),
+                startPoint.Y + length * Math.Sin(directionInRadian));
+        }
     }
 }

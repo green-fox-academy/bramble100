@@ -29,18 +29,37 @@ namespace Tree
             this.random = random;
             this.isRandom = isRandom;
             this.numberOfToes = numberOfToes;
-            this.isRandomColored = false;
-            foxDraw.FillColor(Colors.Aqua);
-            foxDraw.StrokeColor(Colors.Aqua);
+            this.isRandomColored = isRandomColored;
+            foxDraw.FillColor(Colors.BurlyWood);
+            foxDraw.StrokeColor(Colors.BurlyWood);
             foxDraw.DrawRectangle(0, 0, canvas.Width, canvas.Height);
         }
-
+        /// <summary>
+        /// Draw one line and recursively calls itself three times.
+        /// </summary>
+        /// <param name="startPoint"></param>
+        /// <param name="direction"></param>
+        /// <param name="length"></param>
+        /// <param name="depth"></param>
         internal void Draw(Point startPoint, 
-            int length = 100, 
-            int depth = 1)
+            double direction,
+            double length, 
+            int depth)
         {
-            foxDraw.FillColor(Colors.Red);
-
+            if (depth < 1)
+            {
+                return;
+            }
+            foxDraw.FillColor(Colors.Firebrick);
+            foxDraw.StrokeColor(Colors.Firebrick);
+            Point endPoint = Helper.CalculatePointOffset(startPoint, length, direction);
+            //sole
+            foxDraw.DrawLine(startPoint, endPoint);
+            // toes
+            double newLength = 2.0 * length / 3.0;
+            Draw(endPoint, direction - 20, newLength, depth - 1);
+            Draw(endPoint, direction, newLength, depth - 1);
+            Draw(endPoint, direction + 20, newLength, depth - 1);
         }
     }
 }

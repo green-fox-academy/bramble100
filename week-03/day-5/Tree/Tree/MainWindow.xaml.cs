@@ -26,7 +26,7 @@ namespace Tree
             InitializeComponent();
 
             BirdLeg birdleg = new BirdLeg(new FoxDraw(canvas), new Random(), canvas);
-            birdleg.Draw(new Point(canvas.Width / 2, canvas.Height));
+            birdleg.Draw(new Point(canvas.Width / 2, canvas.Height), -90, 150, 8);
         }
     }
 }
