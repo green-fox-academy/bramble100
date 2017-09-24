@@ -19,7 +19,6 @@ namespace Calculator
             calculatorStringList = new List<string>();
             Feed(inputStringToCalculate);
         }
-
         public void Feed(string inputStringToCalculate)
         {
             originalString = inputStringToCalculate;
@@ -54,7 +53,6 @@ namespace Calculator
             }
             Console.WriteLine();
         }
-
         private void CalculateNextOperation(int localCursor, char op)
         {
             double number1 = Double.Parse(calculatorStringList[localCursor - 1]);
@@ -80,7 +78,6 @@ namespace Calculator
                 calculatorStringList.RemoveRange(localCursor, 2);
             }
         }
-
         private int FindNextOperator(int startPosition, char op)
         {
             for (int i = startPosition; i < calculatorStringList.Count; i++)
@@ -92,7 +89,6 @@ namespace Calculator
             }
             return 0;
         }
-
         private bool IsValid(string stringToCalculate)
         {
             string validCharacters = validDigits + validOperators + " ";
