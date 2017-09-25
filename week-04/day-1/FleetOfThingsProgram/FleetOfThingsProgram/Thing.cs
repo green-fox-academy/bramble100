@@ -13,10 +13,7 @@ namespace FleetOfThingsProgram
 
         public Thing(string name) => Name = name;
 
-        public Thing(string name, bool completed) : this(name)
-        {
-            Completed = completed;
-        }
+        public Thing(string name, bool completed) : this(name) => Completed = completed;
 
         public override string ToString() => $"[{(Completed ? "X" : " ")}] {Name}";
 
