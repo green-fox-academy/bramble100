@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DicesProgram
 {
@@ -16,7 +12,7 @@ namespace DicesProgram
             while(key.Key != ConsoleKey.Escape)
             {
                 dices.Roll();
-                 Console.WriteLine(dices.ToString());
+                Console.WriteLine(dices.ToString());
                 key = Console.ReadKey();
             }
         }

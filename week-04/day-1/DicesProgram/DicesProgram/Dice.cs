@@ -4,24 +4,18 @@ namespace DicesProgram
 {
     internal class Dice
     {
-        private int Value;
+        private int value;
 
-        private Random random;
+        private Random Random;
+
+        public int Value { get => value; private set => Value = value; }
 
         public Dice(Random random)
         {
-            this.random = random;
+            this.Random = random;
             Roll();
         }
 
-        public void Roll()
-        {
-            Value = random.Next(1, 7);
-        }
-
-        public int GetValue()
-        {
-            return Value;
-        }
+        public void Roll() => value = Random.Next(1, 7);
     }
 }
