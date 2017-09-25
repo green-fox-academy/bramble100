@@ -31,7 +31,7 @@ namespace Hexagon
                 250,
                 random,
                 foxDraw,
-                6);
+                8);
         }
 
         public void DrawHexagon(int xPosition, 
