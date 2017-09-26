@@ -10,6 +10,12 @@ namespace AircraftCarrierApp
     {
         static void Main(string[] args)
         {
+
+            Aircraft aircraft = new Aircraft(AircraftType.F16);
+
+            Console.WriteLine(aircraft.ToString());
+
+            Console.ReadKey();
         }
     }
 }

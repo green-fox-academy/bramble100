@@ -28,7 +28,7 @@ namespace AircraftCarrierApp
             }
         }
 
-        public string  Type()
+        public string Type()
         {
             if(type == AircraftType.F16)
             {
@@ -65,6 +65,15 @@ namespace AircraftCarrierApp
                 ActualAmmunition += ammoLoadable;
             }
             return ammoReturnable;
+        }
+
+        internal bool IsFillable() => ActualAmmunition < MaxAmmunition;
+
+        public override string ToString() => $"Type: {type}, Ammo: {ActualAmmunition}, Base Damage: {BaseDamage}, All Damage: {ActualAmmunition * BaseDamage}";
+
+        internal int TotalDamage()
+        {
+            return BaseDamage * ActualAmmunition;
         }
     }
 }
