@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PallidaClassProgram", "PallidaClassProgram\PallidaClassProgram.csproj", "{0D7FB103-F07D-4AE6-BF52-7D828F5F58B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D7FB103-F07D-4AE6-BF52-7D828F5F58B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7FB103-F07D-4AE6-BF52-7D828F5F58B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7FB103-F07D-4AE6-BF52-7D828F5F58B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7FB103-F07D-4AE6-BF52-7D828F5F58B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85D029A9-3BA5-4D2C-B109-A8CB7D53D510}
+	EndGlobalSection
+EndGlobal
