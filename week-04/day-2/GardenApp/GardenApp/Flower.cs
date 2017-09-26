@@ -2,29 +2,16 @@
 
 namespace GardenApp
 {
-    internal class Flower
+    internal class Flower : Plant
     {
-        private string color;
-        private int water = 0;
+        private static string name = "flower";
 
-        public Flower(string color)
-        {
-            this.color = color;
-        }
+        public Flower(string color) => this.color = color;
 
-        public bool NeedsWatering()
-        {
-            return water < 5;
-        }
+        public override bool NeedsWatering() => water < 5;
 
-        public void Water(int water)
-        {
-            this.water += (int)(water * 0.75);
-        }
+        public override void Water(int water) => this.water += (int)(water * 0.75);
 
-        internal string DisplayStatusReport()
-        {
-            return $"The {color} flower {(NeedsWatering() ? "needs" : "doesn't need")} water";
-        }
+        internal override string DisplayStatusReport() => $"The {color} {name} {(NeedsWatering() ? "needs" : "doesn't need")} water";
     }
 }
