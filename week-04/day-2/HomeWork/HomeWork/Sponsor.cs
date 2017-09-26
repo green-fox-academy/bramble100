@@ -13,9 +13,9 @@ namespace HomeWork
 
         public Sponsor(string personName = "Jane Doe", 
             int age = 30, 
-            Gender personGender = Gender.Female, 
-            int hiredStudents = 0,
-            string company = "Google") : base(personName, age, personGender)
+            Gender personGender = Gender.Female,
+            string company = "Google", 
+            int hiredStudents = 0) : base(personName, age, personGender)
         {
             this.hiredStudent = hiredStudents;
             this.company = company;
