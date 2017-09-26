@@ -11,36 +11,20 @@ namespace AircraftCarrierApp
         private int ActualAmmunition = 0;
         private int MaxAmmunition = 0;
         private int BaseDamage = 0;
-        private AircraftType type;
+        internal AircraftType Type;
 
         public Aircraft(AircraftType type)
         {
-            this.type = type;
-            if (this.type == AircraftType.F16)
+            this.Type = type;
+            if (this.Type == AircraftType.F16)
             {
                 MaxAmmunition = 8;
                 BaseDamage = 30;
             }
-            else if (this.type == AircraftType.F35)
+            else if (this.Type == AircraftType.F35)
             {
                 MaxAmmunition = 12;
                 BaseDamage = 50;
-            }
-        }
-
-        public string Type()
-        {
-            if(type == AircraftType.F16)
-            {
-                return "F16";
-            }
-            else if (type == AircraftType.F16)
-            {
-                return "F35";
-            }
-            else
-            {
-                return "Invalid type set";
             }
         }
 
@@ -69,7 +53,7 @@ namespace AircraftCarrierApp
 
         internal bool IsFillable() => ActualAmmunition < MaxAmmunition;
 
-        public override string ToString() => $"Type: {type}, Ammo: {ActualAmmunition}, Base Damage: {BaseDamage}, All Damage: {ActualAmmunition * BaseDamage}";
+        public override string ToString() => $"Aircraft type: {Type}, Ammo: {ActualAmmunition}, Base Damage: {BaseDamage}, All Damage: {ActualAmmunition * BaseDamage}";
 
         internal int TotalDamage()
         {
