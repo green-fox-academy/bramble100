@@ -10,15 +10,21 @@ namespace Anagram
     {
         public bool IsAnagram(string inputString1, string inputString2)
         {
-            if (!inputString1.Equals(inputString2))
+            if (inputString1.Equals(inputString2))
             {
-                List<char> processedString1 = inputString1.ToLower().ToList<char>();
-                List<char> processedString2 = inputString2.ToLower().ToList<char>();
-                processedString1.Sort();
-                processedString2.Sort();
-                return processedString1.ToString().Equals(processedString2.ToString());
+                return true;
             }
-            return true;
+
+            List<char> processedListOfChars1 = inputString1.Replace(" ", String.Empty).ToLower().ToList<char>();
+            List<char> processedListOfChars2 = inputString2.Replace(" ", String.Empty).ToLower().ToList<char>();
+
+            if (processedListOfChars1.Count != processedListOfChars2.Count)
+            {
+                return false;
+            }
+            processedListOfChars1.Sort();
+            processedListOfChars2.Sort();
+            return String.Concat(processedListOfChars1).Equals(String.Concat(processedListOfChars2));
         }
     }
 }

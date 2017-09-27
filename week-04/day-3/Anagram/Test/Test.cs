@@ -9,37 +9,40 @@ using Anagram;
 
 namespace Test
 {
+
+    // variations:
+    // - empty string (ES)
+    // - string with whitespace (WS)
+    // - string with lowercase (LC)
+    // - string with uppercase (UC)
+    // - string with mixed case (MC)
+
+    // variation for the two strings:
+    // - same cases (SC)
+    // - different cases in same letters(DCSL)
+    // - different cases in different letters (DCDL)
+
     [TestFixture]
     public class TestForFalse
     {
         Analyzer anagram = new Analyzer();
 
         [Test]
-        public void ForOneEmptyStringAndOneNotEmpty() => Assert.AreEqual(false, anagram.IsAnagram(String.Empty, "hello"));
-
-        [Test]
-        public void ForTwoNotEmptyStrings() => Assert.AreEqual(false, anagram.IsAnagram("helo", "hello"));
-
-        [Test]
         public void OneEmptyStringAndOneNotEmpty() => Assert.AreEqual(false, anagram.IsAnagram(String.Empty, "hello"));
+
+        [Test]
+        public void TwoNotEmptyStrings() => Assert.AreEqual(false, anagram.IsAnagram("helo", "hello"));
+
+        [Test]
+        public void TwoNotEmptyStringsEqualLength() => Assert.AreEqual(false, anagram.IsAnagram("helxo", "hello"));
     }
 
     [TestFixture]
     public class TestForTrue
     {
         Analyzer anagram = new Analyzer();
-        // variations:
-        // - empty string
-        // - string with whitespace
-        // - string with lowercase
-        // - string with uppercase
-        // - string with mixed case
 
-        // variation for the two strings:
-        // - same cases
-        // - different cases in same letters
-        // - different cases in different letters
-
+        // ES - ES
         [Test]
         public void TwoEmptyStrings() => Assert.AreEqual(true, anagram.IsAnagram(String.Empty, String.Empty));
 
@@ -54,5 +57,8 @@ namespace Test
 
         [Test]
         public void AnagramsNoWhiteSpaceNotIdenticalMixedCase() => Assert.AreEqual(true, anagram.IsAnagram("elhOl", "Hello"));
+
+        [Test]
+        public void AnagramsWhiteSpace() => Assert.AreEqual(true, anagram.IsAnagram("e lhOl", "Hell o"));
     }
 }
