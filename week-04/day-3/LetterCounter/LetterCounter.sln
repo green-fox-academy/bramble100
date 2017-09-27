@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetterCounter", "LetterCounter\LetterCounter.csproj", "{935E4359-E1E8-44CB-9F13-DA1E4E30DF71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{A53E7167-6009-40C6-82F9-50BD23D261EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{935E4359-E1E8-44CB-9F13-DA1E4E30DF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{935E4359-E1E8-44CB-9F13-DA1E4E30DF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{935E4359-E1E8-44CB-9F13-DA1E4E30DF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A53E7167-6009-40C6-82F9-50BD23D261EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A53E7167-6009-40C6-82F9-50BD23D261EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A53E7167-6009-40C6-82F9-50BD23D261EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A53E7167-6009-40C6-82F9-50BD23D261EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

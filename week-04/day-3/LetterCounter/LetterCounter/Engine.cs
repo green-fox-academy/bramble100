@@ -12,6 +12,11 @@ namespace LetterCounter
         {
             Dictionary<char, int> result = new Dictionary<char, int>();
 
+            if (String.IsNullOrEmpty(inputString))
+            {
+                return result;
+            }
+
             foreach (char character in inputString.ToArray<char>())
             {
                 if (result.ContainsKey(character))
