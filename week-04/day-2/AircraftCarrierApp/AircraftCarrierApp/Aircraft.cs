@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AircraftCarrierApp
+﻿namespace AircraftCarrierApp
 {
-    abstract class Aircraft
+    public abstract class Aircraft
     {
         protected int ActualAmmunition = 0;
         protected int MaxAmmunition = 0;

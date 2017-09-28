@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AircraftCarrierApp
+﻿namespace AircraftCarrierApp
 {
-    class AirCraftF35 : Aircraft
+    public class AirCraftF35 : Aircraft
     {
         public AirCraftF35()
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AircraftCarrierApp
 {
-    class Carrier : List<Aircraft>
+    public class Carrier : List<Aircraft>
     {
         private int AmmoStorage = 0;
         private int HealthPoint = 0;
@@ -70,18 +70,21 @@ namespace AircraftCarrierApp
             }
         }
 
-        private void ReloadNextAirCraft(Type type)
+        private void ReloadNextAirCraft(Type type) => FindAll(aircraft => aircraft.GetType() == type && aircraft.IsReloadable()).
+                ForEach(aircraft => AmmoStorage = aircraft.Reload(AmmoStorage));
+
+        private void ReloadNextAirCraftOld(Type type)
         {
-            foreach (Aircraft ac in this)
+            foreach (Aircraft aircraft in this)
             {
-                if (ac.GetType() == type && ac.IsReloadable())
+                if (aircraft.GetType() == type && aircraft.IsReloadable())
                 {
-                    AmmoStorage = ac.Reload(AmmoStorage);
+                    AmmoStorage = aircraft.Reload(AmmoStorage);
                 }
             }
         }
 
-        private bool ThereIsAircraftToReload(Type type) => Find(aircraft 
+        public bool ThereIsAircraftToReload(Type type) => Find(aircraft 
             => aircraft.GetType() == type && aircraft.IsReloadable()) != null;
 
         private bool ThereIsAircraftToReloadOld(Type type)
