@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
+    <Compile Include="AirCraftF16.cs" />
+    <Compile Include="AirCraftF35.cs" />
     <Compile Include="AircraftType.cs" />
     <Compile Include="Carrier.cs" />
     <Compile Include="Program.cs" />

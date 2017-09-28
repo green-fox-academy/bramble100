@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AircraftCarrierApp
 {
@@ -10,11 +8,9 @@ namespace AircraftCarrierApp
     {
         private int AmmoStorage = 0;
         private int HealthPoint = 0;
-        private List<Aircraft> aircrafts = new List<Aircraft>();
 
         public Carrier(int ammoStorage, int healthPoint)
         {
-            aircrafts.ForEach(item => Add(item));
             AmmoStorage = ammoStorage;
             HealthPoint = healthPoint;
         }
@@ -28,53 +24,71 @@ namespace AircraftCarrierApp
 
         public void AddAircraft(string aircraftType)
         {
-            if(aircraftType == "F16")
+            if (aircraftType == "F16")
             {
-                Add(new Aircraft(AircraftType.F16));
+                Add(new AirCraftF16());
             }
             else if (aircraftType == "F35")
             {
-                Add(new Aircraft(AircraftType.F35));
+                Add(new AirCraftF35());
+            }
+            else
+            {
+                throw new ArgumentException("Invalid aircraft type specified");
             }
         }
 
         public void AddAircraft(AircraftType type)
         {
-            Add(new Aircraft(type));
+            if (type == AircraftType.F16)
+            {
+                Add(new AirCraftF16());
+            }
+            else if (type == AircraftType.F35)
+            {
+                Add(new AirCraftF35());
+            }
+            else
+            {
+                throw new ArgumentException("Invalid aircraft type specified");
+            }
         }
 
-        public void Fill()
+        public void Reload()
         {
-            if(AmmoStorage == 0)
+            if (AmmoStorage == 0)
             {
-                throw new Exception("Not ammo on carrier to fill the aircrafts.");
+                throw new Exception("No ammo on carrier to reload the aircrafts.");
             }
-            while(AmmoStorage != 0 && ThereIsAircraftToFill(AircraftType.F35))
+            while (AmmoStorage != 0 && ThereIsAircraftToReload(typeof(AirCraftF35)))
             {
-                FillNextAirCraft(AircraftType.F35);
+                ReloadNextAirCraft(typeof(AirCraftF35));
             }
-            while (AmmoStorage != 0 && ThereIsAircraftToFill(AircraftType.F16))
+            while (AmmoStorage != 0 && ThereIsAircraftToReload(typeof(AirCraftF16)))
             {
-                FillNextAirCraft(AircraftType.F16);
+                ReloadNextAirCraft(typeof(AirCraftF16));
             }
         }
 
-        private void FillNextAirCraft(AircraftType type)
+        private void ReloadNextAirCraft(Type type)
         {
             foreach (Aircraft ac in this)
             {
-                if (ac.Type == type && ac.IsFillable())
+                if (ac.GetType() == type && ac.IsReloadable())
                 {
-                    AmmoStorage = ac.Refill(AmmoStorage);
+                    AmmoStorage = ac.Reload(AmmoStorage);
                 }
             }
         }
 
-        private bool ThereIsAircraftToFill(AircraftType type)
+        private bool ThereIsAircraftToReload(Type type) => Find(aircraft 
+            => aircraft.GetType() == type && aircraft.IsReloadable()) != null;
+
+        private bool ThereIsAircraftToReloadOld(Type type)
         {
-            foreach (Aircraft ac in this)
+            foreach (Aircraft aircraft in this)
             {
-                if (ac.Type == type && ac.IsFillable())
+                if (aircraft.GetType() == type && aircraft.IsReloadable())
                 {
                     return true;
                 }
@@ -85,7 +99,9 @@ namespace AircraftCarrierApp
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine($"Aircraft carrier => HP: {HealthPoint}, Aircraft count: {Count}, Ammo storage: {AmmoStorage}, Total damage: {TotalDamage()}");
+            stringBuilder.AppendLine($"Aircraft carrier => HP: {HealthPoint}, " +
+                $"Aircraft count: {Count}, Ammo storage: {AmmoStorage}, " +
+                $"Total damage: {TotalDamage()}");
             ForEach(aircraft => stringBuilder.AppendLine(aircraft.ToString()));
             return stringBuilder.ToString();
         }

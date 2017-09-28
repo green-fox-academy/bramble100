@@ -6,26 +6,14 @@ using System.Threading.Tasks;
 
 namespace AircraftCarrierApp
 {
-    class Aircraft
+    abstract class Aircraft
     {
-        private int ActualAmmunition = 0;
-        private int MaxAmmunition = 0;
-        private int BaseDamage = 0;
-        internal AircraftType Type;
+        protected int ActualAmmunition = 0;
+        protected int MaxAmmunition = 0;
+        protected int BaseDamage = 0;
 
-        public Aircraft(AircraftType type)
+        public Aircraft()
         {
-            this.Type = type;
-            if (this.Type == AircraftType.F16)
-            {
-                MaxAmmunition = 8;
-                BaseDamage = 30;
-            }
-            else if (this.Type == AircraftType.F35)
-            {
-                MaxAmmunition = 12;
-                BaseDamage = 50;
-            }
         }
 
         public int Fight()
@@ -34,7 +22,7 @@ namespace AircraftCarrierApp
             return ActualAmmunition * BaseDamage;
         }
 
-        public int Refill(int ammoAvailable)
+        public int Reload(int ammoAvailable)
         {
             int ammoNeeded = MaxAmmunition - ActualAmmunition;
             int ammoLoadable = ammoAvailable >= ammoNeeded ? ammoNeeded : ammoAvailable;
@@ -51,13 +39,12 @@ namespace AircraftCarrierApp
             return ammoReturnable;
         }
 
-        internal bool IsFillable() => ActualAmmunition < MaxAmmunition;
+        internal bool IsReloadable() => ActualAmmunition < MaxAmmunition;
 
-        public override string ToString() => $"Aircraft type: {Type}, Ammo: {ActualAmmunition}, Base Damage: {BaseDamage}, All Damage: {ActualAmmunition * BaseDamage}";
+        public override string ToString() => $"Ammo: {ActualAmmunition}, " +
+            $"Base Damage: {BaseDamage}, " +
+            $"All Damage: {ActualAmmunition * BaseDamage}";
 
-        internal int TotalDamage()
-        {
-            return BaseDamage * ActualAmmunition;
-        }
+        internal int TotalDamage() => BaseDamage * ActualAmmunition;
     }
 }
