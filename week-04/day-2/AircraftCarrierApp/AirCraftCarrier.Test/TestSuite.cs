@@ -15,7 +15,8 @@ namespace AirCraftCarrier.Test
         [TestCase]
         public void NoRefillableAircraft()
         {
-            Assert.AreEqual(false, carrier.ThereIsAircraftToReload(typeof(AirCraftF16)));
+            Type type = typeof(AirCraftF16);
+            Assert.AreEqual(false, carrier.ThereIsAircraftToReload(type));
         }
     }
 }

@@ -60,6 +60,20 @@ namespace AircraftCarrierApp
             {
                 throw new Exception("No ammo on carrier to reload the aircrafts.");
             }
+            List<Type> types = new List<Type>()
+            {
+                typeof(AirCraftF35),
+                typeof(AirCraftF16)
+            };
+            types.ForEach(type => ReloadAirCrafts(type));
+        }
+
+        public void ReloadOld()
+        {
+            if (AmmoStorage == 0)
+            {
+                throw new Exception("No ammo on carrier to reload the aircrafts.");
+            }
             while (AmmoStorage != 0 && ThereIsAircraftToReload(typeof(AirCraftF35)))
             {
                 ReloadNextAirCraft(typeof(AirCraftF35));
@@ -70,7 +84,16 @@ namespace AircraftCarrierApp
             }
         }
 
-        private void ReloadNextAirCraft(Type type) => FindAll(aircraft => aircraft.GetType() == type && aircraft.IsReloadable()).
+        public void ReloadAirCrafts(Type type)
+        {
+            while (AmmoStorage != 0 && ThereIsAircraftToReload(type))
+            {
+                ReloadNextAirCraft(type);
+            }
+        }
+
+        private void ReloadNextAirCraft(Type type)
+            => FindAll(aircraft => aircraft.GetType() == type && aircraft.IsReloadable()).
                 ForEach(aircraft => AmmoStorage = aircraft.Reload(AmmoStorage));
 
         private void ReloadNextAirCraftOld(Type type)
@@ -84,8 +107,11 @@ namespace AircraftCarrierApp
             }
         }
 
-        public bool ThereIsAircraftToReload(Type type) => Find(aircraft 
-            => aircraft.GetType() == type && aircraft.IsReloadable()) != null;
+        public bool ThereIsAircraftToReload(Type type) => Exists(aircraft
+            => aircraft.GetType() == type && aircraft.IsReloadable());
+
+        //public bool ThereIsAircraftToReload(Type type) => Find(aircraft
+        //    => aircraft.GetType() == type && aircraft.IsReloadable()) != null;
 
         private bool ThereIsAircraftToReloadOld(Type type)
         {
