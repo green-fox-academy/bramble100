@@ -8,8 +8,11 @@ namespace Wanderer
 {
     class MovingObjects : Dictionary<string, object>
     {
-        public MovingObjects()
+        Hero hero;
+        Random random;
+        public MovingObjects(Random random)
         {
+            Hero
         }
     }
 }
