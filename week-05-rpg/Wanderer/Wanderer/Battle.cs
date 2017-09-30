@@ -21,7 +21,7 @@ namespace Wanderer
         {
             get
             {
-                return Attacker.IsAlive && Defendant.IsAlive;
+                return !(Attacker.IsAlive && Defendant.IsAlive);
             }
         }
 

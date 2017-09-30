@@ -16,7 +16,6 @@ namespace Wanderer
         int MIN_NUMBER_OF_MONSTERS = 3;
         int MAX_NUMBER_OF_MONSTERS = 6;
 
-
         public Area(Random random)
         {
             totalNumberOfMonsters = dice.random.Next(MIN_NUMBER_OF_MONSTERS - 2, MAX_NUMBER_OF_MONSTERS - 1);
