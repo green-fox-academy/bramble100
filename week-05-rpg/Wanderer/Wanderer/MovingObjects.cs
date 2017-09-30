@@ -12,16 +12,13 @@ namespace Wanderer
         MonsterBoss monsterBoss;
         KeyHolderMonster keyHolderMonster;
         List<Monster> otherMonsters;
-        int MIN_NUMBER_OF_MONSTERS = 3;
-        int MAX_NUMBER_OF_MONSTERS = 6;
 
-        internal MovingObjects(Dice dice)
+        internal MovingObjects(int totalNumberOfMonsters, Dice dice)
         {
             hero = new Hero(dice);
             monsterBoss = new MonsterBoss(dice);
             keyHolderMonster = new KeyHolderMonster();
-            int numberOfMonsters = dice.random.Next(MIN_NUMBER_OF_MONSTERS - 2, MAX_NUMBER_OF_MONSTERS - 1);
-            for (int i = 0; i < numberOfMonsters; i++)
+            for (int i = 2; i < totalNumberOfMonsters; i++)
             {
                 otherMonsters.Add(new Monster(dice));
             }
