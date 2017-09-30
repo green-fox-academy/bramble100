@@ -9,18 +9,24 @@ namespace Wanderer
     class MovingObjects
     {
         Hero hero;
-        MonsterBoss monsterBoss;
-        KeyHolderMonster keyHolderMonster;
-        List<Monster> otherMonsters;
+        List<Monster> monsters = new List<Monster>();
+        private int totalNumberOfMonsters;
+        private int level;
 
-        internal MovingObjects(int totalNumberOfMonsters, Dice dice)
+        private Dice dice;
+
+        public MovingObjects(int totalNumberOfMonsters, int level, Dice dice)
         {
+            this.totalNumberOfMonsters = totalNumberOfMonsters;
+            this.level = level;
+            this.dice = dice;
+
             hero = new Hero(dice);
-            monsterBoss = new MonsterBoss(dice);
-            keyHolderMonster = new KeyHolderMonster();
+            monsters.Add(new MonsterBoss(level, dice));
+            monsters.Add(new KeyHolderMonster(level, dice));
             for (int i = 2; i < totalNumberOfMonsters; i++)
             {
-                otherMonsters.Add(new Monster(dice));
+                monsters.Add(new Monster(level, dice));
             }
         }
     }
