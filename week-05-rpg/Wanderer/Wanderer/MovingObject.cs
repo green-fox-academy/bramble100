@@ -50,5 +50,14 @@ namespace Wanderer
                 defendant.CurrentHealthPoints = Math.Max(0, defendant.CurrentHealthPoints);
             }
         }
+
+        public override string ToString()
+        {
+            return $"{GetType().ToString()}" + 
+                $" (Level: {Level})" +
+                $" HP: {CurrentHealthPoints}/{MaximalHealthPoints}"+ 
+                $" | DP: {DefendPoints}" + 
+                $" | SP: {StrikePoints}";
+        }
     }
 }
