@@ -8,18 +8,14 @@ namespace Wanderer
 {
     class Monster : MovingObject
     {
-        internal Monster(Dice dice) : base(dice)
+        internal Monster(int level, Dice dice) : base(dice)
         {
-        }
-
-        virtual protected void Initialize(int level = 1)
-        {
-            // Monster Lvl x(if boss)
-            // HP: 2 * x * d6(+d6)
+            // Monster Lvl x
+            // HP: 2 * x * d6
             MaximalHealthPoints = CurrentHealthPoints = 2 * level * dice.Roll();
-            // DP: x / 2 * d6(+d6 / 2)
-            DefendPoints = level/2 * dice.Roll() + dice.Roll();
-            // SP: x* d6(+x)
+            // DP: x / 2 * d6
+            DefendPoints = level / 2 * dice.Roll() + dice.Roll();
+            // SP: x* d6
             StrikePoints = level * dice.Roll();
         }
     }
