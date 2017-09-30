@@ -18,9 +18,13 @@ namespace Wanderer
 
         protected Dice dice;
 
-        public MovingObject(int level, Dice dice)
+        public MovingObject(Dice dice)
         {
             this.dice = dice;
+        }
+
+        public MovingObject(int level, Dice dice) : this(dice)
+        {
             InitalizeLevel(level);
             InitalizePoints();
         }

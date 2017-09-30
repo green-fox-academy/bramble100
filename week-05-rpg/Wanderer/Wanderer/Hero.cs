@@ -8,7 +8,16 @@ namespace Wanderer
 {
     class Hero : MovingObject
     {
-        internal Hero(Dice dice) : base(dice)
+        public Hero(int level, Dice dice) : base(dice)
+        {
+        }
+
+        internal override void InitalizeLevel(int level)
+        {
+            Level = level;
+        }
+
+        internal override void InitalizePoints()
         {
             // HP: 20 + 3 * d6
             MaximalHealthPoints = CurrentHealthPoints = 20 + dice.Roll() + dice.Roll() + dice.Roll();

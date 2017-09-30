@@ -15,13 +15,13 @@ namespace Wanderer
 
         private Dice dice;
 
-        public MovingObjects(int totalNumberOfMonsters, int level, Dice dice)
+        public MovingObjects(int totalNumberOfMonsters, int areaLevel, Dice dice)
         {
             this.totalNumberOfMonsters = totalNumberOfMonsters;
-            this.level = level;
+            this.level = areaLevel;
             this.dice = dice;
 
-            hero = new Hero(dice);
+            hero = new Hero(areaLevel, dice);
             monsters.Add(new MonsterBoss(level, dice));
             monsters.Add(new KeyHolderMonster(level, dice));
             for (int i = 2; i < totalNumberOfMonsters; i++)
