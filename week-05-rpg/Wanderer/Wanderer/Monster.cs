@@ -8,8 +8,6 @@ namespace Wanderer
 {
     class Monster : MovingObject
     {
-        private int Level;
-
         protected Monster(Dice dice) : base(dice)
         {
         }

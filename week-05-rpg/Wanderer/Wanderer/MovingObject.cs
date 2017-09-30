@@ -14,9 +14,23 @@ namespace Wanderer
         protected int CurrentHealthPoints;
         protected int DefendPoints;
         protected int StrikePoints;
+        protected int Level;
 
         protected Dice dice;
 
         public MovingObject(Dice dice) => this.dice = dice;
+
+        public bool IsAlive
+        {
+            get
+            {
+                return CurrentHealthPoints > 0;
+            }
+        }
+
+        internal void Strike(MovingObject defendant)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
