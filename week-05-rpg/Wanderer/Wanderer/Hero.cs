@@ -43,7 +43,7 @@ namespace Wanderer
             // 10 % chance to restore all his HP
             CurrentHealthPoints = random10 > 8 ? CurrentHealthPoints : MaximalHealthPoints;
 
-            // HP cannot exceed the max value
+            // HP should not exceed the max value
             CurrentHealthPoints = Math.Max(CurrentHealthPoints, MaximalHealthPoints);
         }
     }

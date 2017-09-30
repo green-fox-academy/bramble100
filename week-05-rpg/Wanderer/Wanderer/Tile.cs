@@ -9,5 +9,10 @@ namespace Wanderer
     public class Tile
     {
         private bool IsWalkable;
+
+        public Tile(bool isWalkable)
+        {
+            IsWalkable = isWalkable;
+        }
     }
 }
