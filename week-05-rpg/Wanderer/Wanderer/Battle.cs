@@ -17,12 +17,34 @@ namespace Wanderer
             Defendant = defendant;
         }
 
+        public bool IsWonByAnyParty
+        {
+            get
+            {
+                return Attacker.IsAlive && Defendant.IsAlive;
+            }
+        }
+
         public void Perform()
         {
-            while(Attacker.IsAlive && Defendant.IsAlive)
+            while (IsWonByAnyParty)
             {
-                Attacker.Strike(Defendant);
-                Defendant.Strike(Attacker);
+                PerformOneRound();
+            }
+        }
+
+        private void PerformOneRound()
+        {
+            Attacker.Strike(Defendant);
+            if (!Defendant.IsAlive)
+            {
+                Attacker.LevelUp();
+                return;
+            }
+            Defendant.Strike(Attacker);
+            if (Attacker.IsAlive)
+            {
+                Defendant.LevelUp();
             }
         }
     }

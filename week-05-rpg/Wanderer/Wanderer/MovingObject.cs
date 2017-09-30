@@ -28,9 +28,20 @@ namespace Wanderer
             }
         }
 
-        internal void Strike(MovingObject defendant)
+        internal void LevelUp()
         {
             throw new NotImplementedException();
+        }
+
+        internal void Strike(MovingObject defendant)
+        {
+            int StrikeValue = StrikePoints + 2 * dice.Roll();
+            bool StrikeIsSuccesful = StrikeValue>defendant.DefendPoints;
+            if (StrikeIsSuccesful)
+            {
+                defendant.CurrentHealthPoints -= StrikeValue - defendant.DefendPoints;
+                defendant.CurrentHealthPoints = Math.Max(0, defendant.CurrentHealthPoints);
+            }
         }
     }
 }
