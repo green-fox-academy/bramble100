@@ -10,10 +10,6 @@ namespace Wanderer
     {
         internal Hero(Dice dice) : base(dice)
         {
-        }
-
-        protected void Initialize()
-        {
             // HP: 20 + 3 * d6
             MaximalHealthPoints = CurrentHealthPoints = 20 + dice.Roll() + dice.Roll() + dice.Roll();
             // DP: 2 * d6
