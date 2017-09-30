@@ -8,7 +8,7 @@ namespace Wanderer
 {
     class Dice
     {
-        Random random;
+        public Random random;
         public Dice(Random random)
         {
             this.random = random;

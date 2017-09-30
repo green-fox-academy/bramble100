@@ -8,7 +8,7 @@ namespace Wanderer
 {
     class MonsterBoss : Monster
     {
-        protected MonsterBoss(Dice dice) : base(dice)
+        internal MonsterBoss(Dice dice) : base(dice)
         {
         }
 

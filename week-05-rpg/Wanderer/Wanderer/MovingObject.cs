@@ -30,7 +30,14 @@ namespace Wanderer
 
         internal void LevelUp()
         {
-            throw new NotImplementedException();
+            // after successfully won battle the character is leveling up
+            Level++;
+            // his max HP increases by d6
+            MaximalHealthPoints += dice.Roll();
+            // his DP increases by d6
+            DefendPoints += dice.Roll();
+            // his SP increases by d6
+            StrikePoints += dice.Roll();
         }
 
         internal void Strike(MovingObject defendant)

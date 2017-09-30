@@ -8,7 +8,7 @@ namespace Wanderer
 {
     class Hero : MovingObject
     {
-        public Hero(Dice dice) : base(dice)
+        internal Hero(Dice dice) : base(dice)
         {
         }
 

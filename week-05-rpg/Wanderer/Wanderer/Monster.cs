@@ -8,7 +8,7 @@ namespace Wanderer
 {
     class Monster : MovingObject
     {
-        protected Monster(Dice dice) : base(dice)
+        internal Monster(Dice dice) : base(dice)
         {
         }
 
