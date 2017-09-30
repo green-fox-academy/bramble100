@@ -10,11 +10,12 @@ namespace Wanderer
     {
         internal Monster(int areaLevel, Dice dice) : base(dice)
         {
-            // the monsters levels come from the number of the area
-            // if its the Xth area, the mosters have lvl X(with 50 % chance) or lvl X + 1(40 %) or lvl X + 2(10 %)
-
             Level = areaLevel + LevelModifierCalculator();
+            InitalizePoints();
+        }
 
+        internal override void InitalizePoints()
+        {
             // Monster Lvl x
             // HP: 2 * x * d6
             MaximalHealthPoints = CurrentHealthPoints = 2 * Level * dice.Roll();
@@ -26,6 +27,8 @@ namespace Wanderer
 
         private int LevelModifierCalculator()
         {
+            // the monsters levels come from the number of the area
+            // if its the Xth area, the mosters have lvl X(with 50 % chance) or lvl X + 1(40 %) or lvl X + 2(10 %)
             int random10 = dice.random.Next(10);
             int modifier = 0; // lower 50 %
             modifier += random10 > 4 ? 1 : 0; // upper 50%

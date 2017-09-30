@@ -18,7 +18,16 @@ namespace Wanderer
 
         protected Dice dice;
 
-        public MovingObject(Dice dice) => this.dice = dice;
+        public MovingObject(int level, Dice dice)
+        {
+            this.dice = dice;
+            InitalizeLevel(level);
+            InitalizePoints();
+        }
+
+        internal abstract void InitalizeLevel(int level);
+
+        internal abstract void InitalizePoints();
 
         public bool IsAlive
         {
@@ -43,7 +52,7 @@ namespace Wanderer
         internal void Strike(MovingObject defendant)
         {
             int StrikeValue = StrikePoints + 2 * dice.Roll();
-            bool StrikeIsSuccesful = StrikeValue>defendant.DefendPoints;
+            bool StrikeIsSuccesful = StrikeValue > defendant.DefendPoints;
             if (StrikeIsSuccesful)
             {
                 defendant.CurrentHealthPoints -= StrikeValue - defendant.DefendPoints;
@@ -53,10 +62,10 @@ namespace Wanderer
 
         public override string ToString()
         {
-            return $"{GetType().ToString()}" + 
+            return $"{GetType().ToString()}" +
                 $" (Level: {Level})" +
-                $" HP: {CurrentHealthPoints}/{MaximalHealthPoints}"+ 
-                $" | DP: {DefendPoints}" + 
+                $" HP: {CurrentHealthPoints}/{MaximalHealthPoints}" +
+                $" | DP: {DefendPoints}" +
                 $" | SP: {StrikePoints}";
         }
     }

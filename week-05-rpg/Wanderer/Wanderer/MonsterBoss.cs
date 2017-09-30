@@ -10,6 +10,11 @@ namespace Wanderer
     {
         internal MonsterBoss(int level, Dice dice) : base(dice)
         {
+            InitalizePoints();
+        }
+
+        internal override void InitalizePoints()
+        {
             // Monster Lvl x(if boss)
             // HP: 2 * x * d6(+d6)
             MaximalHealthPoints = CurrentHealthPoints = 2 * level * dice.Roll() + dice.Roll();
@@ -18,5 +23,6 @@ namespace Wanderer
             // SP: x* d6(+x)
             StrikePoints = level * dice.Roll() + level;
         }
+
     }
 }

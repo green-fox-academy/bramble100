@@ -12,14 +12,16 @@ namespace Wanderer
         const int  YSIZE = 10;
         MovingObjects movingObjects;
         int totalNumberOfMonsters;
-        Dice dice;
+        int level;
         int MIN_NUMBER_OF_MONSTERS = 3;
         int MAX_NUMBER_OF_MONSTERS = 6;
 
-        public Area(Random random)
+        Dice dice;
+
+        public Area(int level, Random random)
         {
             totalNumberOfMonsters = dice.random.Next(MIN_NUMBER_OF_MONSTERS - 2, MAX_NUMBER_OF_MONSTERS - 1);
-            movingObjects = new MovingObjects(totalNumberOfMonsters, dice);
+            movingObjects = new MovingObjects(totalNumberOfMonsters, level, dice);
             RandomLayoutGenerator();
         }
 
