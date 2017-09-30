@@ -26,5 +26,25 @@ namespace Wanderer
             // SP: 5 + d6
             StrikePoints = 5 + dice.Roll();
         }
+
+        internal void EnterNextArea()
+        {
+            RestorePoints();
+        }
+
+        private void RestorePoints()
+        {
+            int random10 = dice.random.Next(10);
+            // when entering a new area the hero has
+            // 50 % chance to restore 10 % of his HP
+            CurrentHealthPoints += CurrentHealthPoints / 10;
+            // 40 % chance to restore the third of his HP
+            CurrentHealthPoints += random10 > 4 ? (int)(CurrentHealthPoints * 0.23) : 0;
+            // 10 % chance to restore all his HP
+            CurrentHealthPoints = random10 > 8 ? CurrentHealthPoints : MaximalHealthPoints;
+
+            // HP cannot exceed the max value
+            CurrentHealthPoints = Math.Max(CurrentHealthPoints, MaximalHealthPoints);
+        }
     }
 }
