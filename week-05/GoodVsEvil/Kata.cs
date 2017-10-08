@@ -39,18 +39,25 @@ namespace GoodVsEvil
             };
 
             int SumOfGoodWarriorsWorth = 0;
-            good.Split(' ').Select((numberOfWarriors, index)
-                => SumOfGoodWarriorsWorth += Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]);
+            //good.Split(' ').Select((numberOfWarriors, index)
+            //    => SumOfGoodWarriorsWorth += Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]);
+
+            for (int i = 0; i < good.Split(' ').Length; i++)
+            {
+                SumOfGoodWarriorsWorth += Convert.ToInt32(good.Split(' ')[i]) * GoodWarriorsWorth[i];
+            }
 
             int SumOfEvilWarriorsWorth = 0;
-            evil.Split(' ').Select((numberOfWarriors, index)
-                => SumOfEvilWarriorsWorth += Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]);
+            for (int i = 0; i < evil.Split(' ').Length; i++)
+            {
+                SumOfEvilWarriorsWorth += Convert.ToInt32(evil.Split(' ')[i]) * EvilWarriorsWorth[i];
+            }
 
-            if (SumOfGoodWarriorsWorth>SumOfEvilWarriorsWorth)
+            if (SumOfGoodWarriorsWorth > SumOfEvilWarriorsWorth)
             {
                 return "Battle Result: Good triumphs over Evil";
             }
-            else if(SumOfGoodWarriorsWorth < SumOfEvilWarriorsWorth)
+            else if (SumOfGoodWarriorsWorth < SumOfEvilWarriorsWorth)
             {
                 return "Battle Result: Evil eradicates all trace of Good";
             }
