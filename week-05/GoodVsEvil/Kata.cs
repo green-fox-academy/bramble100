@@ -38,14 +38,8 @@ namespace GoodVsEvil
                 10  // Wizards
             };
 
-            int SumOfGoodWarriorsWorth = 0;
-            //good.Split(' ').Select((numberOfWarriors, index)
-            //    => SumOfGoodWarriorsWorth += Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]);
-
-            for (int i = 0; i < good.Split(' ').Length; i++)
-            {
-                SumOfGoodWarriorsWorth += Convert.ToInt32(good.Split(' ')[i]) * GoodWarriorsWorth[i];
-            }
+            int SumOfGoodWarriorsWorth = good.Split(' ').Select((numberOfWarriors, index)
+                => Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]).Sum();
 
             int SumOfEvilWarriorsWorth = 0;
             for (int i = 0; i < evil.Split(' ').Length; i++)
