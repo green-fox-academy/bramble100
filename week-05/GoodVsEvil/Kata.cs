@@ -17,7 +17,7 @@ namespace GoodVsEvil
         /// <returns></returns>
         public static string GoodVsEvil(string good, string evil)
         {
-            int[] GoodWarriorsWorth = new int[6] 
+            int[] GoodWarriorsWorth = new int[6]
             {
                 1, // Hobbits
                 2, // Men
@@ -38,7 +38,23 @@ namespace GoodVsEvil
                 10  // Wizards
             };
 
-            return "";
+            int SumOfGoodWarriorsWorth = 0;
+            good.Split(' ').Select((numberOfWarriors, index)
+                => SumOfGoodWarriorsWorth += Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]);
+
+            int SumOfEvilWarriorsWorth = 0;
+            evil.Split(' ').Select((numberOfWarriors, index)
+                => SumOfEvilWarriorsWorth += Convert.ToInt32(numberOfWarriors) * GoodWarriorsWorth[index]);
+
+            if (SumOfGoodWarriorsWorth>SumOfEvilWarriorsWorth)
+            {
+                return "Battle Result: Good triumphs over Evil";
+            }
+            else if(SumOfGoodWarriorsWorth < SumOfEvilWarriorsWorth)
+            {
+                return "Battle Result: Evil eradicates all trace of Good";
+            }
+            return "Battle Result: No victor on this battle field";
         }
     }
 }
