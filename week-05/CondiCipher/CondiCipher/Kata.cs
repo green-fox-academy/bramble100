@@ -13,7 +13,7 @@ namespace CondiCipher
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Encode("cryptogam", "cryptogram", 0));
+            Console.WriteLine(Encode("cryptogam", "on", 10));
             Console.ReadKey();
         }
 
@@ -24,21 +24,22 @@ namespace CondiCipher
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var character in m)
             {
-                if (Char.IsLetter(character))                    
-                {
-                    int keyIndex = keyAlphabet.FindIndex(c => c == character);
-                    char appendableCharacter = Convert.ToChar(keyAlphabet[(keyIndex + initShift) % 26]);
-                    stringBuilder.Append(appendableCharacter);
-                    initShift = keyIndex+1;
-                }
-                else
-                {
-                    stringBuilder.Append(character);
-                }
+                stringBuilder.Append(EncodeOneCharacter(character, keyAlphabet, ref initShift));
             }
             return stringBuilder.ToString();
         }
 
+        private static char EncodeOneCharacter(char character, List<char> keyAlphabet, ref int  initShift)
+        {
+            if (!Char.IsLetter(character))
+            {
+                return character;
+            }
+            int keyIndex = keyAlphabet.FindIndex(c => c == character);
+            char appendableCharacter = Convert.ToChar(keyAlphabet[(keyIndex + initShift) % 26]);
+            initShift = keyIndex + 1;
+            return appendableCharacter;
+        }
         public static string Decode(string key, string m, int initShift)
         {
             return m;
