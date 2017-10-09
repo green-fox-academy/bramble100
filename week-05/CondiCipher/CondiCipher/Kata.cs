@@ -13,7 +13,9 @@ namespace CondiCipher
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Decode("nqhbfgmi", "qvf cmnxmdkjfca.p,ab mf,byokf vjhwpcyb", 28));
             Console.WriteLine(Encode("cryptogam", "on", 10));
+            Console.WriteLine(Decode("cryptogam", "jx", 10));
             Console.ReadKey();
         }
 
@@ -22,27 +24,43 @@ namespace CondiCipher
             var keyAlphabet = new List<char>(key.Distinct());
             keyAlphabet.AddRange("abcdefghijklmnopqrstuvwxyz".Except(key.Distinct()));
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var character in m)
-            {
-                stringBuilder.Append(EncodeOneCharacter(character, keyAlphabet, ref initShift));
-            }
+            initShift %= 26;
+            m.ToList().ForEach(character => stringBuilder.Append(EncodeOneCharacter(character, keyAlphabet, ref initShift)));
             return stringBuilder.ToString();
         }
 
-        private static char EncodeOneCharacter(char character, List<char> keyAlphabet, ref int  initShift)
+        private static char EncodeOneCharacter(char character, List<char> keyAlphabet, ref int initShift)
         {
             if (!Char.IsLetter(character))
             {
                 return character;
             }
             int keyIndex = keyAlphabet.FindIndex(c => c == character);
-            char appendableCharacter = Convert.ToChar(keyAlphabet[(keyIndex + initShift) % 26]);
+            char appendableCharacter = keyAlphabet[(keyIndex + initShift) % 26];
             initShift = keyIndex + 1;
             return appendableCharacter;
         }
+
         public static string Decode(string key, string m, int initShift)
         {
-            return m;
+            var keyAlphabet = new List<char>(key.Distinct());
+            keyAlphabet.AddRange("abcdefghijklmnopqrstuvwxyz".Except(key.Distinct()));
+            StringBuilder stringBuilder = new StringBuilder();
+            initShift %= 26;
+            m.ToList().ForEach(character => stringBuilder.Append(DecodeOneCharacter(character, keyAlphabet, ref initShift)));
+            return stringBuilder.ToString();
+        }
+
+        private static char DecodeOneCharacter(char character, List<char> keyAlphabet, ref int initShift)
+        {
+            if (!Char.IsLetter(character))
+            {
+                return character;
+            }
+            int keyIndex = keyAlphabet.FindIndex(c => c == character);
+            char appendableCharacter = keyAlphabet[(keyIndex - initShift + 26) % 26];
+            initShift = (26 + keyIndex - initShift + 1) % 26;
+            return appendableCharacter;
         }
     }
 }
