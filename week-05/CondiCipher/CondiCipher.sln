@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CondiCipher", "CondiCipher\CondiCipher.csproj", "{E0C5C107-5FD8-44C0-948E-41B62599E223}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CondiCipherTests", "CondiCipherTests\CondiCipherTests.csproj", "{EB79C43F-3420-499F-8CAB-6E0D74F53B71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E0C5C107-5FD8-44C0-948E-41B62599E223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0C5C107-5FD8-44C0-948E-41B62599E223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0C5C107-5FD8-44C0-948E-41B62599E223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB79C43F-3420-499F-8CAB-6E0D74F53B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB79C43F-3420-499F-8CAB-6E0D74F53B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB79C43F-3420-499F-8CAB-6E0D74F53B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB79C43F-3420-499F-8CAB-6E0D74F53B71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
