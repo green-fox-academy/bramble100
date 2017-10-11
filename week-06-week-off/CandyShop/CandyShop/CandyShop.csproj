@@ -43,7 +43,9 @@
     <Compile Include="Candy.cs" />
     <Compile Include="CandyShop.cs" />
     <Compile Include="Lollipop.cs" />
+    <Compile Include="Money.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sugar.cs" />
     <Compile Include="Sweet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

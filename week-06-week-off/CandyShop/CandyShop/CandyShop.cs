@@ -3,13 +3,9 @@ using System.Collections.Generic;
 
 namespace CandyShopLogic
 {
-    public class CandyShop
+    public class CandyShop : Dictionary<Type, decimal>
     {
-        private decimal moneyInDrawer = 0m;
-        private decimal sugarInventory = 0m;
-        private decimal sugarPrice = 100m;
-        private Dictionary<Type, decimal> pricesOfSweets = new Dictionary<Type, decimal>();
-        private Dictionary<Type, decimal> sweetInventory = new Dictionary<Type, decimal>();
+        private Dictionary<Type, decimal> pricesOfGoods;
 
         // We run a Candy shop where we sell candies and lollipops
         // One lollipop's price is 10$
@@ -36,19 +32,24 @@ namespace CandyShopLogic
 
         public CandyShop(decimal sugarGiven)
         {
-            sugarInventory = sugarGiven;
-            sweetInventory.Add(typeof(Candy), 0);
-            sweetInventory.Add(typeof(Lollipop), 0);
-            pricesOfSweets.Add(typeof(Candy), 20m);
-            pricesOfSweets.Add(typeof(Lollipop), 10m);
+            Add(typeof(Money), 0);
+            Add(typeof(Sugar), sugarGiven);
+            Add(typeof(Candy), 0);
+            Add(typeof(Lollipop), 0);
+            pricesOfGoods = new Dictionary<Type, decimal>()
+            {
+                { typeof(Candy), 20m },
+                { typeof(Lollipop), 10m },
+                { typeof(Sugar), 100m}
+            };
         }
 
         public void CreateSweets(Sweet sweet)
         {
-            if (sweet.sugarNeeded < sugarInventory)
+            if (sweet.sugarNeeded < this[typeof(Sugar)])
             {
-                sweetInventory[sweet.GetType()] += 1;
-                sugarInventory -= sweet.sugarNeeded;
+                this[sweet.GetType()] += 1;
+                this[typeof(Sugar)] -= sweet.sugarNeeded;
             }
             else
             {
@@ -63,17 +64,21 @@ namespace CandyShopLogic
 
         public void Sell(Sweet sweet, decimal qty)
         {
-            if (sweetInventory[sweet.GetType()] > qty)
+            if (this[sweet.GetType()] > qty)
             {
-                sweetInventory[sweet.GetType()] -= qty;
-                moneyInDrawer += pricesOfSweets[sweet.GetType()] * qty;
+                this[sweet.GetType()] -= qty;
+                this[typeof(Money)] += pricesOfGoods[sweet.GetType()] * qty;
+            }
+            else
+            {
+                Console.WriteLine($"Not enough {sweet.GetType().Name} to sell.");
             };
         }
 
         public void Raise(decimal raise)
         {
-            pricesOfSweets[typeof(Candy)] *= (1 + raise / 100);
-            pricesOfSweets[typeof(Lollipop)] *= (1 + raise / 100);
+            pricesOfGoods[typeof(Candy)] *= (1 + raise / 100);
+            pricesOfGoods[typeof(Lollipop)] *= (1 + raise / 100);
         }
 
         /// <summary>
@@ -82,10 +87,10 @@ namespace CandyShopLogic
         /// <param name="sugar">The amount of sugar in gr</param>
         public void BuySugar(decimal sugar)
         {
-            if (sugar / 1000 * sugarPrice < moneyInDrawer)
+            if (sugar / 1000 * pricesOfGoods[typeof(Sugar)] < this[typeof(Money)])
             {
-                sugarInventory += sugar;
-                moneyInDrawer -= sugar / 1000 * sugarPrice;
+                this[typeof(Sugar)] += sugar;
+                this[typeof(Money)] -= sugar / 1000 * pricesOfGoods[typeof(Sugar)];
             }
             else
             {
@@ -93,9 +98,9 @@ namespace CandyShopLogic
             }
         }
 
-        public override string ToString() => $"CandyShop: Money: ${moneyInDrawer}" +
-                $" Sugar: {sugarInventory} gr" +
-                $" Candy: {sweetInventory[typeof(Candy)]} pcs" +
-                $" Lollipop: {sweetInventory[typeof(Lollipop)]} pcs";
+        public override string ToString() => $"CandyShop: Money: ${this[typeof(Money)]}" +
+                $" Sugar: {this[typeof(Sugar)]} gr" +
+                $" Candy: {this[typeof(Candy)]} pcs" +
+                $" Lollipop: {this[typeof(Lollipop)]} pcs";
     }
 }
