@@ -57,7 +57,7 @@ namespace CandyShopLogic
 
         public void PrintInfo()
         {
-            throw new NotImplementedException();
+            ToString();
         }
 
         public void Sell(object cANDY, int v)
@@ -74,5 +74,10 @@ namespace CandyShopLogic
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString() => $"CandyShop: Money: ${moneyInDrawer}" +
+                $" Sugar: {sugarInventory} gr" +
+                $" Candy: {sweetInventory[typeof(Candy)]} pcs" +
+                $" Lollipop: {sweetInventory[typeof(Lollipop)]} pcs";
     }
 }
