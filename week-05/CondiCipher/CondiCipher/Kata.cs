@@ -13,13 +13,13 @@ namespace CondiCipher
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Decode("nqhbfgmi", "qvf cmnxmdkjfca.p,ab mf,byokf vjhwpcyb", 28));
-            Console.WriteLine(Encode("cryptogam", "on", 10));
-            Console.WriteLine(Decode("cryptogam", "jx", 10));
+            Console.WriteLine(Decode("qvf cmnxmdkjfca.p,ab mf,byokf vjhwpcyb", "nqhbfgmi", 28));
+            Console.WriteLine(Encode("on", "cryptogam", 10));
+            Console.WriteLine(Decode("jx", "cryptogam", 10));
             Console.ReadKey();
         }
 
-        public static string Encode(string key, string m, int initShift)
+        public static string Encode(string m, string key, int initShift)
         {
             var keyAlphabet = new List<char>(key.Distinct());
             keyAlphabet.AddRange("abcdefghijklmnopqrstuvwxyz".Except(key.Distinct()));
@@ -41,7 +41,7 @@ namespace CondiCipher
             return appendableCharacter;
         }
 
-        public static string Decode(string key, string m, int initShift)
+        public static string Decode(string m, string key, int initShift)
         {
             var keyAlphabet = new List<char>(key.Distinct());
             keyAlphabet.AddRange("abcdefghijklmnopqrstuvwxyz".Except(key.Distinct()));
