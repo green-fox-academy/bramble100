@@ -8,8 +8,9 @@ namespace CandyShopLogic
 {
     public class CandyShop
     {
-        private decimal moneyInDrawer = 0;
-        private decimal sugarInventory = 0;  
+        private decimal moneyInDrawer = 0m;
+        private decimal sugarInventory = 0m;
+        private decimal sugarPrice = 100m;
         private Dictionary<Type, decimal> sweetInventory = new Dictionary<Type, decimal>();
 
         // We run a Candy shop where we sell candies and lollipops
@@ -44,10 +45,10 @@ namespace CandyShopLogic
 
         public void CreateSweets(Sweet sweet)
         {
-            if (sweet.sugarNeeded < sugarInventory)
+            if (sweet.SugarNeeded < sugarInventory)
             {
                 sweetInventory[sweet.GetType()] += 1;
-                sugarInventory -= sweet.sugarNeeded;
+                sugarInventory -= sweet.SugarNeeded;
             }
             else
             {
@@ -60,9 +61,13 @@ namespace CandyShopLogic
             ToString();
         }
 
-        public void Sell(object cANDY, int v)
+        public void Sell(Sweet sweet, decimal qty)
         {
-            throw new NotImplementedException();
+            if (sweetInventory[sweet.GetType()] > qty)
+            {
+                sweetInventory[sweet.GetType()] -= qty;
+                moneyInDrawer += sweet.Price * qty;
+            };
         }
 
         public void Raise(int v)
@@ -70,9 +75,21 @@ namespace CandyShopLogic
             throw new NotImplementedException();
         }
 
-        public void BuySugar(int v)
+        /// <summary>
+        /// Buys the given amount of sugar (amount in gr).
+        /// </summary>
+        /// <param name="sugar">The amount of sugar in gr</param>
+        public void BuySugar(decimal sugar)
         {
-            throw new NotImplementedException();
+            if(sugar * sugarPrice < moneyInDrawer)
+            {
+                sugarInventory += sugar;
+                moneyInDrawer -= sugar / 1000 * sugarPrice;
+            }
+            else
+            {
+                Console.WriteLine($"Not enough money to buy {sugar} gr of sugar.");
+            }
         }
 
         public override string ToString() => $"CandyShop: Money: ${moneyInDrawer}" +

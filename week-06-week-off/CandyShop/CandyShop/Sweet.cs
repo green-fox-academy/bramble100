@@ -2,6 +2,10 @@
 {
     public abstract class Sweet
     {
-        public decimal sugarNeeded;
+        protected decimal sugarNeeded;
+        protected decimal price;
+
+        public decimal Price { get; set; }
+        public decimal SugarNeeded { get; }
     }
 }

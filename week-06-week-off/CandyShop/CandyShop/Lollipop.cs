@@ -2,6 +2,37 @@
 {
     public class Lollipop : Sweet
     {
-        private new decimal sugarNeeded = 10;
+        public new decimal Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    price = value;
+                }
+                else
+                {
+                    System.Console.WriteLine("Please no negative price.");
+                }
+            }
+        }
+
+        public new decimal SugarNeeded
+        {
+            get
+            {
+                return sugarNeeded;
+            }
+        }
+
+        public Lollipop()
+        {
+            sugarNeeded = 10m;
+            price = 20m;
+        }
     }
 }
