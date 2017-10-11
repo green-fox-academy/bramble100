@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CandyShopLogic
 {
@@ -33,8 +30,8 @@ namespace CandyShopLogic
         // The CandyShop should print properties represented as string in this format:
         // "Inventory: 3 candies, 2 lollipops, Income: 100, Sugar: 400gr"
 
-        public static readonly Candy CANDY;
-        public static readonly Lollipop LOLLIPOP;
+        public static readonly Candy CANDY = new Candy();
+        public static readonly Lollipop LOLLIPOP = new Lollipop();
 
 
         public CandyShop(decimal sugarGiven)
@@ -48,10 +45,10 @@ namespace CandyShopLogic
 
         public void CreateSweets(Sweet sweet)
         {
-            if (sweet.SugarNeeded < sugarInventory)
+            if (sweet.sugarNeeded < sugarInventory)
             {
                 sweetInventory[sweet.GetType()] += 1;
-                sugarInventory -= sweet.SugarNeeded;
+                sugarInventory -= sweet.sugarNeeded;
             }
             else
             {
@@ -61,7 +58,7 @@ namespace CandyShopLogic
 
         public void PrintInfo()
         {
-            ToString();
+            Console.WriteLine(ToString());
         }
 
         public void Sell(Sweet sweet, decimal qty)
@@ -69,7 +66,7 @@ namespace CandyShopLogic
             if (sweetInventory[sweet.GetType()] > qty)
             {
                 sweetInventory[sweet.GetType()] -= qty;
-                moneyInDrawer += sweet.Price * qty;
+                moneyInDrawer += pricesOfSweets[sweet.GetType()] * qty;
             };
         }
 
@@ -85,7 +82,7 @@ namespace CandyShopLogic
         /// <param name="sugar">The amount of sugar in gr</param>
         public void BuySugar(decimal sugar)
         {
-            if(sugar * sugarPrice < moneyInDrawer)
+            if (sugar / 1000 * sugarPrice < moneyInDrawer)
             {
                 sugarInventory += sugar;
                 moneyInDrawer -= sugar / 1000 * sugarPrice;
