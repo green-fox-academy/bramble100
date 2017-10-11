@@ -75,8 +75,8 @@ namespace CandyShopLogic
 
         public void Raise(decimal raise)
         {
-            
-            throw new NotImplementedException();
+            pricesOfSweets[typeof(Candy)] *= (1 + raise / 100);
+            pricesOfSweets[typeof(Lollipop)] *= (1 + raise / 100);
         }
 
         /// <summary>
