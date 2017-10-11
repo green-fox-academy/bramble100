@@ -10,7 +10,7 @@ namespace CandyShopLogic
     {
         private decimal moneyInDrawer = 0;
         private decimal sugarInventory = 0;  
-        private Dictionary<Sweet, decimal> sweetInventory = new Dictionary<Sweet, decimal>();
+        private Dictionary<Type, decimal> sweetInventory = new Dictionary<Type, decimal>();
 
         // We run a Candy shop where we sell candies and lollipops
         // One lollipop's price is 10$
@@ -38,13 +38,21 @@ namespace CandyShopLogic
         public CandyShop(decimal sugarGiven)
         {
             sugarInventory = sugarGiven;
-            sweetInventory.Add(new Candy(), 0);
-            sweetInventory.Add(new Lollipop(), 0);
+            sweetInventory.Add(typeof(Candy), 0);
+            sweetInventory.Add(typeof(Lollipop), 0);
         }
 
         public void CreateSweets(Sweet sweet)
         {
-            throw new NotImplementedException();
+            if (sweet.sugarNeeded < sugarInventory)
+            {
+                sweetInventory[sweet.GetType()] += 1;
+                sugarInventory -= sweet.sugarNeeded;
+            }
+            else
+            {
+                Console.WriteLine($"Not enough sugar to create the {sweet.GetType().Name}.");
+            };
         }
 
         public void PrintInfo()
