@@ -11,6 +11,7 @@ namespace CandyShopLogic
         private decimal moneyInDrawer = 0m;
         private decimal sugarInventory = 0m;
         private decimal sugarPrice = 100m;
+        private Dictionary<Type, decimal> pricesOfSweets = new Dictionary<Type, decimal>();
         private Dictionary<Type, decimal> sweetInventory = new Dictionary<Type, decimal>();
 
         // We run a Candy shop where we sell candies and lollipops
@@ -41,6 +42,8 @@ namespace CandyShopLogic
             sugarInventory = sugarGiven;
             sweetInventory.Add(typeof(Candy), 0);
             sweetInventory.Add(typeof(Lollipop), 0);
+            pricesOfSweets.Add(typeof(Candy), 20m);
+            pricesOfSweets.Add(typeof(Lollipop), 10m);
         }
 
         public void CreateSweets(Sweet sweet)
@@ -70,8 +73,9 @@ namespace CandyShopLogic
             };
         }
 
-        public void Raise(int v)
+        public void Raise(decimal raise)
         {
+            
             throw new NotImplementedException();
         }
 
