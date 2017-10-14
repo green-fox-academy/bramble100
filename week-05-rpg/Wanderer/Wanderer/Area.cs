@@ -9,7 +9,7 @@ namespace Wanderer
     class Area : List<Tile>
     {
         const int XSIZE = 10;
-        const int YSIZE = 10;
+        const int YSIZE = 11;
         MovingObjects movingObjects;
         int totalNumberOfMonsters;
         int Level;

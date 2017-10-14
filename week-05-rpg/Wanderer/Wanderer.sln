@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanderer", "Wanderer\Wanderer.csproj", "{4C0D2455-D725-4059-A5E1-946D52E53021}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WandererGUI", "WandererGUI\WandererGUI.csproj", "{EC266408-F60B-4039-8F8D-E1B267C8D418}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4C0D2455-D725-4059-A5E1-946D52E53021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0D2455-D725-4059-A5E1-946D52E53021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C0D2455-D725-4059-A5E1-946D52E53021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC266408-F60B-4039-8F8D-E1B267C8D418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC266408-F60B-4039-8F8D-E1B267C8D418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC266408-F60B-4039-8F8D-E1B267C8D418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC266408-F60B-4039-8F8D-E1B267C8D418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
