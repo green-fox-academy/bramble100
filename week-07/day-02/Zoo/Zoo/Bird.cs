@@ -2,30 +2,30 @@
 
 namespace Zoo
 {
-    public class Mammal :Animal
+    public class Bird : Animal
     {
-        public Mammal(string name) : base(name)
+        public Bird(string name) : base(name)
         {
         }
 
         public override void Greet()
         {
-            Console.WriteLine("Hi, I'm a mammal.");
+            Console.WriteLine("Hi, I'm a bird.");
         }
 
         public override void Move()
         {
-            Console.WriteLine("I'm crawling."); ;
+            Console.WriteLine("I'm flying, or something."); ;
         }
 
         public override string UtterSound()
         {
-            return "Woof, meow (whatever you want from a mammal).";
+            return "Chirp, chirp.";
         }
 
         public override string WantChild()
         {
-            return "want a child from my uterus!";
+            return "want a child from an egg!";
         }
     }
 }

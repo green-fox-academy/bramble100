@@ -14,11 +14,18 @@ namespace Zoo
         public double weight;
         public bool canFly;
 
+        public Animal(string name)
+        {
+            this.name = name;
+        }
+
+        public string Name { get => name; set => name = value; }
+
         public abstract void Greet();
 
-        public abstract void WantChild();
+        public abstract string WantChild();
 
-        public abstract void UtterSound();
+        public abstract string UtterSound();
 
         public abstract void Move();
     }
