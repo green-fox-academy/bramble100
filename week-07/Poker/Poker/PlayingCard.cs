@@ -18,15 +18,20 @@ namespace Poker
         public PlayingCard(string inputString)
         {
             IsValid = false;
-            if (String.IsNullOrEmpty(inputString) 
-                || !validRanks.Contains(inputString.ToUpper()[0]) 
+            if (String.IsNullOrEmpty(inputString))
+            {
+                return;
+            }
+            else if(inputString.Length != 2)
+            {
+                return;
+            }
+            else if(!validRanks.Contains(inputString.ToUpper()[0])
                 || !validSuites.Contains(inputString.ToUpper()[1]))
             {
                 return;
             }
-
-            IsValid = inputString.Length == 2;
-
+           
             Rank = inputString[0];
             Suit = inputString[1];
             IsValid = true;

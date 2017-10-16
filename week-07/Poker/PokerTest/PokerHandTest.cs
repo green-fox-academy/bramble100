@@ -41,7 +41,8 @@ namespace PokerTest
         [Test]
         public void WhenOneInvalidArbitraryCharInput()
         {
-            string input = Convert.ToChar('a' + random.Next(26)).ToString();
+            string input = Convert.ToChar('a' + random.Next(25)).ToString();
+            //string input = Convert.ToChar('a' + 27).ToString();
             playingCard = new PlayingCard(input);
             Assert.IsFalse(playingCard.IsValid);
         }
@@ -92,6 +93,14 @@ namespace PokerTest
             string input = "qh";
             playingCard = new PlayingCard(input);
             Assert.IsTrue(playingCard.IsValid);
+        }
+
+        [Test]
+        public void WhenSpecialChar()
+        {
+            string input = "t;";
+            playingCard = new PlayingCard(input);
+            Assert.IsFalse(playingCard.IsValid);
         }
     }
 }
