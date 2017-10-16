@@ -14,7 +14,12 @@ namespace Poker
 
         public PlayingCard(string inputString)
         {
-            IsValid = (inputString != null);
+            if (String.IsNullOrEmpty(inputString))
+            {
+                IsValid = false;
+                return;
+            }
+            IsValid = inputString.Length == 2;
         }
     }
 }
