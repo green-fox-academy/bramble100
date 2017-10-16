@@ -18,7 +18,9 @@ namespace Poker
         public PlayingCard(string inputString)
         {
             IsValid = false;
-            if (String.IsNullOrEmpty(inputString) || !validRanks.Contains(inputString[0]))
+            if (String.IsNullOrEmpty(inputString) 
+                || !validRanks.Contains(inputString.ToUpper()[0]) 
+                || !validSuites.Contains(inputString.ToUpper()[1]))
             {
                 return;
             }

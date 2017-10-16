@@ -61,5 +61,37 @@ namespace PokerTest
             playingCard = new PlayingCard(input);
             Assert.IsTrue(playingCard.IsValid);
         }
+
+        [Test]
+        public void WhenValidCharsInvalidOrder()
+        {
+            string input = "H2";
+            playingCard = new PlayingCard(input);
+            Assert.IsFalse(playingCard.IsValid);
+        }
+
+        [Test]
+        public void WhenValidRankInvalidSuit()
+        {
+            string input = "2A";
+            playingCard = new PlayingCard(input);
+            Assert.IsFalse(playingCard.IsValid);
+        }
+
+        [Test]
+        public void WhenInValidRankValidSuit()
+        {
+            string input = "xH";
+            playingCard = new PlayingCard(input);
+            Assert.IsFalse(playingCard.IsValid);
+        }
+
+        [Test]
+        public void WhenValidCardLowerCase()
+        {
+            string input = "qh";
+            playingCard = new PlayingCard(input);
+            Assert.IsTrue(playingCard.IsValid);
+        }
     }
 }
