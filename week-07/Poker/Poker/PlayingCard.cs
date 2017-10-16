@@ -10,16 +10,24 @@ namespace Poker
     {
         public char Rank { get; }
         public char Suit { get; }
-        public bool IsValid { get; private set; }
+        public bool IsValid  { get; private set; }
+
+        string validRanks = "23456789TJQKA";
+        string validSuites = "SHDC";
 
         public PlayingCard(string inputString)
         {
-            if (String.IsNullOrEmpty(inputString))
+            IsValid = false;
+            if (String.IsNullOrEmpty(inputString) || !validRanks.Contains(inputString[0]))
             {
-                IsValid = false;
                 return;
             }
+
             IsValid = inputString.Length == 2;
+
+            Rank = inputString[0];
+            Suit = inputString[1];
+            IsValid = true;
         }
     }
 }
