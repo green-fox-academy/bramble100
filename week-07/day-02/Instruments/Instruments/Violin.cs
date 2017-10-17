@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Instruments
 {
-    public class ElectricGuitar : StringedInstrument
+    public class Violin : StringedInstrument
     {
-        protected ElectricGuitar()
+        protected Violin()
         {
-            NumberOfStrings = 6;
+            NumberOfStrings = 4;
         }
 
         public override void Sound()
         {
-            Console.WriteLine("Twang"); ;
+            Console.WriteLine("Screech");
         }
     }
 }
