@@ -9,7 +9,7 @@ namespace CloneableApp
         {
             Student john = new Student("John Doe", 20, Gender.Male, "BME");
             Student johnTheClone = (Student) john.Clone();
-            john.ToString();
+            john.Introduce();
             johnTheClone.Introduce();
             Console.ReadKey();
         }
