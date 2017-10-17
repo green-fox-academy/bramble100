@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Instruments
 {
-    public abstract class Instruments
+    public abstract class Instrument
     {
         public abstract void Play();
     }
