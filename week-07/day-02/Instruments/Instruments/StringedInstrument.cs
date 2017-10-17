@@ -10,6 +10,15 @@ namespace Music
     {
         private int numberOfStrings;
 
+        public StringedInstrument()
+        {
+        }
+
+        public StringedInstrument(int numberOfStrings)
+        {
+            NumberOfStrings = numberOfStrings;
+        }
+
         public int NumberOfStrings { get => numberOfStrings; set => numberOfStrings = value; }
 
         public abstract void Sound();

@@ -8,9 +8,9 @@ namespace Music
 {
     public class ElectricGuitar : StringedInstrument
     {
-        protected ElectricGuitar()
+        public ElectricGuitar(int numberOfStrings = 6)
         {
-            NumberOfStrings = 6;
+            NumberOfStrings = numberOfStrings;
         }
 
         public override void Sound()

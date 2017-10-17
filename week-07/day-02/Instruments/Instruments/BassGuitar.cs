@@ -8,9 +8,9 @@ namespace Music
 {
     public class BassGuitar : StringedInstrument
     {
-        protected BassGuitar()
+        public BassGuitar(int numberOfStrings = 4)
         {
-            NumberOfStrings = 4;
+            NumberOfStrings = numberOfStrings;
         }
 
         public override void Sound()

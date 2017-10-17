@@ -8,9 +8,9 @@ namespace Music
 {
     public class Violin : StringedInstrument
     {
-        protected Violin()
+        public Violin(int numberOfStrings = 4)
         {
-            NumberOfStrings = 4;
+            NumberOfStrings = numberOfStrings;
         }
 
         public override void Sound()
