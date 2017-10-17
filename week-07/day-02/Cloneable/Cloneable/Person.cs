@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace HomeWork
 {
-    class Person
+    public class Person
     {
         public string name;
         public int age;
         public Gender gender;
 
-        public void Introduce()
+        public virtual void Introduce()
         {
             Console.WriteLine($"Hi, I'm {name}, a(n) {age} year old {gender}.");
         }
