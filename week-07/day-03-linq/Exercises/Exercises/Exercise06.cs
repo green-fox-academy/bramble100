@@ -12,7 +12,20 @@ namespace Exercises
         {
             string stringToProcess = "Write a LINQ Expression to find the frequency of characters in a given string!";
 
+            WithLinqExpression(stringToProcess);
+
             WithMethodExpression(stringToProcess);
+        }
+
+        private static void WithLinqExpression(string stringToProcess)
+        {
+            Console.WriteLine("Linq expression:");
+            var query = from character in stringToProcess.ToLower().ToList().OrderBy(x => x)
+                        group character by character
+                        into uniqueCharacters
+                        select uniqueCharacters;
+
+            query.ToList().ForEach(x => Console.WriteLine($"{x.Key}: {x.Count()}"));
         }
 
         private static void WithMethodExpression(string stringToProcess)
@@ -26,7 +39,6 @@ namespace Exercises
                 .ToList()
                 .ForEach(character
                     => Console.WriteLine($"{character}: {stringToProcess.ToLower().Count(character2 => character == character2)}"));
-
         }
     }
 }
