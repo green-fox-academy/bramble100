@@ -17,7 +17,12 @@ namespace Exercises
                                   select number * number;
 
             squaredNumbersLinq.ToList().ForEach(number => Console.WriteLine(number));
-            n.ToList().Where(number => number > 0).Select(number => number * number).ToList().ForEach(number => Console.WriteLine(number));
+            n
+                .ToList()
+                .Where(number => number > 0)
+                .Select(number => number * number)
+                .ToList()
+                .ForEach(number => Console.WriteLine(number));
         }
     }
 }
