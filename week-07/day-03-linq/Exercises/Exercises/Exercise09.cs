@@ -20,7 +20,6 @@ namespace Exercises
 
         private static void WithLinqExpression(char[] charArray)
         {
-
             Console.WriteLine("Linq expression:");
         }
 
