@@ -10,7 +10,7 @@ namespace Exercises
     {
         static void Main(string[] args)
         {
-            Exercise04.Run();
+            Exercise10.Run();
             Console.ReadKey();
         }
     }
