@@ -10,6 +10,10 @@ namespace Reservation
     {
         static void Main(string[] args)
         {
+            for (int i = 0; i < 10; i++)
+            {
+                Reservation reservation = new Reservation();
+            }
         }
     }
 }

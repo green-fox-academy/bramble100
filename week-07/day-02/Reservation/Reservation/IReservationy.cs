@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Reservation
 {
-    interface IReservationy
+    public interface IReservationy
     {
-        string GetDowBooking();
+        string DowBooking();
 
         string GetCodeBooking();
     }
