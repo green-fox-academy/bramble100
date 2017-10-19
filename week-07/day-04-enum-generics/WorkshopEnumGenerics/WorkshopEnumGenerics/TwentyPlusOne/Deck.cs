@@ -24,7 +24,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             theoreticallyAvailableCards.ForEach(card => cards.Add(card));
         }
 
-        public void ShuffleDeck()
+        public void Shuffle()
         {
             List<Card> shuffledCards = new List<Card>();
             while (cards.Count > 0)
@@ -71,7 +71,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             return card;
         }
 
-        public string GetDeck()
+        public string GetCardsList()
         {
             StringBuilder stringBuilder = new StringBuilder();
             cards.ForEach(card => stringBuilder.AppendLine(card.ToString()));

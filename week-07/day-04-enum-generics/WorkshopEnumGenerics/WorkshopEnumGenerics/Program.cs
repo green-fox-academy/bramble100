@@ -16,6 +16,9 @@ namespace WorkshopEnumGenerics
         {
             Deck deck = new Deck();
             Console.WriteLine(deck);
+            deck.Shuffle();
+            Console.WriteLine(deck.PullRandom());
+            Console.WriteLine(deck.GetCardsList());
         }
 
         private static void Exercise01_ParkingLot()
