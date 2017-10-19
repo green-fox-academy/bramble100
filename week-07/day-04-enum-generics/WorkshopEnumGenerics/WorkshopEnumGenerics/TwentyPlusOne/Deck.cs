@@ -34,9 +34,11 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         }
 
-        public void PullLast()
+        public Card PullLast()
         {
-
+            Card card = cards.Last();
+            cards.RemoveAt(cards.Count-1);
+            return card;
         }
 
         public Card PullRandom()
