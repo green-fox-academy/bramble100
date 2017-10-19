@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WorkshopEnumGenerics.TwentyPlusOne;
 
 namespace WorkshopEnumGenerics
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            //Exercise01_ParkingLot();
+            Exercise02_TwentyPlusOne();
+            Console.ReadKey();
+        }
+
+        private static void Exercise02_TwentyPlusOne()
+        {
+            Deck deck = new Deck();
+            Console.WriteLine(deck);
+        }
+
+        private static void Exercise01_ParkingLot()
         {
             ParkingLot parkingLot = new ParkingLot();
             Console.WriteLine(parkingLot);
@@ -20,7 +30,6 @@ namespace WorkshopEnumGenerics
             Console.WriteLine(parkingLot.ColorsAndTypesOfParkingCars);
             Console.WriteLine();
             Console.WriteLine(parkingLot.MostFrequentCar);
-            Console.ReadKey();
         }
     }
 }

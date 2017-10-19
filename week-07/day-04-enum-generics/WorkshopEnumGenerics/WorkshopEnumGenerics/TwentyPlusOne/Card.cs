@@ -12,8 +12,14 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         private Suit suit;
         private CardColor cardColor;
 
-        public Rank Rank { get => rank; set => rank = value; }
-        public Suit Suit { get => suit; set => suit = value; }
-        public CardColor CardColor { get => cardColor; set => cardColor = value; }
+        public Card(Rank rank, Suit suit)
+        {
+            this.rank = rank;
+            this.suit = suit;
+        }
+
+        public Rank Rank { get => rank; private set => rank = value; }
+        public Suit Suit { get => suit; private set => suit = value; }
+        public CardColor CardColor { get => cardColor; private set => cardColor = value; }
     }
 }

@@ -42,12 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="CarColor.cs" />
-    <Compile Include="CarType.cs" />
-    <Compile Include="ParkingLot.cs" />
+    <Compile Include="ParkingLot\Car.cs" />
+    <Compile Include="ParkingLot\CarColor.cs" />
+    <Compile Include="ParkingLot\CarType.cs" />
+    <Compile Include="ParkingLot\ParkingLot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TwentyPlusOne\Card.cs" />
+    <Compile Include="TwentyPlusOne\CardColor.cs" />
+    <Compile Include="TwentyPlusOne\Deck.cs" />
+    <Compile Include="TwentyPlusOne\Rank.cs" />
+    <Compile Include="TwentyPlusOne\Suit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
