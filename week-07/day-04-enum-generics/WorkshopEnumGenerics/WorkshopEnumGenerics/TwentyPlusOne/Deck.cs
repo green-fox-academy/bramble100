@@ -24,6 +24,29 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             theoreticallyAvailableCards.ForEach(card => cards.Add(card));
         }
 
+        public void ShuffleDeck()
+        {
+
+        }
+
+        public void PullFirst()
+        {
+
+        }
+
+        public void PullLast()
+        {
+
+        }
+
+        public Card PullRandom()
+        {
+            int cardID = random.Next(cards.Count);
+            Card card = cards.ElementAt(cardID);
+            cards.RemoveAt(cardID);
+            return card;
+        }
+
         public override string ToString()
         {
             return $"The deck consists of {cards.Count} cards.";
