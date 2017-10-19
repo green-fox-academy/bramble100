@@ -41,15 +41,50 @@ namespace WorkshopEnumGenerics
             }
         }
 
+        public string TypesOfParkingCars
+        {
+            get
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+
+                (from car in cars
+                 group car by car.Type
+                 into types
+                 select types)
+                    .ToList()
+                    .ForEach(x =>
+                   stringBuilder.AppendLine($"{x.Key}: {x.Count()}"));
+
+                return stringBuilder.ToString();
+            }
+        }
+
         public string ColorsAndTypesOfParkingCars
         {
             get
             {
                 StringBuilder stringBuilder = new StringBuilder();
 
-                var query = cars.GroupBy(car => $"{car.Color} {car.Type}", car => car).OrderBy(c => c.Count());
-                query.ToList().ForEach(group => stringBuilder.AppendLine($"{group.Key} {group.Count()}"));
+                cars
+                    .GroupBy(car => $"{car.Color} {car.Type}", car => car)
+                    .OrderBy(c => c.Count())
+                    .ToList()
+                    .ForEach(group => stringBuilder.AppendLine($"{group.Key} {group.Count()}"));
                 return stringBuilder.ToString();
+            }
+        }
+
+        public string MostFrequentCar
+        {
+            get
+            {
+                var query = cars
+                    .GroupBy(car => $"{car.Color} {car.Type}", car => car)
+                    .OrderBy(c => c.Count())
+                    .ToList()
+                    .Last();
+
+                return $"{query.Key}: {query.Count()}";
             }
         }
 

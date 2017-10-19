@@ -15,7 +15,11 @@ namespace WorkshopEnumGenerics
             Console.WriteLine();
             Console.WriteLine(parkingLot.ColorsOfParkingCars);
             Console.WriteLine();
+            Console.WriteLine(parkingLot.TypesOfParkingCars);
+            Console.WriteLine();
             Console.WriteLine(parkingLot.ColorsAndTypesOfParkingCars);
+            Console.WriteLine();
+            Console.WriteLine(parkingLot.MostFrequentCar);
             Console.ReadKey();
         }
     }
