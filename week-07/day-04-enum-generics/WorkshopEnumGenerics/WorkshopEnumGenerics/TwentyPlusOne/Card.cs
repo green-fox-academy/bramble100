@@ -21,5 +21,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public Rank Rank { get => rank; private set => rank = value; }
         public Suit Suit { get => suit; private set => suit = value; }
         public CardColor CardColor { get => cardColor; private set => cardColor = value; }
+
+        public override string ToString() => $"{rank} of {suit}";
     }
 }
