@@ -5,7 +5,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 {
     public class Hand
     {
-        private HashSet<Card> cards;
+        private HashSet<Card> cards = new HashSet<Card>();
 
         public void Add(Card card)
         {
