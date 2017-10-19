@@ -13,6 +13,14 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         Hand[] players;
         public bool IsOver;
 
+        public bool IsPush
+        {
+            get
+            {
+                return dealer.IsBlackJack && players[0].IsBlackJack;
+            }
+        }
+
         public Game(int numberOfHands = 1)
         {
             deck = new Deck();
@@ -31,40 +39,43 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public void Play()
         {
             FirstDeal();
+            if (IsPush)
+            {
+                IsOver = true;
+            }
             if (IsWonWithBlackJack())
             {
                 IsOver = true;
             }
-        }
 
-        private bool IsWonWithBlackJack()
-        {
-            return players[0].IsBlackJack;
+            for (int i = 0; i < players.Length; i++)
+            {
+
+            }
+            IsOver = true;
         }
 
         private void FirstDeal()
         {
-            Deal(dealer, 2);
-            for (int i = 0; i < players.Length; i++)
+            for (int cardTurn = 0; cardTurn < 2; cardTurn++)
             {
-                Deal(i, 2);
+                for (int player = 0; player < players.Length; player++)
+                {
+                    Deal(player);
+                }
+                Deal(dealer);
             }
         }
 
-        private void Deal(int playerIndex, int numberOfCards)
-        {
-            for (int i = 0; i < numberOfCards; i++)
-            {
-                players[playerIndex].Add(deck.PullFirst());
-            }
-        }
+        private void Deal(int playerIndex) 
+            => players[playerIndex].Add(deck.PullFirst());
 
-        private void Deal(Hand hand, int numberOfCards)
+        private void Deal(Hand hand) 
+            => dealer.Add(deck.PullFirst());
+
+        private bool IsWonWithBlackJack()
         {
-            for (int i = 0; i < numberOfCards; i++)
-            {
-                dealer.Add(deck.PullFirst());
-            }
+            return players[0].IsBlackJack;
         }
 
         public override string ToString()
