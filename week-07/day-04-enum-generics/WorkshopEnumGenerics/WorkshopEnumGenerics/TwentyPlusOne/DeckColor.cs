@@ -1,6 +1,6 @@
 ﻿namespace WorkshopEnumGenerics.TwentyPlusOne
 {
-    public enum CardColor
+    public enum DeckColor
     {
         Red,
         Black
