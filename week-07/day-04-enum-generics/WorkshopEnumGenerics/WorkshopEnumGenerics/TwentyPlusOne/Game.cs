@@ -12,14 +12,13 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         Hand dealer;
         Hand[] players;
         public bool IsOver;
+        public bool IsWonByDealer;
 
-        public bool IsPush
-        {
-            get
-            {
-                return dealer.IsBlackJack && players[0].IsBlackJack;
-            }
-        }
+        public bool IsPush => dealer.IsBlackJack && players[0].IsBlackJack;
+
+        public bool IsWonByPlayerWithBlackJack => players[0].IsBlackJack;
+
+        public bool IsWonByDealerWithBlackJack => dealer.IsBlackJack;
 
         public Game(int numberOfHands = 1)
         {
@@ -39,20 +38,23 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public void Play()
         {
             FirstDeal();
-            if (IsPush)
+            ToString();
+            if (IsWonByPlayerWithBlackJack || IsWonByDealerWithBlackJack)
             {
                 IsOver = true;
-            }
-            if (IsWonWithBlackJack())
-            {
-                IsOver = true;
+                return;
             }
 
             for (int i = 0; i < players.Length; i++)
             {
-
+                HitIfRequested(i);
             }
             IsOver = true;
+        }
+
+        private void HitIfRequested(int i)
+        {
+            //throw new NotImplementedException();
         }
 
         private void FirstDeal()
@@ -67,22 +69,23 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             }
         }
 
-        private void Deal(int playerIndex) 
+        private void Deal(int playerIndex)
             => players[playerIndex].Add(deck.PullFirst());
 
-        private void Deal(Hand hand) 
+        private void Deal(Hand hand)
             => dealer.Add(deck.PullFirst());
-
-        private bool IsWonWithBlackJack()
-        {
-            return players[0].IsBlackJack;
-        }
 
         public override string ToString()
         {
-            return "BlackJack game."
-                + $"\nNumber of players: {players.Length}"
-                + $"\nThe game is {(IsOver ? String.Empty : "not ")}over.";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("BlackJack game.");
+            stringBuilder.AppendLine($"Number of players: {players.Length}");
+            stringBuilder.AppendLine($"The game is {(IsOver ? String.Empty : "not ")}over.");
+            stringBuilder.AppendLine("Dealer's hand:");
+            stringBuilder.AppendLine(dealer.ToString());
+            stringBuilder.AppendLine("Player's hand:");
+            stringBuilder.AppendLine(players[0].ToString());
+            return stringBuilder.ToString();
         }
     }
 }
