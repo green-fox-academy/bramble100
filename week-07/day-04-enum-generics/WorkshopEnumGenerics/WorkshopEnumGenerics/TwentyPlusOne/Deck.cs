@@ -26,7 +26,12 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         public void ShuffleDeck()
         {
-
+            List<Card> shuffledCards = new List<Card>();
+            while (cards.Count > 0)
+            {
+                shuffledCards.Add(PullRandom());
+            }
+            cards = shuffledCards;
         }
 
         public Card PullFirst()
@@ -66,9 +71,13 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             return card;
         }
 
-        public override string ToString()
+        public string GetDeck()
         {
-            return $"The deck consists of {cards.Count} cards.";
+            StringBuilder stringBuilder = new StringBuilder();
+            cards.ForEach(card => stringBuilder.AppendLine(card.ToString()));
+            return stringBuilder.ToString();
         }
+
+        public override string ToString() => $"The deck consists of {cards.Count} cards.";
     }
 }
