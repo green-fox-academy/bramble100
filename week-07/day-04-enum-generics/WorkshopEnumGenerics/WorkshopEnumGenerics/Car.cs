@@ -10,7 +10,7 @@ namespace WorkshopEnumGenerics
     {
         CarColor color;
         CarType type;
-        public CarColor Color { get => Color; set => Color = value; }
+        public CarColor Color { get => color; set => color = value; }
         public CarType Type { get => type; set => type = value; }
 
         public Car(CarColor color, CarType type)
