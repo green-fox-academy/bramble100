@@ -8,7 +8,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 {
     public class Deck
     {
-        private List<Card> theoreticallyAvailableCards = new List<Card>();
         private List<Card> cards = new List<Card>();
         private Random random = new Random();
 
@@ -18,10 +17,9 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             {
                 for (int rank = 0; rank < typeof(Rank).GetEnumValues().Length; rank++)
                 {
-                    theoreticallyAvailableCards.Add(new Card((Rank)rank, (Suit)suit));
+                    cards.Add(new Card((Rank)rank, (Suit)suit));
                 }
             }
-            theoreticallyAvailableCards.ForEach(card => cards.Add(card));
         }
 
         public void Shuffle()
