@@ -14,13 +14,30 @@ namespace WorkshopEnumGenerics
 
         public ParkingLot()
         {
-            return;
-
             for (int i = 0; i < numberOfCars; i++)
             {
-                cars[i] = new Car(
+                cars.Add(new Car(
                     (CarColor)random.Next(typeof(CarColor).GetEnumNames().Length),
-                    (CarType)random.Next(typeof(CarType).GetEnumNames().Length));
+                    (CarType)random.Next(typeof(CarType).GetEnumNames().Length)));
+            }
+        }
+
+        public string ColorsOfParkingCars
+        {
+            get
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+
+                (from car in cars
+                 group car by car.Color
+                            into colors
+                 select colors)
+                    .ToList()
+                    .ForEach(
+                    x =>
+                    stringBuilder.AppendLine($"{x.Key}: {x.Count()}"));   
+                
+                return stringBuilder.ToString();
             }
         }
 
