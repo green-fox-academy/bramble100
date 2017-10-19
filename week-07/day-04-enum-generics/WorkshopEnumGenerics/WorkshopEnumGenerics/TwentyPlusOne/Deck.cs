@@ -29,13 +29,25 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         }
 
-        public void PullFirst()
+        public Card PullFirst()
         {
+            if(cards.Count == 0)
+            {
+                return null;
+            }
 
+            Card card = cards.First();
+            cards.RemoveAt(0);
+            return card;
         }
 
         public Card PullLast()
         {
+            if (cards.Count == 0)
+            {
+                return null;
+            }
+
             Card card = cards.Last();
             cards.RemoveAt(cards.Count-1);
             return card;
@@ -43,6 +55,11 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         public Card PullRandom()
         {
+            if (cards.Count == 0)
+            {
+                return null;
+            }
+
             int cardID = random.Next(cards.Count);
             Card card = cards.ElementAt(cardID);
             cards.RemoveAt(cardID);
