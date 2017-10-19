@@ -7,6 +7,8 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     {
         private HashSet<Card> cards = new HashSet<Card>();
 
+        public bool IsBlackJack { get; internal set; }
+
         public void Add(Card card)
         {
             if(card == null)

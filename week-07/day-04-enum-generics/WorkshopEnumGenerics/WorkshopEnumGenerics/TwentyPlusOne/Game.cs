@@ -31,6 +31,15 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public void Play()
         {
             FirstDeal();
+            if (IsWonWithBlackJack())
+            {
+                IsOver = true;
+            }
+        }
+
+        private bool IsWonWithBlackJack()
+        {
+            return players[0].IsBlackJack;
         }
 
         private void FirstDeal()

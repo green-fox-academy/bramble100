@@ -14,11 +14,12 @@ namespace WorkshopEnumGenerics
 
         private static void Exercise02_TwentyPlusOne()
         {
-            Deck deck = new Deck();
-            Console.WriteLine(deck);
-            deck.Shuffle();
-            Console.WriteLine(deck.PullRandom());
-            Console.WriteLine(deck.GetCardsList());
+            Game game = new Game();
+            Console.WriteLine(game);
+            while (!game.IsOver)
+            {
+                game.Play();
+            }
         }
 
         private static void Exercise01_ParkingLot()
