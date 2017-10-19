@@ -10,10 +10,11 @@ namespace WorkshopEnumGenerics
     {
         int numberOfCars = 256;
         Random random = new Random();
-        List<Car> cars= new List<Car>();
+        List<Car> cars = new List<Car>();
 
-        public ParkingLot()
+        public ParkingLot(int numberOfCars = 256)
         {
+            this.numberOfCars = numberOfCars;
             for (int i = 0; i < numberOfCars; i++)
             {
                 cars.Add(new Car(
@@ -30,13 +31,24 @@ namespace WorkshopEnumGenerics
 
                 (from car in cars
                  group car by car.Color
-                            into colors
+                 into colors
                  select colors)
                     .ToList()
-                    .ForEach(
-                    x =>
-                    stringBuilder.AppendLine($"{x.Key}: {x.Count()}"));   
-                
+                    .ForEach(x =>
+                   stringBuilder.AppendLine($"{x.Key}: {x.Count()}"));
+
+                return stringBuilder.ToString();
+            }
+        }
+
+        public string ColorsAndTypesOfParkingCars
+        {
+            get
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+
+                var query = cars.GroupBy(car => $"{car.Color} {car.Type}", car => car).OrderBy(c => c.Count());
+                query.ToList().ForEach(group => stringBuilder.AppendLine($"{group.Key} {group.Count()}"));
                 return stringBuilder.ToString();
             }
         }
@@ -44,7 +56,7 @@ namespace WorkshopEnumGenerics
         public override string ToString()
         {
             return $"Parking Lot:\nCapacity: {numberOfCars}"
-                +$"\nNumber of parking cars: {cars.Count}";
+                + $"\nNumber of parking cars: {cars.Count}";
         }
     }
 }
