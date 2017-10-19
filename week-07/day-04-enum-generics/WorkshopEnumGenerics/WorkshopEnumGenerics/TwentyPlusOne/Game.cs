@@ -10,33 +10,31 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     {
         Deck deck;
         Hand dealer;
-        Hand[] players;
+        Hand player;
         public bool IsOver;
         public bool IsWonByDealer;
 
-        public bool IsPush => dealer.IsBlackJack && players[0].IsBlackJack;
+        public bool IsPush => dealer.IsBlackJack && player.IsBlackJack;
 
-        public bool IsWonByPlayerWithBlackJack => players[0].IsBlackJack;
+        public bool IsWonByPlayerWithBlackJack => player.IsBlackJack;
 
         public bool IsWonByDealerWithBlackJack => dealer.IsBlackJack;
 
-        public Game(int numberOfHands = 1)
+        public Game()
         {
             deck = new Deck();
             dealer = new Hand();
-            players = new Hand[numberOfHands];
+            player = new Hand();
             IsOver = false;
 
             deck.Shuffle();
 
-            for (int i = 0; i < numberOfHands; i++)
-            {
-                players[i] = new Hand();
-            }
         }
 
         public void Play()
         {
+            PlayerDecision playerDecision;
+
             FirstDeal();
             ToString();
             if (IsWonByPlayerWithBlackJack || IsWonByDealerWithBlackJack)
@@ -45,14 +43,18 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 return;
             }
 
-            for (int player = 0; player < players.Length; player++)
+            do
             {
-                GetPlayerDecision(player);
-            }
+                playerDecision = GetPlayerDecision();
+                if (playerDecision == PlayerDecision.Hit)
+                {
+                    Hit();
+                }
+            } while (playerDecision == PlayerDecision.Hit);
             IsOver = true;
         }
 
-        private void GetPlayerDecision(int player)
+        private PlayerDecision GetPlayerDecision()
         {
             ConsoleKeyInfo key;
 
@@ -61,33 +63,32 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             do
             {
                 key = Console.ReadKey();
-                if (key.Key != ConsoleKey.H)
-                {
-                    Hit(player);
-                }
-
             } while (key.Key != ConsoleKey.H || key.Key != ConsoleKey.S);
+
+            if (key.Key != ConsoleKey.H)
+            {
+                return PlayerDecision.Hit;
+            }
+
+            return PlayerDecision.Stand;
         }
 
-        private void Hit(int player)
+        private void Hit()
         {
-            throw new NotImplementedException();
+            Deal(player);
         }
 
         private void FirstDeal()
         {
             for (int cardTurn = 0; cardTurn < 2; cardTurn++)
             {
-                for (int player = 0; player < players.Length; player++)
-                {
-                    Deal(player);
-                }
+                Deal(player);
                 Deal(dealer);
             }
         }
 
         private void Deal(int playerIndex)
-            => players[playerIndex].Add(deck.PullFirst());
+            => player.Add(deck.PullFirst());
 
         private void Deal(Hand hand)
             => dealer.Add(deck.PullFirst());
@@ -96,12 +97,11 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("BlackJack game.");
-            stringBuilder.AppendLine($"Number of players: {players.Length}");
             stringBuilder.AppendLine($"The game is {(IsOver ? String.Empty : "not ")}over.");
             stringBuilder.AppendLine("Dealer's hand:");
             stringBuilder.AppendLine(dealer.ToString());
             stringBuilder.AppendLine("Player's hand:");
-            stringBuilder.AppendLine(players[0].ToString());
+            stringBuilder.AppendLine(player.ToString());
             return stringBuilder.ToString();
         }
     }
