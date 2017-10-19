@@ -9,18 +9,27 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     class Game
     {
         Deck[] decks;
-        Hand[] hands;
+        Hand dealer;
+        Hand[] players;
 
         public Game(int numberOfDecks = 1, int numberOfHands = 2)
         {
             decks = new Deck[numberOfDecks];
-            hands = new Hand[numberOfHands];
+            dealer = new Hand();
+            players = new Hand[numberOfHands];
 
             for (int i = 0; i < decks.Length; i++)
             {
                 decks[i] = new Deck();
                 decks[i].Shuffle();
             }
+        }
+
+        public override string ToString()
+        {
+            return "BlackJack game."
+                + $"\nNumber of decks: {decks.Length}"
+                + $"\nNumber of players: {players.Length}";
         }
     }
 }
