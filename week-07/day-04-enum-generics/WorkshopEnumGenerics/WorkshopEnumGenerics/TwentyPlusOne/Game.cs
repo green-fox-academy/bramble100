@@ -45,16 +45,33 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 return;
             }
 
-            for (int i = 0; i < players.Length; i++)
+            for (int player = 0; player < players.Length; player++)
             {
-                HitIfRequested(i);
+                GetPlayerDecision(player);
             }
             IsOver = true;
         }
 
-        private void HitIfRequested(int i)
+        private void GetPlayerDecision(int player)
         {
-            //throw new NotImplementedException();
+            ConsoleKeyInfo key;
+
+            Console.WriteLine("What is your decision?");
+            Console.WriteLine("(H)it / (S)tand");
+            do
+            {
+                key = Console.ReadKey();
+                if (key.Key != ConsoleKey.H)
+                {
+                    Hit(player);
+                }
+
+            } while (key.Key != ConsoleKey.H || key.Key != ConsoleKey.S);
+        }
+
+        private void Hit(int player)
+        {
+            throw new NotImplementedException();
         }
 
         private void FirstDeal()
