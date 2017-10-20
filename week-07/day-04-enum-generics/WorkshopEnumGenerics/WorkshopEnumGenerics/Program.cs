@@ -15,7 +15,6 @@ namespace WorkshopEnumGenerics
         private static void Exercise02_TwentyPlusOne()
         {
             Game game = new Game();
-            Console.WriteLine(game);
             while (!game.IsOver)
             {
                 game.Play();

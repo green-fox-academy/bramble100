@@ -11,87 +11,76 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         Deck deck;
         Hand dealer;
         Hand player;
-        public bool IsOver;
-        public bool IsWonByDealer;
+        public bool IsOver
+            => IsPush || IsWonByDealer || IsWonByPlayer;
 
-        public bool IsPush => dealer.IsBlackJack && player.IsBlackJack;
+        public bool IsPush 
+            => dealer.IsBlackJack && player.IsBlackJack;
 
-        public bool IsWonByPlayerWithBlackJack => player.IsBlackJack;
+        public bool IsWonByPlayer 
+            => player.IsBlackJack || dealer.IsBusted;
 
-        public bool IsWonByDealerWithBlackJack => dealer.IsBlackJack;
+        public bool IsWonByDealer 
+            => dealer.IsBlackJack || player.IsBusted;
+
+        public bool IsEndedAfterFirstDeal 
+            => IsWonByPlayer || IsWonByDealer;
 
         public Game()
         {
             deck = new Deck();
             dealer = new Hand();
             player = new Hand();
-            IsOver = false;
 
             deck.Shuffle();
-
         }
 
         public void Play()
         {
-            PlayerDecision playerDecision;
-
             FirstDeal();
-            ToString();
-            if (IsWonByPlayerWithBlackJack || IsWonByDealerWithBlackJack)
-            {
-                IsOver = true;
-                return;
-            }
+            Console.WriteLine(ToString());
 
+            ImproveHands();
+        }
+
+        private void ImproveHands()
+        {
+            PlayerDecision playerDecision;
             do
             {
                 playerDecision = GetPlayerDecision();
                 if (playerDecision == PlayerDecision.Hit)
                 {
-                    Hit();
+                    Deal(player);
+                    Console.WriteLine(ToString());
                 }
             } while (playerDecision == PlayerDecision.Hit);
-            IsOver = true;
         }
 
         private PlayerDecision GetPlayerDecision()
         {
-            ConsoleKeyInfo key;
+            ConsoleKey key;
 
             Console.WriteLine("What is your decision?");
             Console.WriteLine("(H)it / (S)tand");
             do
             {
-                key = Console.ReadKey();
-            } while (key.Key != ConsoleKey.H || key.Key != ConsoleKey.S);
+                key = Console.ReadKey().Key;
+            } while (key != ConsoleKey.H && key != ConsoleKey.S);
 
-            if (key.Key != ConsoleKey.H)
-            {
-                return PlayerDecision.Hit;
-            }
-
-            return PlayerDecision.Stand;
-        }
-
-        private void Hit()
-        {
-            Deal(player);
+            return key == ConsoleKey.H ? PlayerDecision.Hit : PlayerDecision.Stand;
         }
 
         private void FirstDeal()
         {
-            for (int cardTurn = 0; cardTurn < 2; cardTurn++)
-            {
-                Deal(player);
-                Deal(dealer);
-            }
+            Deal(player);
+            Deal(dealer);
+            Deal(player);
+            Deal(dealer);
         }
 
-        private void Deal(int playerIndex)
-            => player.Add(deck.PullFirst());
-
         private void Deal(Hand hand)
-            => dealer.Add(deck.PullFirst());
+            => hand.Add(deck.PullFirst());
 
         public override string ToString()
         {
