@@ -8,9 +8,9 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 {
     public class Game
     {
-        Deck deck;
-        Hand dealer;
-        Hand player;
+        public Deck deck;
+        public Hand dealer;
+        public Hand player;
         public bool IsOver
             => IsPush || IsWonByDealer || IsWonByPlayer;
 
