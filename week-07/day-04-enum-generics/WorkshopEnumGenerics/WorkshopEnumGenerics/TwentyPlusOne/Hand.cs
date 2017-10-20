@@ -9,47 +9,15 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     {
         private HashSet<Card> cards = new HashSet<Card>();
         public const int BLACK_JACK = 21;
-        private int? value;
-
-        public int Value
-        {
-            get
-            {
-                // is there any cards?
-                if (cards.Count == 0)
-                {
-                    value = null;
-                    return 0;
-                }
-
-                // hand needs recalculate?
-                if (value != null)
-                {
-                    return (int)value;
-                }
-
-                // calculate
-                value = cards.ToList().Sum(card => Card.Value[card.Rank]);
-
-                // blackjack or under?
-                if(value <= BLACK_JACK)
-                {
-                    return (int)value;
-                }
-
-                // if contains and ace, reduce value by 10
-                if(cards.ToList().Exists(card => card.Rank == Rank.Ace))
-                {
-                    value -= 10;
-                }
-
-                return (int)value;
-            }
-        }
+        private int value;
 
         public bool IsBlackJack => Value == BLACK_JACK;
 
         public bool IsBusted => Value > BLACK_JACK;
+
+        public bool IsInGame => Value < BLACK_JACK;
+
+        public int Value { get => value; private set => this.value = value; }
 
         public void Add(Card card)
         {
@@ -62,7 +30,33 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 throw new ArgumentException($"Hand already contains {card}.");
             }
             cards.Add(card);
-            value = null;
+            Value = CalculateHandValue();
+        }
+
+        private int CalculateHandValue()
+        {
+            // is there any cards?
+            if (cards.Count == 0)
+            {
+                return 0;
+            }
+
+            // calculate
+            Value = cards.ToList().Sum(card => Card.Value[card.Rank]);
+
+            // blackjack or under?
+            if (Value <= BLACK_JACK)
+            {
+                return Value;
+            }
+
+            // if contains and ace, reduce value by 10
+            if (cards.ToList().Exists(card => card.Rank == Rank.Ace))
+            {
+                Value -= 10;
+            }
+
+            return Value;
         }
 
         public override string ToString()
