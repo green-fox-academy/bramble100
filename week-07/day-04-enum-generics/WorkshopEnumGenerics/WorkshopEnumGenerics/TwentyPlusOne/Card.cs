@@ -11,8 +11,9 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         private Rank rank;
         private Suit suit;
         private DeckColor cardColor;
+        public bool? IsHighAce;
 
-        public static Dictionary<Rank, int> Value = new Dictionary<Rank, int>
+        private static Dictionary<Rank, int> ValueDict = new Dictionary<Rank, int>
         {
             {Rank.Two, 2 },
             {Rank.Three, 3 },
@@ -33,6 +34,22 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         {
             this.rank = rank;
             this.suit = suit;
+            if (rank==Rank.Ace)
+            {
+                IsHighAce = true;
+            }
+        }
+
+        public int Value
+        {
+            get
+            {
+                if (IsHighAce == null)
+                {
+                    return ValueDict[Rank];
+                }
+                return (bool)IsHighAce ? ValueDict[Rank] : ValueDict[Rank] - 10;
+            }
         }
 
         public Rank Rank { get => rank; private set => rank = value; }

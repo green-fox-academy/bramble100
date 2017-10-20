@@ -42,7 +42,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             }
 
             // calculate
-            Value = cards.ToList().Sum(card => Card.Value[card.Rank]);
+            Value = cards.ToList().Sum(card => card.Value);
 
             // blackjack or under?
             if (Value <= BLACK_JACK)
@@ -50,7 +50,8 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 return Value;
             }
 
-            // if contains and ace, reduce value by 10
+            // if contains an ace, reduce value by 10
+            // TODO update logic with player's choice: ace = 11 / ace = 1 / split?
             if (cards.ToList().Exists(card => card.Rank == Rank.Ace))
             {
                 Value -= 10;
