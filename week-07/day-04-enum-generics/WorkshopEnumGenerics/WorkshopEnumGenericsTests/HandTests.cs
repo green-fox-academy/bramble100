@@ -7,12 +7,34 @@ namespace WorkshopEnumGenericsTests
     class HandTests
     {
         [Test]
-        public void ValueUnderBlackJack()
+        public void ValueUnderBlackJackWithTwoEights()
         {
             Hand hand = new Hand();
+            hand.Add(new Card(Rank.Eight, Suit.Clubs));
+            hand.Add(new Card(Rank.Eight, Suit.Diamonds));
+
+            Assert.AreEqual(16, hand.Value);
+        }
+
+        [Test]
+        public void ValueUnderBlackJackWithHighAce()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Eight, Suit.Clubs));
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
 
-            Assert.AreEqual(11, hand.Value);
+            Assert.AreEqual(19, hand.Value);
+        }
+
+        [Test]
+        public void ValueUnderBlackJackWithLowAce()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Eight, Suit.Clubs));
+            Card card = new Card(Rank.Ace, Suit.Clubs);
+            card.IsHighAce = false;
+            hand.Add(card);
+            Assert.AreEqual(9, hand.Value);
         }
 
         [Test]
