@@ -59,6 +59,5 @@ namespace WorkshopEnumGenericsTests
 
             Assert.AreEqual(5, hand.Value);
         }
-
     }
 }

@@ -40,7 +40,10 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             FirstDeal();
             Console.WriteLine(ToString());
 
-            ImproveHands();
+            if (!IsOver)
+            {
+                ImproveHands();
+            }            
         }
 
         private void ImproveHands()

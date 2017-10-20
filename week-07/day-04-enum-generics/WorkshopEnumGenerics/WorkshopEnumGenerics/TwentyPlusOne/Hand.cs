@@ -50,8 +50,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 return Value;
             }
 
-            // if contains an ace, reduce value by 10
-            // TODO update logic with player's choice: ace = 11 / ace = 1 / split?
+            // if contains and ace, reduce value by 10
             if (cards.ToList().Exists(card => card.Rank == Rank.Ace))
             {
                 Value -= 10;
