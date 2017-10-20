@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WorkshopEnumGenerics.TwentyPlusOne
 {
-    class Game
+    public class Game
     {
         Deck deck;
         Hand dealer;
