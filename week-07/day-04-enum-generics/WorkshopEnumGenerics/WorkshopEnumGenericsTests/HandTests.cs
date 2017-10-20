@@ -46,5 +46,19 @@ namespace WorkshopEnumGenericsTests
             Assert.AreEqual(30, hand.Value);
             Assert.True(hand.IsBusted);
         }
+
+        [Test]
+        public void ValueAfterUpdate()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Two, Suit.Clubs));
+
+            Assert.AreEqual(2, hand.Value);
+
+            hand.Add(new Card(Rank.Three, Suit.Clubs));
+
+            Assert.AreEqual(5, hand.Value);
+        }
+
     }
 }
