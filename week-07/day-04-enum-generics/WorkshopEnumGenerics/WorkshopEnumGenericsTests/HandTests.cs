@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using WorkshopEnumGenerics.TwentyPlusOne;
 
 namespace WorkshopEnumGenericsTests
@@ -27,7 +22,6 @@ namespace WorkshopEnumGenericsTests
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
 
             Assert.True(hand.IsInGame);
-
         }
 
         [Test]
@@ -52,6 +46,5 @@ namespace WorkshopEnumGenericsTests
             Assert.AreEqual(30, hand.Value);
             Assert.True(hand.IsBusted);
         }
-
     }
 }

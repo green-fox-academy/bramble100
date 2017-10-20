@@ -30,10 +30,10 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 throw new ArgumentException($"Hand already contains {card}.");
             }
             cards.Add(card);
-            Value = CalculateHandValue();
+            Value = UpdateHandValue();
         }
 
-        private int CalculateHandValue()
+        private int UpdateHandValue()
         {
             // is there any cards?
             if (cards.Count == 0)
