@@ -27,9 +27,10 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             && dealer.IsImprovable;
 
         public bool GameIsOver 
-            => FirstDealHasDone 
+            => AnyHandIsBusted ||
+            (FirstDealHasDone 
             && !PlayerHandIsImprovable 
-            && !DealerHandIsImprovable;
+            && !DealerHandIsImprovable);
 
         public bool FirstDealHasDone
         {
@@ -54,6 +55,8 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 }
             }
         }
+
+        public bool AnyHandIsBusted => dealer.IsBusted || player.IsBusted;
 
         public Deck deck;
         public BlackJackHandDealer dealer;
