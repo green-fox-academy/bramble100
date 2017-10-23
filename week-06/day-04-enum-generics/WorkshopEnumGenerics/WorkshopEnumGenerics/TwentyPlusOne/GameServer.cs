@@ -30,11 +30,23 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             => FirstDealHasDone 
             && !PlayerHandIsImprovable 
             && !DealerHandIsImprovable;
-            
+
+        public bool FirstDealHasDone
+        {
+            get => firstDealHasDone;
+            set
+            {
+                if (!firstDealHasDone)
+                {
+                    firstDealHasDone = value;
+                }
+            }
+        }
+
         public Deck deck;
         public BlackJackHandDealer dealer;
         public BlackJackHandPlayer player;
-        public bool FirstDealHasDone;
+        private bool firstDealHasDone;
         public bool PlayerSignedStand;
 
         public GameServer()
