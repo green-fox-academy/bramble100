@@ -14,8 +14,9 @@ namespace WorkshopEnumGenerics
 
         private static void Exercise02_TwentyPlusOne()
         {
-            Game game = new Game();
-            game.Play();
+            GameServer gameServer = new GameServer();
+            GameClient gameClient = new GameClient(gameServer);
+            gameClient.Play();
         }
 
         private static void Exercise01_ParkingLot()

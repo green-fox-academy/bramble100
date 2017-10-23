@@ -9,7 +9,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void AfterFirstDealGameGoesOn()
         {
-            Game game = new Game();
+            GameServer game = new GameServer();
             game.dealer.Add(new Card(Rank.Eight, Suit.Hearts));
             game.dealer.Add(new Card(Rank.Nine, Suit.Hearts));
 
@@ -24,7 +24,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void AfterFirstDealPlayerHasBlackJack()
         {
-            Game game = new Game();
+            GameServer game = new GameServer();
             game.dealer.Add(new Card(Rank.Eight, Suit.Hearts));
             game.dealer.Add(new Card(Rank.Nine, Suit.Hearts));
 
@@ -39,7 +39,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void AfterFirstDealDealerHasBlackJack()
         {
-            Game game = new Game();
+            GameServer game = new GameServer();
             game.dealer.Add(new Card(Rank.Ace, Suit.Hearts));
             game.dealer.Add(new Card(Rank.King, Suit.Hearts));
 
@@ -54,7 +54,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void DealerIsBusted()
         {
-            Game game = new Game();
+            GameServer game = new GameServer();
             game.dealer.Add(new Card(Rank.Queen, Suit.Hearts));
             game.dealer.Add(new Card(Rank.Nine, Suit.Hearts));
             game.dealer.Add(new Card(Rank.King, Suit.Spades));

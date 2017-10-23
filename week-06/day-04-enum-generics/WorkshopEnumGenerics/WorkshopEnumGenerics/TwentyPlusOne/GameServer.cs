@@ -3,7 +3,7 @@ using System.Text;
 
 namespace WorkshopEnumGenerics.TwentyPlusOne
 {
-    public class Game
+    public class GameServer
     {
 
         public bool IsATie
@@ -15,67 +15,113 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public bool IsWonByDealer
             => !dealer.IsBusted && (player.IsBusted || dealer.Value > player.Value);
 
+        public bool PlayerHandIsImprovable
+            => FirstDealHasDone && player.IsInGame && !PlayerSignedStand && !player.IsTwentyOne;
+        public bool PlayerSignedStand;
+
+        public bool DealerHandIsImprovable
+            => FirstDealHasDone && dealer.Value < DEALER_DECISION_POINT;
+
+        public bool GameIsOver => FirstDealHasDone && !PlayerHandIsImprovable && !DealerHandIsImprovable;
+            
+
         public Deck deck;
         public Hand dealer;
         public Hand player;
+        public bool FirstDealHasDone;
+        private int DEALER_DECISION_POINT = 17;
 
-        public Game()
+        public GameServer()
+        {
+            Initialize();
+        }
+
+        public void Clear()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             deck = new Deck();
             dealer = new Hand();
             player = new Hand();
+            FirstDealHasDone = false;
+            PlayerSignedStand = false;
 
             deck.Shuffle();
         }
 
-        public void Play()
+        /// <summary>
+        /// For debug purposes only.
+        /// </summary>
+        public void PlayForDebug()
         {
             FirstDeal();
             if (!dealer.IsTwentyOne || !player.IsTwentyOne)
             {
-                ImprovePlayerHand();
+                ImprovePlayerHandForDebug();
                 if (!player.IsTwentyOne && !player.IsBusted)
                 {
                     ImproveDealerHand();
                 }
             }
             Console.WriteLine(ToString());
-            Console.WriteLine(DetermineResult());
         }
 
-        private void ImprovePlayerHand()
+        public void FirstDeal()
+        {
+            if (!FirstDealHasDone)
+            {
+                Deal(player);
+                Deal(dealer);
+                Deal(player);
+                Deal(dealer);
+                FirstDealHasDone = true;
+            }
+        }
+        /// <summary>
+        /// For debug purposes only.
+        /// </summary>
+        public void ImprovePlayerHandForDebug()
         {
             PlayerDecision playerDecision;
             while (player.IsInGame && !player.IsTwentyOne)
             {
                 Console.WriteLine(ToString());
-                playerDecision = GetPlayerDecision();
+                playerDecision = GetPlayerDecisionForDebug();
                 if (playerDecision == PlayerDecision.Hit)
                 {
                     Deal(player);
                 }
                 else if (playerDecision == PlayerDecision.Stand)
                 {
+                    PlayerSignedStand = true;
                     return;
                 }
             }
         }
 
-        private void ImproveDealerHand()
+        public void ImprovePlayerHand()
         {
-            while (dealer.Value < 17)
+            if (PlayerHandIsImprovable)
+            {
+                Deal(player);
+            }
+        }
+
+        public void ImproveDealerHand()
+        {
+            while (DealerHandIsImprovable)
             {
                 Deal(dealer);
             }
         }
-
-        private string DetermineResult()
-        {
-            return IsATie ? "It is a tie/push." :
-                $"{(IsWonByDealer ? "Dealer" : "Player")} has won.";
-        }
-
-        private PlayerDecision GetPlayerDecision()
+        /// <summary>
+        /// For debug purposes only.
+        /// </summary>
+        /// <returns></returns>
+        private PlayerDecision GetPlayerDecisionForDebug()
         {
             ConsoleKey key;
 
@@ -89,14 +135,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             return key == ConsoleKey.H ? PlayerDecision.Hit : PlayerDecision.Stand;
         }
 
-        private void FirstDeal()
-        {
-            Deal(player);
-            Deal(dealer);
-            Deal(player);
-            Deal(dealer);
-        }
-
         private void Deal(Hand hand)
             => hand.Add(deck.PullFirst());
 
@@ -106,6 +144,11 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             stringBuilder.AppendLine("---------------");
             stringBuilder.AppendLine("BlackJack game.");
             stringBuilder.AppendLine("---------------");
+            if (GameIsOver)
+            {
+                stringBuilder.AppendLine(IsATie ? "It is a tie/push." : $"{(IsWonByDealer ? "Dealer" : "Player")} has won.");
+                stringBuilder.AppendLine("---------------");
+            }            
             stringBuilder.AppendLine("Dealer's hand:");
             stringBuilder.AppendLine(dealer.ToString());
             stringBuilder.AppendLine("---------------");

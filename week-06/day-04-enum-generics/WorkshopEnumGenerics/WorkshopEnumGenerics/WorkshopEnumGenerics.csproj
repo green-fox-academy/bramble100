@@ -51,7 +51,8 @@
     <Compile Include="TwentyPlusOne\Card.cs" />
     <Compile Include="TwentyPlusOne\DeckColor.cs" />
     <Compile Include="TwentyPlusOne\Deck.cs" />
-    <Compile Include="TwentyPlusOne\Game.cs" />
+    <Compile Include="TwentyPlusOne\GameClient.cs" />
+    <Compile Include="TwentyPlusOne\GameServer.cs" />
     <Compile Include="TwentyPlusOne\Hand.cs" />
     <Compile Include="TwentyPlusOne\PlayerDecision.cs" />
     <Compile Include="TwentyPlusOne\Rank.cs" />
