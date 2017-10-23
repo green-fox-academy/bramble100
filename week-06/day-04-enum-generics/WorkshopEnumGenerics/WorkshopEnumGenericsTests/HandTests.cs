@@ -9,7 +9,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_Under21_WithTwoEights()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Eight, Suit.Clubs));
             hand.Add(new Card(Rank.Eight, Suit.Diamonds));
 
@@ -19,7 +19,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_Under21_WithHighAce()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Eight, Suit.Diamonds));
 
@@ -29,7 +29,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_Under21_WithLowAce()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Eight, Suit.Clubs));
             hand.Add(new Card(Rank.Nine, Suit.Diamonds));
@@ -40,7 +40,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_Under21_WithTwoHighAces()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Eight, Suit.Clubs));
             hand.Add(new Card(Rank.Ace, Suit.Hearts));
@@ -51,7 +51,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_Under21_WithLowAndHighAces()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Two, Suit.Clubs));
             hand.Add(new Card(Rank.Seven, Suit.Clubs));
@@ -63,7 +63,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_Under21_WithTwoLowAces()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Eight, Suit.Clubs));
             hand.Add(new Card(Rank.Nine, Suit.Diamonds));
@@ -75,7 +75,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void IsInGame()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
 
             Assert.True(hand.IsInGame);
@@ -84,7 +84,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void TwentyOne()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Jack, Suit.Clubs));
 
@@ -94,7 +94,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void ValueOver21()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Jack, Suit.Clubs));
             hand.Add(new Card(Rank.Jack, Suit.Diamonds));
             hand.Add(new Card(Rank.Jack, Suit.Hearts));
@@ -105,7 +105,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void IsBusted()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Jack, Suit.Clubs));
             hand.Add(new Card(Rank.Jack, Suit.Diamonds));
             hand.Add(new Card(Rank.Jack, Suit.Hearts));
@@ -117,7 +117,7 @@ namespace WorkshopEnumGenericsTests
         [Test]
         public void Value_AfterUpdate()
         {
-            Hand hand = new Hand();
+            BlackJackHand hand = new BlackJackHand();
             hand.Add(new Card(Rank.Two, Suit.Clubs));
 
             Assert.AreEqual(2, hand.Value);

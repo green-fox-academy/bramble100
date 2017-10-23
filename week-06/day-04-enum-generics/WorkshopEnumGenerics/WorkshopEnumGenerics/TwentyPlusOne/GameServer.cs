@@ -26,8 +26,8 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             
 
         public Deck deck;
-        public Hand dealer;
-        public Hand player;
+        public BlackJackHand dealer;
+        public BlackJackHand player;
         public bool FirstDealHasDone;
         private int DEALER_DECISION_POINT = 17;
 
@@ -44,8 +44,8 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         private void Initialize()
         {
             deck = new Deck();
-            dealer = new Hand();
-            player = new Hand();
+            dealer = new BlackJackHand();
+            player = new BlackJackHand();
             FirstDealHasDone = false;
             PlayerSignedStand = false;
 
