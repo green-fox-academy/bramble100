@@ -16,9 +16,7 @@ namespace WorkshopEnumGenericsTests
             game.player.Add(new Card(Rank.Seven, Suit.Clubs));
             game.player.Add(new Card(Rank.Five, Suit.Clubs));
 
-            Assert.False(game.IsEndedAfterFirstDeal);
-            Assert.False(game.IsOver);
-            Assert.False(game.IsPush);
+            Assert.False(game.IsATie);
             Assert.False(game.IsWonByDealer);
             Assert.False(game.IsWonByPlayer);
         }
@@ -33,9 +31,7 @@ namespace WorkshopEnumGenericsTests
             game.player.Add(new Card(Rank.Ace, Suit.Clubs));
             game.player.Add(new Card(Rank.Jack, Suit.Clubs));
 
-            Assert.True(game.IsEndedAfterFirstDeal);
-            Assert.True(game.IsOver);
-            Assert.False(game.IsPush);
+            Assert.False(game.IsATie);
             Assert.False(game.IsWonByDealer);
             Assert.True(game.IsWonByPlayer);
         }
@@ -50,11 +46,9 @@ namespace WorkshopEnumGenericsTests
             game.player.Add(new Card(Rank.Six, Suit.Clubs));
             game.player.Add(new Card(Rank.Jack, Suit.Clubs));
 
-            Assert.True(game.IsEndedAfterFirstDeal);
-            Assert.True(game.IsOver);
-            Assert.False(game.IsPush);
+            Assert.False(game.IsATie);
             Assert.True(game.IsWonByDealer);
-            Assert.False(game.IsWonByPlayer);
+            //Assert.False(game.IsWonByPlayer);
         }
 
         [Test]
@@ -71,9 +65,7 @@ namespace WorkshopEnumGenericsTests
             Assert.AreEqual(29, game.dealer.Value);
             Assert.AreEqual(13, game.player.Value);
 
-            Assert.True(game.IsEndedAfterFirstDeal);
-            Assert.True(game.IsOver);
-            Assert.False(game.IsPush);
+            Assert.False(game.IsATie);
             Assert.False(game.IsWonByDealer);
             Assert.True(game.IsWonByPlayer);
         }

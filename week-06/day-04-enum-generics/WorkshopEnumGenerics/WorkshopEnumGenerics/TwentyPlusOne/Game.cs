@@ -6,9 +6,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     public class Game
     {
 
-        public bool IsOver
-            => IsWonByDealer || IsWonByPlayer;
-
         public bool IsATie
             => dealer.Value == player.Value;
 
@@ -16,7 +13,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             => !player.IsBusted && (dealer.IsBusted || player.Value > dealer.Value);
 
         public bool IsWonByDealer
-            => !dealer.IsBusted && (player.IsBusted || dealer.Value > dealer.Value);
+            => !dealer.IsBusted && (player.IsBusted || dealer.Value > player.Value);
 
         public Deck deck;
         public Hand dealer;
@@ -34,9 +31,15 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public void Play()
         {
             FirstDeal();
+            if (!dealer.IsTwentyOne || !player.IsTwentyOne)
+            {
+                ImprovePlayerHand();
+                if (!player.IsTwentyOne && !player.IsBusted)
+                {
+                    ImproveDealerHand();
+                }
+            }
             Console.WriteLine(ToString());
-            ImprovePlayerHand();
-            ImproveDealerHand();
             Console.WriteLine(DetermineResult());
         }
 
@@ -45,11 +48,11 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             PlayerDecision playerDecision;
             while (player.IsInGame && !player.IsTwentyOne)
             {
+                Console.WriteLine(ToString());
                 playerDecision = GetPlayerDecision();
                 if (playerDecision == PlayerDecision.Hit)
                 {
                     Deal(player);
-                    Console.WriteLine(ToString());
                 }
                 else if (playerDecision == PlayerDecision.Stand)
                 {
@@ -103,7 +106,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             stringBuilder.AppendLine("---------------");
             stringBuilder.AppendLine("BlackJack game.");
             stringBuilder.AppendLine("---------------");
-            stringBuilder.AppendLine($"The game is {(IsOver ? String.Empty : "not ")}over.");
             stringBuilder.AppendLine("Dealer's hand:");
             stringBuilder.AppendLine(dealer.ToString());
             stringBuilder.AppendLine("---------------");

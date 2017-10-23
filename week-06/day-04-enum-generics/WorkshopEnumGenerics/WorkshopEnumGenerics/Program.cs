@@ -15,10 +15,7 @@ namespace WorkshopEnumGenerics
         private static void Exercise02_TwentyPlusOne()
         {
             Game game = new Game();
-            while (!game.IsOver)
-            {
-                game.Play();
-            }
+            game.Play();
         }
 
         private static void Exercise01_ParkingLot()
