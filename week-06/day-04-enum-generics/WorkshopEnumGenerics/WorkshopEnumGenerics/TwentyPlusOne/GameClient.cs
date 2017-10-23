@@ -19,14 +19,20 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public GameClient(GameServer gameServer)
         {
             this.gameServer = gameServer;
+            gameServer.PlayerMoney = 1000;
         }
 
         internal void Play()
         {
             ConsoleKey key;
             do
-            {
+            {                
                 PlayOneRound();
+                if (gameServer.PlayerMoney < 25)
+                {
+                    Console.WriteLine("Sorry, you have run out of cash.");
+                    break;
+                }
                 Console.WriteLine("Would you like to play one more round? Press (ESC) to quit.");
                 key = Console.ReadKey().Key;
             } while (key != ConsoleKey.Escape);
@@ -36,6 +42,14 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         private void PlayOneRound()
         {
+            if (gameServer.PlayerMoney < 25)
+            {
+                Console.WriteLine("Sorry, you have run out of cash.");
+                return;
+            }
+
+            EnterBet();
+
             gameServer.FirstDeal();
 
             if (!gameServer.PlayerHandIsImprovable)
@@ -48,7 +62,22 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 ImprovePlayerHand();
             }
             ImproveDealerHand();
+
+            gameServer.PayOut();
+
             Console.WriteLine(gameServer);
+        }
+
+        private void EnterBet()
+        {
+            int bet;
+            Console.WriteLine($"You have ${gameServer.PlayerMoney} worth chips.");
+            do
+            {
+                Console.WriteLine($"Please enter your bet (min $25, max ${gameServer.PlayerMoney}):");
+                bet = Convert.ToInt32(Console.ReadLine());
+            } while (bet < 25 || bet > gameServer.PlayerMoney);        
+            gameServer.PlayerBet = bet;
         }
 
         private void ImprovePlayerHand()

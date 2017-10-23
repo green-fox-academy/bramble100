@@ -5,7 +5,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 {
     public class GameServer
     {
-
         public bool IsATie
             => dealer.Value == player.Value;
 
@@ -58,11 +57,38 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         public bool AnyHandIsBusted => dealer.IsBusted || player.IsBusted;
 
+        public int PlayerMoney
+        {
+            get => playerMoney;
+            set
+            {
+                if (!FirstDealHasDone)
+                {
+                    playerMoney = value;
+                }
+            }
+        }
+
+        public int PlayerBet
+        {
+            get => playerBet;
+            set
+            {
+                if (!FirstDealHasDone && value <= PlayerMoney)
+                {
+                    playerBet = value;
+                    PlayerMoney -= PlayerBet;
+                }                    
+            }
+        }
+
         public Deck deck;
         public BlackJackHandDealer dealer;
         public BlackJackHandPlayer player;
         private bool firstDealHasDone;
         private bool playerSignedStand;
+        private int playerMoney;
+        private int playerBet;
 
         public GameServer()
         {
@@ -113,6 +139,18 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             }
         }
 
+        internal void PayOut()
+        {
+            if (IsATie)
+            {
+                playerMoney += playerBet;
+            }
+            else if (IsWonByPlayer)
+            {
+                playerMoney += 2 * playerBet;
+            };
+        }
+
         private void Deal(Hand hand)
             => hand.Add(deck.PullFirst());
 
@@ -132,6 +170,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             stringBuilder.AppendLine("---------------");
             stringBuilder.AppendLine("Player's hand:");
             stringBuilder.AppendLine(player.ToString());
+            stringBuilder.AppendLine($"Player's money: ${playerMoney}");
             return stringBuilder.ToString();
         }
     }
