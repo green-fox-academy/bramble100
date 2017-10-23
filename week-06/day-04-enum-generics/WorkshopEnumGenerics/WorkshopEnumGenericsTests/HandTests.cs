@@ -7,13 +7,69 @@ namespace WorkshopEnumGenericsTests
     class HandTests
     {
         [Test]
-        public void ValueUnderBlackJackWithTwoEights()
+        public void Value_Under21_WithTwoEights()
         {
             Hand hand = new Hand();
             hand.Add(new Card(Rank.Eight, Suit.Clubs));
             hand.Add(new Card(Rank.Eight, Suit.Diamonds));
 
             Assert.AreEqual(16, hand.Value);
+        }
+
+        [Test]
+        public void Value_Under21_WithHighAce()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Ace, Suit.Clubs));
+            hand.Add(new Card(Rank.Eight, Suit.Diamonds));
+
+            Assert.AreEqual(19, hand.Value);
+        }
+
+        [Test]
+        public void Value_Under21_WithLowAce()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Ace, Suit.Clubs));
+            hand.Add(new Card(Rank.Eight, Suit.Clubs));
+            hand.Add(new Card(Rank.Nine, Suit.Diamonds));
+
+            Assert.AreEqual(18, hand.Value);
+        }
+
+        [Test]
+        public void Value_Under21_WithTwoHighAces()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Ace, Suit.Clubs));
+            hand.Add(new Card(Rank.Eight, Suit.Clubs));
+            hand.Add(new Card(Rank.Ace, Suit.Hearts));
+
+            Assert.AreEqual(20, hand.Value);
+        }
+
+        [Test]
+        public void Value_Under21_WithLowAndHighAces()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Ace, Suit.Clubs));
+            hand.Add(new Card(Rank.Two, Suit.Clubs));
+            hand.Add(new Card(Rank.Seven, Suit.Clubs));
+            hand.Add(new Card(Rank.Ace, Suit.Hearts));
+
+            Assert.AreEqual(21, hand.Value);
+        }
+
+        [Test]
+        public void Value_Under21_WithTwoLowAces()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Ace, Suit.Clubs));
+            hand.Add(new Card(Rank.Eight, Suit.Clubs));
+            hand.Add(new Card(Rank.Nine, Suit.Diamonds));
+            hand.Add(new Card(Rank.Ace, Suit.Hearts));
+
+            Assert.AreEqual(19, hand.Value);
         }
 
         [Test]
@@ -26,14 +82,24 @@ namespace WorkshopEnumGenericsTests
         }
 
         [Test]
-        public void BlackJack()
+        public void TwentyOne()
         {
             Hand hand = new Hand();
             hand.Add(new Card(Rank.Ace, Suit.Clubs));
             hand.Add(new Card(Rank.Jack, Suit.Clubs));
 
             Assert.AreEqual(21, hand.Value);
-            Assert.True(hand.IsBlackJack);
+        }
+
+        [Test]
+        public void ValueOver21()
+        {
+            Hand hand = new Hand();
+            hand.Add(new Card(Rank.Jack, Suit.Clubs));
+            hand.Add(new Card(Rank.Jack, Suit.Diamonds));
+            hand.Add(new Card(Rank.Jack, Suit.Hearts));
+
+            Assert.AreEqual(30, hand.Value);
         }
 
         [Test]
@@ -49,7 +115,7 @@ namespace WorkshopEnumGenericsTests
         }
 
         [Test]
-        public void ValueAfterUpdate()
+        public void Value_AfterUpdate()
         {
             Hand hand = new Hand();
             hand.Add(new Card(Rank.Two, Suit.Clubs));
