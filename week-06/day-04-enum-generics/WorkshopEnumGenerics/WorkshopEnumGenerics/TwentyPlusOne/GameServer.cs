@@ -58,23 +58,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             deck.Shuffle();
         }
 
-        /// <summary>
-        /// For debug purposes only.
-        /// </summary>
-        public void PlayForDebug()
-        {
-            FirstDeal();
-            if (!dealer.IsTwentyOne || !player.IsTwentyOne)
-            {
-                ImprovePlayerHandForDebug();
-                if (!player.IsTwentyOne && !player.IsBusted)
-                {
-                    ImproveDealerHand();
-                }
-            }
-            Console.WriteLine(ToString());
-        }
-
         public void FirstDeal()
         {
             if (!FirstDealHasDone)
@@ -84,27 +67,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 Deal(player);
                 Deal(dealer);
                 FirstDealHasDone = true;
-            }
-        }
-        /// <summary>
-        /// For debug purposes only.
-        /// </summary>
-        public void ImprovePlayerHandForDebug()
-        {
-            PlayerDecision playerDecision;
-            while (player.IsInGame && !player.IsTwentyOne)
-            {
-                Console.WriteLine(ToString());
-                playerDecision = GetPlayerDecisionForDebug();
-                if (playerDecision == PlayerDecision.Hit)
-                {
-                    Deal(player);
-                }
-                else if (playerDecision == PlayerDecision.Stand)
-                {
-                    PlayerSignedStand = true;
-                    return;
-                }
             }
         }
 
@@ -122,24 +84,6 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             {
                 Deal(dealer);
             }
-        }
-
-        /// <summary>
-        /// For debug purposes only.
-        /// </summary>
-        /// <returns></returns>
-        private PlayerDecision GetPlayerDecisionForDebug()
-        {
-            ConsoleKey key;
-
-            Console.WriteLine("What is your decision?");
-            Console.WriteLine("(H)it / (S)tand");
-            do
-            {
-                key = Console.ReadKey().Key;
-            } while (key != ConsoleKey.H && key != ConsoleKey.S);
-
-            return key == ConsoleKey.H ? PlayerDecision.Hit : PlayerDecision.Stand;
         }
 
         private void Deal(Hand hand)
