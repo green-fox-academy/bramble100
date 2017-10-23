@@ -43,11 +43,23 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             }
         }
 
+        public bool PlayerSignedStand
+        {
+            get => playerSignedStand;
+            set
+            {
+                if (!playerSignedStand)
+                {
+                    playerSignedStand = value;
+                }
+            }
+        }
+
         public Deck deck;
         public BlackJackHandDealer dealer;
         public BlackJackHandPlayer player;
         private bool firstDealHasDone;
-        public bool PlayerSignedStand;
+        private bool playerSignedStand;
 
         public GameServer()
         {
