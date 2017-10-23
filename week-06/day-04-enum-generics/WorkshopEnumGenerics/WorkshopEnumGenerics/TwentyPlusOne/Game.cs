@@ -6,23 +6,21 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     public class Game
     {
 
-        public bool IsPush
-            => dealer.IsBlackJack && player.IsBlackJack;
+        public bool IsOver
+            => IsWonByDealer || IsWonByPlayer;
+
+        public bool IsATie
+            => dealer.Value == player.Value;
 
         public bool IsWonByPlayer
-            => player.IsBlackJack || dealer.IsBusted;
+            => !player.IsBusted && (dealer.IsBusted || player.Value > dealer.Value);
 
         public bool IsWonByDealer
-            => dealer.IsBlackJack || player.IsBusted;
-
-        public bool IsEndedAfterFirstDeal
-            => IsWonByPlayer || IsWonByDealer;
+            => !dealer.IsBusted && (player.IsBusted || dealer.Value > dealer.Value);
 
         public Deck deck;
         public Hand dealer;
         public Hand player;
-        public bool IsOver
-            => IsPush || IsWonByDealer || IsWonByPlayer;
 
         public Game()
         {
@@ -37,17 +35,15 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         {
             FirstDeal();
             Console.WriteLine(ToString());
-
-            if (!IsOver)
-            {
-                ImproveHands();
-            }            
+            ImprovePlayerHand();
+            ImproveDealerHand();
+            Console.WriteLine(DetermineResult());
         }
 
-        private void ImproveHands()
+        private void ImprovePlayerHand()
         {
             PlayerDecision playerDecision;
-            do
+            while (player.IsInGame && !player.IsTwentyOne)
             {
                 playerDecision = GetPlayerDecision();
                 if (playerDecision == PlayerDecision.Hit)
@@ -55,7 +51,25 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                     Deal(player);
                     Console.WriteLine(ToString());
                 }
-            } while (playerDecision == PlayerDecision.Hit);
+                else if (playerDecision == PlayerDecision.Stand)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void ImproveDealerHand()
+        {
+            while (dealer.Value < 17)
+            {
+                Deal(dealer);
+            }
+        }
+
+        private string DetermineResult()
+        {
+            return IsATie ? "It is a tie/push." :
+                $"{(IsWonByDealer ? "Dealer" : "Player")} has won.";
         }
 
         private PlayerDecision GetPlayerDecision()
@@ -86,10 +100,13 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("---------------");
             stringBuilder.AppendLine("BlackJack game.");
+            stringBuilder.AppendLine("---------------");
             stringBuilder.AppendLine($"The game is {(IsOver ? String.Empty : "not ")}over.");
             stringBuilder.AppendLine("Dealer's hand:");
             stringBuilder.AppendLine(dealer.ToString());
+            stringBuilder.AppendLine("---------------");
             stringBuilder.AppendLine("Player's hand:");
             stringBuilder.AppendLine(player.ToString());
             return stringBuilder.ToString();
