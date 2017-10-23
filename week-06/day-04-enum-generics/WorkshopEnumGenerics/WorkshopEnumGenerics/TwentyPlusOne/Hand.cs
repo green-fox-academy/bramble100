@@ -8,12 +8,12 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
     public class Hand
     {
         private HashSet<Card> cards = new HashSet<Card>();
-        public const int BLACK_JACK = 21;
+        private const int BLACK_JACK = 21;
         private int value;
 
-        public bool IsBlackJack => Value == BLACK_JACK;
+        public bool IsTwentyOne => Value == BLACK_JACK;
         public bool IsBusted => Value > BLACK_JACK;
-        public bool IsInGame => Value < BLACK_JACK;
+        public bool IsInGame => Value <= BLACK_JACK;
 
         public int Value { get => value;
             private set => this.value = value; }
@@ -32,10 +32,10 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             // TODO update logic with player's choice: ace = 11 / ace = 1 / split?
 
             cards.Add(card);
-            Value = UpdateHandValue();
+            Value = UpdateValue();
         }
 
-        private int UpdateHandValue()
+        private int UpdateValue()
         {
             // is there any cards?
             if (cards.Count == 0)
@@ -52,12 +52,14 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 return Value;
             }
 
-            
-            if (cards.ToList().Exists(card => card.Rank == Rank.Ace))
+            for (int i = 0; i < cards.Where(card => card.Rank == Rank.Ace).Count(); i++)
             {
                 Value -= 10;
+                if (IsInGame)
+                {
+                    return Value;
+                }
             }
-
             return Value;
         }
 
