@@ -23,41 +23,64 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
 
         internal void Play()
         {
+            ConsoleKey key;
+            do
+            {
+                PlayOneRound();
+                Console.WriteLine("Would you like to play one more round? Press (ESC) to quit.");
+                key = Console.ReadKey().Key;
+            } while (key != ConsoleKey.Escape);
+
+            Console.WriteLine("Have a nice day, see you soon.");
+        }
+
+        private void PlayOneRound()
+        {
             gameServer.FirstDeal();
 
-            if(!gameServer.PlayerHandIsImprovable)
+            if (!gameServer.PlayerHandIsImprovable)
             {
                 Console.WriteLine(gameServer);
             }
 
             while (gameServer.PlayerHandIsImprovable)
             {
-                PlayerDecision playerDecision;
-                Console.WriteLine(gameServer);
-                ConsoleKey key;
-
-                Console.WriteLine("What is your decision? (H)it / (S)tand");
-                do
-                {
-                    key = Console.ReadKey().Key;
-                } while (!ConsoleKeyToPlayerDecisionDict.Keys.Contains(key));
-
-                playerDecision = ConsoleKeyToPlayerDecisionDict[key];
-
-                if (playerDecision == PlayerDecision.Hit)
-                {
-                    gameServer.ImprovePlayerHand();
-                }
-                else if (playerDecision == PlayerDecision.Stand)
-                {
-                    gameServer.PlayerSignedStand = true;
-                }
+                ImprovePlayerHand();
             }
+            ImproveDealerHand();
+            Console.WriteLine(gameServer);
+        }
+
+        private void ImprovePlayerHand()
+        {
+            PlayerDecision playerDecision;
+            Console.WriteLine(gameServer);
+            ConsoleKey key;
+
+            Console.WriteLine("What is your decision? (H)it / (S)tand");
+            do
+            {
+                key = Console.ReadKey().Key;
+            } while (!ConsoleKeyToPlayerDecisionDict.Keys.Contains(key));
+
+            playerDecision = ConsoleKeyToPlayerDecisionDict[key];
+
+            if (playerDecision == PlayerDecision.Hit)
+            {
+                gameServer.ImprovePlayerHand();
+            }
+            else if (playerDecision == PlayerDecision.Stand)
+            {
+                gameServer.PlayerSignedStand = true;
+            }
+        }
+
+        private void ImproveDealerHand()
+        {
             if (gameServer.player.IsInGame && gameServer.DealerHandIsImprovable)
             {
                 gameServer.ImproveDealerHand();
             }
-            Console.WriteLine(gameServer);
         }
     }
 }
