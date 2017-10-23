@@ -49,6 +49,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwentyPlusOne\BlackJackHand.cs" />
+    <Compile Include="TwentyPlusOne\BlackJackHandDealer.cs" />
+    <Compile Include="TwentyPlusOne\BlackJackHandPlayer.cs" />
     <Compile Include="TwentyPlusOne\Card.cs" />
     <Compile Include="TwentyPlusOne\DeckColor.cs" />
     <Compile Include="TwentyPlusOne\Deck.cs" />

@@ -10,26 +10,32 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
             => dealer.Value == player.Value;
 
         public bool IsWonByPlayer
-            => !player.IsBusted && (dealer.IsBusted || player.Value > dealer.Value);
+            => !player.IsBusted 
+            && (dealer.IsBusted || player.Value > dealer.Value);
 
         public bool IsWonByDealer
-            => !dealer.IsBusted && (player.IsBusted || dealer.Value > player.Value);
+            => !dealer.IsBusted 
+            && (player.IsBusted || dealer.Value > player.Value);
 
         public bool PlayerHandIsImprovable
-            => FirstDealHasDone && player.IsInGame && !PlayerSignedStand && !player.IsTwentyOne;
-        public bool PlayerSignedStand;
+            => FirstDealHasDone 
+            && !PlayerSignedStand
+            && player.IsImprovable;
 
         public bool DealerHandIsImprovable
-            => FirstDealHasDone && dealer.Value < DEALER_DECISION_POINT;
+            => FirstDealHasDone 
+            && dealer.IsImprovable;
 
-        public bool GameIsOver => FirstDealHasDone && !PlayerHandIsImprovable && !DealerHandIsImprovable;
+        public bool GameIsOver 
+            => FirstDealHasDone 
+            && !PlayerHandIsImprovable 
+            && !DealerHandIsImprovable;
             
-
         public Deck deck;
-        public BlackJackHand dealer;
-        public BlackJackHand player;
+        public BlackJackHandDealer dealer;
+        public BlackJackHandPlayer player;
         public bool FirstDealHasDone;
-        private int DEALER_DECISION_POINT = 17;
+        public bool PlayerSignedStand;
 
         public GameServer()
         {
@@ -44,8 +50,8 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
         private void Initialize()
         {
             deck = new Deck();
-            dealer = new BlackJackHand();
-            player = new BlackJackHand();
+            dealer = new BlackJackHandDealer();
+            player = new BlackJackHandPlayer();
             FirstDealHasDone = false;
             PlayerSignedStand = false;
 
@@ -117,6 +123,7 @@ namespace WorkshopEnumGenerics.TwentyPlusOne
                 Deal(dealer);
             }
         }
+
         /// <summary>
         /// For debug purposes only.
         /// </summary>
