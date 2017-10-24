@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Day02Intro.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
         [Route("hello")]
-        public string Hello()
+        public IActionResult Hello()
         {
-            return "Hello Controller World!";
+            return Content("Hello Controller World!");
         }
     }
 }
