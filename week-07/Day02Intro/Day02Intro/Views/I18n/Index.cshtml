@@ -1,4 +1,5 @@
 ﻿@model string[]
+@{ Random random = new Random();}
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,12 +8,13 @@
 </head>
 <body>
     <p>
-        Hello, @Model.ToString()! This site was loaded @Model.ToString() times since last server start.
+        Hello, @Model.ToString()! This site was loaded @Model.Length times since last server start.
         @foreach (var hello in @Model)
-            {
-        <p>
+        {
+        <span style="color:rgb(@random.Next(255), @random.Next(255), @random.Next(255)); 
+              font-size: @random.Next(12,48)px">
             @hello
-        </p>
+        </span>
         }
     </p>
 </body>
