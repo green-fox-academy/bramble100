@@ -14,11 +14,11 @@ namespace Day02Intro.Controllers
     public class RESTController : Controller
     {
         [Route("greeting")]
-        public IActionResult Greeting()
+        public IActionResult Greeting(string name)
         {
             Greeting greeting = new Greeting();
             greeting.Id = 1234;
-            greeting.Content = "I'm a greeting.";
+            greeting.Content = $"I'm a greeting. And I say: Hello {name}";
             return new JsonResult(greeting);
         }
     }
