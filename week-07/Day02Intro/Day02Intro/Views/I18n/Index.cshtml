@@ -12,7 +12,8 @@
         @foreach (var hello in @Model)
         {
         <span style="color:rgb(@random.Next(255), @random.Next(255), @random.Next(255)); 
-              font-size: @random.Next(12,48)px">
+              font-size: @random.Next(12,48)px;
+              border: 20px solid white">
             @hello
         </span>
         }
