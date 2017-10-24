@@ -1,0 +1,19 @@
+﻿@model string[]
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p>
+        Hello, @Model.ToString()! This site was loaded @Model.ToString() times since last server start.
+        @foreach (var hello in @Model)
+            {
+        <p>
+            @hello
+        </p>
+        }
+    </p>
+</body>
+</html>
