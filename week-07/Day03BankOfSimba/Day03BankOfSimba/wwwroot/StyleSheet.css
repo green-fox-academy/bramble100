@@ -5,4 +5,31 @@
 
 table {
     background-color: #b6ff00;
+    table-layout: fixed;
+    color: darkgreen;
+    border: 1px solid red;
+    box-sizing: border-box;
+    border-collapse:collapse;
 }
+
+    table.row {
+        background-color: #b6ff22;
+    }
+
+tr {
+    margin: 0px;
+    padding: 10px;
+}
+
+th {
+    font-size: larger;
+}
+
+td {
+    padding: 2px;
+    border-bottom: 1px solid black;
+}
+
+    td.row {
+        background-color: #b6ff22;
+    }
