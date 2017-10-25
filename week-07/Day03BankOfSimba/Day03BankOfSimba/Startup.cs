@@ -24,11 +24,12 @@ namespace Day03BankOfSimba
         {
             loggerFactory.AddConsole();
 
+            app.UseStaticFiles();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvcWithDefaultRoute();
 
             app.Run(async (context) =>

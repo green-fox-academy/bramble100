@@ -2,6 +2,7 @@
 {
     public enum AnimalType
     {
-        Lion
+        Lion,
+        KingLion
     }
 }
