@@ -38,19 +38,19 @@ namespace Day03BankOfSimba.Controllers
             {
                 Name = "Zumba",
                 Balance = 1000,
-                AnimalType = AnimalType.Lion
+                AnimalType = AnimalType.Mandrill
             });
             bankAccounts.Accounts.Add(new BankAccount()
             {
                 Name = "Samba",
                 Balance = 5000,
-                AnimalType = AnimalType.KingLion
+                AnimalType = AnimalType.Warthog
             });
             bankAccounts.Accounts.Add(new BankAccount()
             {
                 Name = "Mamba",
                 Balance = 4000,
-                AnimalType = AnimalType.Lion
+                AnimalType = AnimalType.Meerkat
             });
             bankAccounts.Accounts.Add(new BankAccount()
             {

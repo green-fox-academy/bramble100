@@ -1,4 +1,7 @@
 ﻿@model Day03BankOfSimba.Models.BankAccounts
+@{ 
+    var classification = new Day03BankOfSimba.Models.AnimalTypeClassification();
+}
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,6 +18,7 @@
                     <td>@bankAccount.Name</td>
                     <td>@bankAccount.AnimalType</td>
                     <td>@bankAccount.Balance.ToString("0.00 Zebra")</td>
+                    <td>@classification[bankAccount.AnimalType]</td>
                 </tr>
             }
     </table>

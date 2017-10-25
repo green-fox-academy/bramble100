@@ -3,6 +3,10 @@
     public enum AnimalType
     {
         Lion,
-        KingLion
+        KingLion,
+        Meerkat,
+        Mandrill,
+        Warthog,
+        Cobra
     }
 }

@@ -1,9 +1,8 @@
 ﻿body {
-    background: #999;
-    color: floralwhite;
+    background: floralwhite;
+    color: #333;
 }
 
 table {
-    background-color: aqua;
-    border: 1px, dashed, solid, red;
+    background-color: #b6ff00;
 }
