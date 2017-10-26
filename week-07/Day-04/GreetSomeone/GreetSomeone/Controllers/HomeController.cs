@@ -25,7 +25,7 @@ namespace GreetSomeone.Controllers
             return View();
         }
 
-        [Route("")]
+        [Route("submit")]
         public IActionResult ShowData()
         {
             return View(userData);
@@ -39,11 +39,11 @@ namespace GreetSomeone.Controllers
             return RedirectToAction("ShowData");
         }
 
-        [HttpGet]
-        [Route("greet")]
-        public IActionResult Index2()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //[Route("greet")]
+        //public IActionResult Index2()
+        //{
+        //    return View();
+        //}
     }
 }
