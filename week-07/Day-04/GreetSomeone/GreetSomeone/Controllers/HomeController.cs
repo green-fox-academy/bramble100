@@ -25,18 +25,19 @@ namespace GreetSomeone.Controllers
             return View();
         }
 
-        [Route("submit")]
-        public IActionResult ShowData()
-        {
-            return View(userData);
-        }
-
         [HttpPost]
         [Route("submit")]
         public IActionResult Index(string name)
         {
             userData.Name = name;
             return RedirectToAction("ShowData");
+        }
+
+        [HttpGet]
+        [Route("submit")]
+        public IActionResult ShowData()
+        {
+            return View(userData);
         }
 
         //[HttpGet]
