@@ -12,7 +12,8 @@ namespace Day03BankOfSimba.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
-        [Route("Simba")]
+        [Route("")]
+        [Route("simba")]
         public IActionResult Index()
         {
             BankAccount bankAccount = new BankAccount()
