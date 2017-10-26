@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace BlackJack.GameServer
 {
-    public class BlackJackHandPlayer : BlackJackHand
+    public class BlackJackHandPlayer : Hand
     {
-        public bool IsImprovable => !IsBusted;
+        public BlackJackHandPlayer()
+        {
+        }
 
+        public BlackJackHandPlayer(HashSet<Card> cards) : base(cards)
+        {
+        }
+
+        public bool IsImprovable => !IsBusted;
     }
 }

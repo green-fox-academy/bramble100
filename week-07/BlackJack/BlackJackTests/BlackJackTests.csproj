@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B71D7C2D-A03B-45AF-A741-743AD879EEE4}</ProjectGuid>
+    <ProjectGuid>{16A274EA-E477-424F-A44D-A2F739B1615A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlackJack</RootNamespace>
-    <AssemblyName>BlackJack</AssemblyName>
+    <RootNamespace>BlackJackTests</RootNamespace>
+    <AssemblyName>BlackJackTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,19 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameServer\BlackJackHandDealer.cs" />
-    <Compile Include="GameServer\BlackJackHandPlayer.cs" />
-    <Compile Include="GameServer\Card.cs" />
-    <Compile Include="GameServer\Deck.cs" />
-    <Compile Include="GameServer\GameController.cs" />
-    <Compile Include="GameServer\GameModel.cs" />
-    <Compile Include="GameServer\Hand.cs" />
-    <Compile Include="GameServer\IBlackJackGameController.cs" />
-    <Compile Include="GameServer\IBlackJackGameModel.cs" />
-    <Compile Include="GameServer\PlayerDecision.cs" />
-    <Compile Include="GameServer\Rank.cs" />
-    <Compile Include="GameServer\Suit.cs" />
+    <Compile Include="CardTests.cs" />
+    <Compile Include="DeckTests.cs" />
+    <Compile Include="GameModelTests.cs" />
+    <Compile Include="HandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJack\BlackJack.csproj">
+      <Project>{b71d7c2d-a03b-45af-a741-743ad879eee4}</Project>
+      <Name>BlackJack</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

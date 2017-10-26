@@ -21,7 +21,11 @@ namespace BlackJack.GameServer
                 }
             }
         }
-
+        public Deck(List<Card> cards, Random random)
+        {
+            this.cards = cards ?? throw new ArgumentNullException(nameof(cards));
+            this.random = random ?? throw new ArgumentNullException(nameof(random));
+        }
         public void Shuffle()
         {
             List<Card> shuffledCards = new List<Card>();
@@ -31,7 +35,6 @@ namespace BlackJack.GameServer
             }
             cards = shuffledCards;
         }
-
         public Card PullFirst()
         {
             if(cards.Count == 0)
@@ -43,7 +46,6 @@ namespace BlackJack.GameServer
             cards.RemoveAt(0);
             return card;
         }
-
         public Card PullLast()
         {
             if (cards.Count == 0)
@@ -55,7 +57,6 @@ namespace BlackJack.GameServer
             cards.RemoveAt(cards.Count-1);
             return card;
         }
-
         public Card PullRandom()
         {
             if (cards.Count == 0)
@@ -68,14 +69,13 @@ namespace BlackJack.GameServer
             cards.RemoveAt(cardID);
             return card;
         }
-
         public string GetCardsList()
         {
             StringBuilder stringBuilder = new StringBuilder();
             cards.ForEach(card => stringBuilder.AppendLine(card.ToString()));
             return stringBuilder.ToString();
         }
-
-        public override string ToString() => $"The deck consists of {cards.Count} cards.";
+        public override string ToString() 
+            => $"The deck consists of {cards.Count} cards.";
     }
 }

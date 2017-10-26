@@ -1,56 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJack.GameServer
 {
-    public class GameController
+    public class GameController : IBlackJackGameController
     {
-        public static bool IsStartable { get; private set; }
-        public static bool BetIsPlaceable { get; private set; }
-        public static int PlacedBet { get; private set; }
-        public static bool FirstDealIsRequestable { get; private set; }
-        public static bool PlayerHandIsImproveable { get; private set; }
-        public static Card DealerCard { get; private set; }
-        public static int DealerCardValue { get; private set; }
-        public static Hand PlayerHand { get; private set; }
-        public static int PlayerCardValue { get; private set; }
-        public static Hand DealerHand { get; private set; }
-        public static int DealerHandValue { get; private set; }
-        public static bool PlayerHasWon { get; private set; }
-        public static bool DealerHasWon { get; private set; }
-        public static bool IsTie { get; private set; }
-        public static bool IsFinished { get; private set; }
+        public bool PlayerHandIsImprovable => gameModel.FirstDealHasDone
+            && !PlayerSignedStand
+            && gameModel.PlayerHandIsImprovable;
 
-        private GameModel game;
-        private static bool winningIsCollectable;
-        private static int collectableWinning;
+        public bool DealerHandIsImprovable => gameModel.FirstDealHasDone
+            && !gameModel.PlayerIsBusted
+            && gameModel.DealerHandIsImprovable;
+        public bool IsWonByPlayer => !gameModel.PlayerIsBusted
+            && (gameModel.DealerIsBusted || gameModel.PlayerHasHigherScore)
+            && IsFinished;
+        public bool IsWonByDealer => !gameModel.DealerIsBusted
+            && (gameModel.PlayerIsBusted || gameModel.DealerHasHigherScore)
+            && IsFinished;
+        public bool IsTied => gameModel.IsTied
+            && IsFinished;
+        public bool PlayerSignedStand { get; private set; } = false;
 
-        public static void PlaceBet(int bet)
+        private bool isFinished = false;
+        public bool IsFinished => isFinished 
+            || gameModel.DealerIsBusted 
+            || gameModel.PlayerIsBusted;
+
+        public HashSet<Card> PlayerHand => gameModel.PlayerHand;
+        public int PlayerHandValue => gameModel.PlayerHandValue;
+        public HashSet<Card> DealerHand => gameModel.DealerHand;
+        public int DealerHandValue => gameModel.DealerHandValue;
+
+        private GameModel gameModel;
+
+        public GameController(GameModel gameModel)
         {
-            throw new NotImplementedException();
+            this.gameModel = gameModel;
+            gameModel.ShuffleDeck();
+            RequestFirstDeal();
         }
 
-        public static void RequestFirstDeal()
+        public void RequestNewGame()
         {
-            throw new NotImplementedException();
+            gameModel = null;
+            gameModel = new GameModel();
+            gameModel.ShuffleDeck();
+            RequestFirstDeal();
         }
 
-        public static void RequestForHit()
+        public void RequestFirstDeal()
         {
-            throw new NotImplementedException();
+            if (!gameModel.FirstDealHasDone)
+            {
+                gameModel.DealForPlayer();
+                gameModel.DealForDealer();
+                gameModel.DealForPlayer();
+                gameModel.DealForDealer();
+            }
         }
 
-        public static void SignStand()
+        public void ImprovePlayerHand()
         {
-            throw new NotImplementedException();
+            if (PlayerHandIsImprovable)
+            {
+                gameModel.DealForPlayer();
+            }
         }
 
-        public static int CollectWinning()
+        public void SignStand()
         {
-            throw new NotImplementedException();
+            PlayerSignedStand = true;
+            ImproveDealerHand();
+            isFinished = true;
+        }
+
+        private void ImproveDealerHand()
+        {
+            while (DealerHandIsImprovable)
+            {
+                gameModel.DealForDealer();
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("---------------");
+            stringBuilder.AppendLine("BlackJack game.");
+            stringBuilder.AppendLine("---------------");
+            if (IsFinished)
+            {
+                stringBuilder.AppendLine(IsTied ? "It is a tie/push." : $"{(IsWonByDealer ? "Dealer" : "Player")} has won.");
+                stringBuilder.AppendLine("---------------");
+            }
+            stringBuilder.AppendLine("Dealer's hand:");
+            stringBuilder.AppendLine(gameModel.DealerToString());
+            stringBuilder.AppendLine("---------------");
+            stringBuilder.AppendLine("Player's hand:");
+            stringBuilder.AppendLine(gameModel.PlayerToString());
+            return stringBuilder.ToString();
         }
     }
 }

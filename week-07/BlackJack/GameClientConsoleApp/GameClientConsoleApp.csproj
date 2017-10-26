@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B71D7C2D-A03B-45AF-A741-743AD879EEE4}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlackJack</RootNamespace>
-    <AssemblyName>BlackJack</AssemblyName>
+    <ProjectGuid>{760DA087-69CF-4EF8-8AA7-AAA8659EFB07}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GameClientConsoleApp</RootNamespace>
+    <AssemblyName>GameClientConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,19 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameServer\BlackJackHandDealer.cs" />
-    <Compile Include="GameServer\BlackJackHandPlayer.cs" />
-    <Compile Include="GameServer\Card.cs" />
-    <Compile Include="GameServer\Deck.cs" />
-    <Compile Include="GameServer\GameController.cs" />
-    <Compile Include="GameServer\GameModel.cs" />
-    <Compile Include="GameServer\Hand.cs" />
-    <Compile Include="GameServer\IBlackJackGameController.cs" />
-    <Compile Include="GameServer\IBlackJackGameModel.cs" />
-    <Compile Include="GameServer\PlayerDecision.cs" />
-    <Compile Include="GameServer\Rank.cs" />
-    <Compile Include="GameServer\Suit.cs" />
+    <Compile Include="GameClient.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJack\BlackJack.csproj">
+      <Project>{b71d7c2d-a03b-45af-a741-743ad879eee4}</Project>
+      <Name>BlackJack</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
