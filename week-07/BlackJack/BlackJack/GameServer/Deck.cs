@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.GameServer
 {
-    public class Deck
+    public class Deck : ICardCollection
     {
         private List<Card> cards = new List<Card>();
         private Random random = new Random();

@@ -47,8 +47,9 @@
     <Compile Include="GameServer\GameController.cs" />
     <Compile Include="GameServer\GameModel.cs" />
     <Compile Include="GameServer\Hand.cs" />
-    <Compile Include="GameServer\IBlackJackGameController.cs" />
-    <Compile Include="GameServer\IBlackJackGameModel.cs" />
+    <Compile Include="GameServer\ICardGameController.cs" />
+    <Compile Include="GameServer\ICardGameModel.cs" />
+    <Compile Include="GameServer\ICardCollection.cs" />
     <Compile Include="GameServer\PlayerDecision.cs" />
     <Compile Include="GameServer\Rank.cs" />
     <Compile Include="GameServer\Suit.cs" />

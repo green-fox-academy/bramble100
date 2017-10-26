@@ -30,6 +30,7 @@ namespace GreetSomeone
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseMvc();
 
             app.Run(async (context) =>

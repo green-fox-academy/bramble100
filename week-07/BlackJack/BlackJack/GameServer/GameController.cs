@@ -3,7 +3,7 @@ using System.Text;
 
 namespace BlackJack.GameServer
 {
-    public class GameController : IBlackJackGameController
+    public class GameController : ICardGameController
     {
         public bool PlayerHandIsImprovable => gameModel.FirstDealHasDone
             && !PlayerSignedStand

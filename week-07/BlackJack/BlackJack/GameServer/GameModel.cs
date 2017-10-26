@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BlackJack.GameServer
 {
-    public class GameModel : IBlackJackGameModel
+    public class GameModel : ICardGameModel
     {
         private Deck deck;
         private BlackJackHandDealer dealer;

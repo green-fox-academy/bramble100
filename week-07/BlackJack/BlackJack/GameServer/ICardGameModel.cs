@@ -2,18 +2,10 @@
 
 namespace BlackJack.GameServer
 {
-    public interface IBlackJackGameModel
+    public interface ICardGameModel
     {
         HashSet<Card> PlayerHand { get; }
         HashSet<Card> DealerHand { get; }
-        bool PlayerHandIsImprovable { get; }
-        bool DealerHandIsImprovable { get; }
-        int PlayerHandValue { get; }
-        int DealerHandValue { get; }
-        bool PlayerIsBusted { get; }
-        bool DealerIsBusted { get; }
-        bool DealerHasHigherScore { get; }
-        bool FirstDealHasDone { get; }
         bool IsTied { get; }
         bool PlayerHasHigherScore { get; }
 
