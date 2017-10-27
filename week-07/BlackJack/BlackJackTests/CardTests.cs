@@ -38,12 +38,11 @@ namespace BlackJackTests
         [TestCase(Rank.Queen, 10)]
         [TestCase(Rank.King, 10)]
         [TestCase(Rank.Ace, 11)]
-        public void ValueNoAce(Rank rank, int value)
+        public void Value(Rank rank, int value)
         {
-            Suit suit = (Suit)random.Next(typeof(Suit).GetEnumNames().Length);
-
+            Suit suit = (Suit)random.Next(typeof(Suit)
+                .GetEnumNames().Length);
             Card card = new Card(rank, suit);
-
             Assert.AreEqual(value, card.Value);
         }
 
