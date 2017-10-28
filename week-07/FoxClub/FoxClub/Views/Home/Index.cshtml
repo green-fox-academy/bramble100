@@ -1,4 +1,6 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@model FoxClub.Models.Fox
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Information</title>
 </head>
@@ -14,10 +16,12 @@
     </header>
     <content>
         <div>
-            <img src="#" alt="Fox picture" />
+            <img src="../../greenfox.png" alt="Fox picture" />
         </div>
         <div>
-            This is Mr Fox. Currently living on pizza and lemonade. He know 2 tricks.
+            This is @(Model.Name.Equals(string.Empty) ? "Mr Fox (he has no name yet)" : Model.Name).
+            Currently living on @Model.Food.ToString().ToLower() and @Model.Drink.ToString().ToLower().
+            He knows @(Model.KnowsAnyTrick ? $"{Model.Tricks.Count().ToString()} tricks" : "no tricks (yet)").
         </div>
         <div>
             <h1>
@@ -25,15 +29,27 @@
             </h1>
         </div>
         <div>
-            <ul>
-                <li>
-                    Write HTML
-                </li>
-                <li>
-                    Code in C#
-                </li>
-            </ul>
+            @if (Model.KnowsAnyTrick)
+            {
+                <ul>
+                    @foreach (var trick in Model.Tricks)
+                    {
+                        <li>
+                            @trick.ToString().ToLower()
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>
+                    He knows no trick yet. Let's train him a little.
+                </span>
+            }
         </div>
     </content>
+    <footer>
+        Arnold BARNA, 2017
+    </footer>
 </body>
 </html>
