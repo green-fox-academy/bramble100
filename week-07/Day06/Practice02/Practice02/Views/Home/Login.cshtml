@@ -1,0 +1,25 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="outer">
+        <div class="login">
+            <form action="gameselector" method="post">
+                <p class="">
+                    @Html.Label("Name:")
+                    @Html.TextBox("Name")
+                </p>
+                <p class="login-form">
+                    @Html.Label("Password:")
+                    @Html.Password("Password")
+                </p>
+                <p>
+                    <input type="submit" value="Sign In">
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
