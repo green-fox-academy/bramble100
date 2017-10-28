@@ -1,0 +1,29 @@
+﻿@model Practice02.Models.LoginData
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+    <title>Game Selector Page</title>
+</head>
+<body>
+    <div class="login">
+        <form action="stg" method="post">
+            <p>
+                Hello @Model.UserName!
+            </p>
+            <p>
+                <label for="selectedgame">Which card game would you like to play:</label>
+                <select name="selectedgame">
+                    <option value="blackjack">BlackJack</option>
+                    <option value="twentyone">TwentyOne</option>
+                    <option value="poker">Poker (not implemented)</option>
+                    <option value="chess">Chess (not a card game)</option>
+                </select>
+            </p>
+            <p>
+                <input type="submit" value="Choose a card game">
+            </p>
+        </form>
+    </div>
+</body>
+</html>

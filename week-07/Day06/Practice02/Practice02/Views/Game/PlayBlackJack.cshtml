@@ -1,0 +1,27 @@
+﻿@model Practice02.Models.LoginData
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Black Jack</title>
+</head>
+<body>
+    <div>
+        <div>
+            <span>@Model.UserName's Hand</span>
+            <span>Hand Value: XX</span>
+            <span>images of cards</span>
+        </div>
+        <div>
+            <form action="/blackjack" method="post">
+                <input type="submit" name="Hit" value="hit" />
+                <input type="submit" name="Stand" value="stand" />
+            </form>
+        </div>
+    </div>
+    <div>
+        <span>Dealer's Hand</span>
+        <span>Hand Value: XX</span>
+        <span>images of cards</span>
+    </div>
+</body>
+</html>

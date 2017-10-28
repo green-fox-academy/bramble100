@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Practice02.Models;
 
 namespace Practice02
 {
@@ -17,6 +18,8 @@ namespace Practice02
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<LoginData>();
+            services.AddSingleton<ChosenGame>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
