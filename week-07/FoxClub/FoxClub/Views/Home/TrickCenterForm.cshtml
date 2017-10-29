@@ -1,0 +1,62 @@
+﻿@model FoxClub.Models.Fox
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Fox Club - Trick Center</title>
+</head>
+<body>
+    <nav>
+        <a href="/information">Information</a>
+        <a href="/nutritionstore">Nutrition Store</a>
+        <a href="/trickcenter">Trick Center</a>
+        <a href="/actionhistory">Action History</a>
+    </nav>
+    <header>
+        Trick Center
+    </header>
+    <content>
+        <div>
+            <img src="../../greenfox.png" alt="Fox picture" />
+        </div>
+        <div>
+            @(Model.Name.Equals(string.Empty) ? "Mr Fox (he has no name yet)" : Model.Name)
+            knows @(Model.KnowsAnyTrick ? $"{Model.Tricks.Count().ToString()} tricks" : "no tricks (yet)").
+        </div>
+        <div>
+            <h1>
+                Known tricks
+            </h1>
+        </div>
+        <div>
+            @if (Model.KnowsAnyTrick)
+            {
+                <ul>
+                    @foreach (var trick in Model.Tricks)
+                    {
+                        <li>@trick.ToString().ToLower()</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>He knows no trick yet. Let's train him a little.</span>
+            }
+        </div>
+        <div>
+            <h2>The following tricks can be learned now:</h2>
+            <form action="/trickcenter" method="post">
+                <select name="trick">
+                    @foreach (var trick in Enum.GetNames(typeof(FoxClub.Models.Trick)))
+                    {
+                        <option value=@trick>@trick</option>
+                    }
+                </select>
+                <input type="submit" value="Let's learn it!" />
+            </form>
+        </div>
+    </content>
+    <footer>
+        Arnold BARNA, 2017
+    </footer>
+</body>
+</html>

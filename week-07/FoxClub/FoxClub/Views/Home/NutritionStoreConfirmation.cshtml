@@ -1,0 +1,26 @@
+﻿@model FoxClub.Models.Fox
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Fox Club - Diet Change Confirmation</title>
+</head>
+<body>
+    <nav>
+        <a href="/information">Information</a>
+        <a href="/nutritionstore">Nutrition Store</a>
+        <a href="/trickcenter">Trick Center</a>
+        <a href="/actionhistory">Action History</a>
+    </nav>
+    <header>
+        Diet Change Confirmation
+    </header>
+    <content>
+        <div>
+            Mr Fox's diet changed to @Model.Food.ToString().ToLower() and @Model.Drink.ToString().ToLower().
+        </div>
+    </content>
+    <footer>
+        Arnold BARNA, 2017
+    </footer>
+</body>
+</html>

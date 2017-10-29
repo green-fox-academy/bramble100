@@ -1,0 +1,42 @@
+﻿@model FoxClub.ViewModels.FoodnDrink
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Fox Club - Nutrition Store</title>
+</head>
+<body>
+    <nav>
+        <a href="/information">Information</a>
+        <a href="/nutritionstore">Nutrition Store</a>
+        <a href="/trickcenter">Trick Center</a>
+        <a href="/actionhistory">Action History</a>
+    </nav>
+    <header>
+        Information page
+    </header>
+    <content>
+        <div>
+            <form action="/nutritionstore" method="post">
+                <label for="food">Food:</label>
+                <select name="food">
+                    @foreach (var option in Model.Foods)
+                    {
+                        <option>@option</option>
+                    }
+                </select>
+                <label for="drink">Drink:</label>
+                <select name="drink">
+                    @foreach (var option in Model.Drinks)
+                    {
+                        <option>@option</option>
+                    }
+                </select>
+                <input type="submit" value="Change diet" />
+            </form>
+        </div>
+    </content>
+    <footer>
+        Arnold BARNA, 2017
+    </footer>
+</body>
+</html>
