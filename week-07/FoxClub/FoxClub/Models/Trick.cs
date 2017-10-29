@@ -2,12 +2,12 @@
 {
     public enum Trick
     {
-        WriteHTML,
-        PrettifyWithCSS,
-        CodeInCSharp,
-        SwimWithSharks,
-        ClimbMountains,
         CatchMouse,
-        KillChicken
+        ClimbMountains,
+        CodeInCSharp,
+        KillChicken,
+        PrettifyWithCSS,
+        SwimWithDolphins,
+        WriteHTML
     }
 }

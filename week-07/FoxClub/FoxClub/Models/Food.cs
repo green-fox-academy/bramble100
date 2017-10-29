@@ -2,10 +2,10 @@
 {
     public enum Food
     {
-        Salad,
         Chicken,
         FishermanSoup,
         Gulash,
+        Salad,
         Venison
     }
 }

@@ -2,10 +2,10 @@
 {
     public enum Drink
     {
-        Wine,
         Champagne,
-        Water,
+        Coke,
         Lemonade,
-        Coke
+        Water,
+        Wine
     }
 }
