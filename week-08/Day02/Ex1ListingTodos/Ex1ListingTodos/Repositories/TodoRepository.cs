@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Ex1ListingTodos.Repositories
 {
@@ -26,6 +27,21 @@ namespace Ex1ListingTodos.Repositories
                 IsDone = false
             });
             todoContext.SaveChanges();
+        }
+
+        internal void Add(IFormCollection formCollection)
+        {
+            Todo todo = new Todo();
+            todo.Title = formCollection["title"];
+
+            todoContext.Add(todo);
+
+            todoContext.SaveChanges();
+        }
+
+        internal void Remove(IFormCollection formCollection)
+        {
+            ;
         }
     }
 }

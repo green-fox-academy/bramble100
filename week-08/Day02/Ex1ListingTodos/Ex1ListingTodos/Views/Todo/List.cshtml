@@ -3,6 +3,7 @@
     table {
         border-collapse: collapse
     }
+
     thead {
         background-color: aliceblue;
     }
@@ -10,9 +11,10 @@
     td {
         border-bottom: 1px dotted grey;
     }
-    td.urgent{
-        font-weight: bold;
-    }
+
+        td.urgent {
+            font-weight: bold;
+        }
 </style>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,24 +23,28 @@
 <body>
     <h1>Todo App</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <td>Id</td>
-                <td>Title</td>
-                <td>Urgent</td>
-                <td>Done</td>
-            </tr>
-        </thead>
-        @foreach (var todo in @Model)
-        {
-            <tr>
-                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.Id</td>
-                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.Title</td>
-                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.IsUrgent</td>
-                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.IsDone</td>
-            </tr>
-        }
-    </table>
+    <form action="/delete" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Title</td>
+                    <td>Urgent</td>
+                    <td>Done</td>
+                    <td></td>
+                </tr>
+            </thead>
+            @foreach (var todo in @Model)
+            {
+                <tr>
+                    <td class="@(todo.IsUrgent? "urgent": "not-urgent")">@todo.Id</td>
+                    <td class="@(todo.IsUrgent? "urgent": "not-urgent")">@todo.Title</td>
+                    <td class="@(todo.IsUrgent? "urgent": "not-urgent")">@todo.IsUrgent</td>
+                    <td class="@(todo.IsUrgent? "urgent": "not-urgent")">@todo.IsDone</td>
+                    <td><input type="submit" name="@todo.Id" value="Delete Todo" /></td>
+                </tr>
+            }
+        </table>
+    </form>
 </body>
 </html>

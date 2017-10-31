@@ -14,8 +14,6 @@ namespace Ex1ListingTodos.Entities
 
         public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
-            foreach (var asd in Todos) {
-            }
         }
     }
 }
