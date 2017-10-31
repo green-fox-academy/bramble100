@@ -15,17 +15,17 @@ namespace Ex1ListingTodos.Controllers
     {
         TodoRepository todoRepository;
 
-        public TodoController(TodoRepository todoRepository)
+        public TodoController(TodoRepository todoRepository) => this.todoRepository = todoRepository;
+
+        [Route("/listone")]
+        public IActionResult ListOne()
         {
-            this.todoRepository = todoRepository;
+            return View(todoRepository.todoContext.Todos.Last());
         }
 
         [Route("")]
         [Route("/list")]
-        public IActionResult List()
-        {
-            return View(todoRepository.todoContext.Todos.Last());
-        }
+        public IActionResult List() => View(todoRepository.todoContext.Todos);
 
         [Route("/add")]
         public IActionResult Add()
