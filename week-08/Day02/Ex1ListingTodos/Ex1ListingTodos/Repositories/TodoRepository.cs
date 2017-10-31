@@ -10,7 +10,7 @@ namespace Ex1ListingTodos.Repositories
 {
     public class TodoRepository
     {
-        TodoContext todoContext;
+        public TodoContext todoContext;
 
         public TodoRepository(TodoContext todoContext)
         {
@@ -21,8 +21,7 @@ namespace Ex1ListingTodos.Repositories
         {
             todoContext.Todos.Add(new Todo()
             {
-                Id = 1,
-                Title = "Say hello",
+                Title = $"Say hello {DateTime.Now.ToString()}",
                 IsUrgent = false,
                 IsDone = false
             });

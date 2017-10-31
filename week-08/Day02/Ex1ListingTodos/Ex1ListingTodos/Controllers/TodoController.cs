@@ -24,14 +24,14 @@ namespace Ex1ListingTodos.Controllers
         [Route("/list")]
         public IActionResult List()
         {
-            //todoRepository.Add();
-            return View(new Todo()
-            {
-                Id = 1,
-                Title = "Say hello",
-                IsUrgent = false,
-                IsDone = false
-            });
+            return View(todoRepository.todoContext.Todos.Last());
+        }
+
+        [Route("/add")]
+        public IActionResult Add()
+        {
+            todoRepository.Add();
+            return RedirectToAction("List");
         }
     }
 }
