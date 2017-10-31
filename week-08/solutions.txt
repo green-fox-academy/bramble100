@@ -1,0 +1,188 @@
+https://lagunita.stanford.edu/courses/DB/SQL/SelfPaced/courseware/ch-sql/seq-exercise-sql_movie_query_core/
+
+Q1
+SELECT title 
+FROM Movie 
+WHERE director="Steven Spielberg";
+
+Q2
+SELECT DISTINCT year 
+FROM Movie, Rating 
+WHERE stars>=4 AND Movie.mID=Rating.mID;
+
+Q3
+SELECT Movie.Title 
+FROM Movie
+WHERE Movie.mID
+NOT IN 
+    (SELECT DISTINCT Rating.mID
+    FROM Rating);
+
+Q4
+SELECT name 
+FROM Rating, Reviewer 
+WHERE ratingDate IS NULL AND Rating.rID=Reviewer.rID;
+
+Q5
+SELECT Reviewer.name, Movie.title, Rating.stars, Rating.ratingDate
+FROM Reviewer, Rating, Movie 
+WHERE Reviewer.rID=Rating.rID AND Rating.mID=Movie.mID
+ORDER BY Reviewer.name, Movie.title, Rating.stars, Rating.ratingDate ASC;
+
+Q6***********************
+SELECT name, Rating.rID, Rating.stars
+FROM Rating, Reviewer
+WHERE Rating.rID=Reviewer.rID
+GROUP BY Rating.mID, Rating.rID
+HAVING COUNT(*)>1;
+
+Q7
+SELECT Movie.title, MAX(Rating.stars)
+FROM Movie, Rating
+WHERE Movie.mID=Rating.mID
+GROUP BY Movie.title
+ORDER BY Movie.title ASC;
+
+Q8
+SELECT Movie.title, MAX(Rating.stars)-MIN(Rating.stars) AS Spread
+FROM Movie, Rating
+WHERE Movie.mID=Rating.mID
+GROUP BY Rating.mID
+ORDER BY Spread DESC, Movie.title ASC;
+
+Q9
+SELECT (SELECT AVG(Stars)
+FROM
+(SELECT Movie.title, AVG(Rating.stars) as Stars
+FROM Rating, Movie
+WHERE Rating.mID=Movie.mID AND Movie.year<1980
+GROUP BY Movie.title))
+-
+(SELECT AVG(Stars)
+FROM
+(SELECT Movie.title, AVG(Rating.stars) as Stars
+FROM Rating, Movie
+WHERE Rating.mID=Movie.mID AND Movie.year>1980
+GROUP BY Movie.title));
+
+https://lagunita.stanford.edu/courses/DB/SQL/SelfPaced/courseware/ch-sql/seq-exercise-sql_movie_query_extra/
+
+Q1
+SELECT DISTINCT Reviewer.name
+FROM Reviewer,Rating, Movie
+WHERE Reviewer.rID=Rating.rID AND Rating.mID=101;
+
+Q2
+SELECT Movie.director, Movie.title, Rating.stars
+FROM Movie, Reviewer, Rating
+WHERE Movie.director=Reviewer.name AND Movie.mID=Rating.mID AND Reviewer.rID=Rating.rID;
+
+Q3
+SELECT Movie.title
+FROM Movie
+UNION 
+SELECT Reviewer.name
+FROM Reviewer;
+
+Q4
+SELECT DISTINCT Movie.title
+FROM Movie, Rating
+WHERE Movie.mID NOT IN
+    (SELECT Rating.mID
+    FROM Rating
+    WHERE Rating.rID=205);
+	
+Q5***********************
+SELECT DISTINCT R1.rID, R2.rID
+FROM Rating AS R1, Rating AS R2, Reviewer
+WHERE R1.mID=R2.mID AND R1.rID<>R2.rID
+;
+
+Q6
+SELECT Reviewer.name, Movie.title, Rating.stars
+FROM Rating, Reviewer, Movie
+WHERE Rating.stars = (SELECT MIN(stars) FROM Rating) 
+    AND Rating.rID=Reviewer.rID 
+    AND Rating.mID=Movie.mID;
+
+Q7
+SELECT Movie.title, AVG(Rating.stars)
+FROM Movie, Rating
+WHERE Movie.mID=Rating.mID
+GROUP BY Movie.title, Rating.mID
+ORDER BY AVG(Rating.stars) DESC, Movie.title ASC;
+
+Q8
+SELECT Reviewer.name
+FROM Reviewer, Rating
+WHERE Reviewer.rID=Rating.rID
+GROUP BY reviewer.rID
+HAVING COUNT(Rating.rID)>2;
+
+Q9
+SELECT title, director
+FROM Movie
+WHERE director IN 
+    (SELECT director
+    FROM Movie
+    GROUP BY director
+    HAVING COUNT()>1)    
+ORDER BY director, title ASC;
+
+Q10
+SELECT title, AVG(stars)
+FROM Movie, Rating
+WHERE Movie.mID=Rating.mID 
+    AND Movie.mID=(SELECT mID
+        FROM Rating
+        GROUP BY mID
+        ORDER BY stars DESC 
+        LIMIT 1)
+GROUP BY Rating.mID;
+
+Q11***********************
+
+SELECT AVG(stars)
+FROM Rating
+GROUP BY mID
+ORDER BY AVG(stars) LIMIT 1;
+
+Q12
+SELECT Movie.director, Movie.title, Rating.stars
+FROM Movie, Rating
+WHERE Movie.mID=Rating.mID AND Movie.director IS NOT NULL
+GROUP BY Movie.director
+ORDER BY Rating.stars DESC;
+
+https://lagunita.stanford.edu/courses/DB/SQL/SelfPaced/courseware/ch-sql/seq-exercise-sql_social_query_core/
+
+Q1
+SELECT name
+FROM Highschooler
+WHERE ID IN 
+    (SELECT ID1
+    FROM Friend
+    WHERE ID2 IN (SELECT ID FROM Highschooler WHERE name = "Gabriel")
+        UNION
+    SELECT ID2
+    FROM Friend
+    WHERE ID1 IN (SELECT ID FROM Highschooler WHERE name = "Gabriel"));
+	
+Q2
+SELECT H1.name, H1.grade, H2.name, H2.grade
+FROM Highschooler H1, Highschooler H2, Likes
+WHERE Likes.ID1=H1.ID
+    AND Likes.ID2=H2.ID
+    AND H1.grade-H2.grade>1;
+
+Q3
+SELECT *
+FROM Likes L1, Likes L2, Highschooler H1, Highschooler H2
+WHERE L1.ID1=H1.ID
+    AND L1.ID2=H2.ID
+    AND L1.ID1=L2.ID1
+    AND H1.name<H2.name
+ORDER BY L1.ID1   
+    ;
+
+-- H1.name, H1.grade, H2.name, H2.grade
