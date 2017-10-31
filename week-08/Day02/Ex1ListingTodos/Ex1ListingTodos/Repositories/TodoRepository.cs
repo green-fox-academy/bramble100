@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ex1ListingTodos.Repositories
 {
-    public class TodoRepository : DbContext
+    public class TodoRepository
     {
         TodoContext todoContext;
 
