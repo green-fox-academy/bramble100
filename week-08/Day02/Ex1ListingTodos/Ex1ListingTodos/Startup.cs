@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Ex1ListingTodos.Models;
+using Ex1ListingTodos.Entities;
+using Ex1ListingTodos.Repositories;
 
 namespace Ex1ListingTodos
 {
@@ -16,7 +20,10 @@ namespace Ex1ListingTodos
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = @"Data Source = (localdb)\ProjectsV13; Initial Catalog = Ex1ListingTodos; Integrated Security = True; Connect Timeout = 30;";
             services.AddMvc();
+            services.AddScoped<TodoRepository>();
+            services.AddDbContext<TodoContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
