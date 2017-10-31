@@ -16,5 +16,17 @@ namespace Ex1ListingTodos.Repositories
         {
             this.todoContext = todoContext;
         }
+
+        public void Add()
+        {
+            todoContext.Todos.Add(new Todo()
+            {
+                Id = 1,
+                Title = "Say hello",
+                IsUrgent = false,
+                IsDone = false
+            });
+            todoContext.SaveChanges();
+        }
     }
 }

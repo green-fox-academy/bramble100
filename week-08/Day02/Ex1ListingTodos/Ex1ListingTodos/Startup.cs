@@ -25,7 +25,7 @@ namespace Ex1ListingTodos
             services.AddScoped<TodoRepository>();
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(connectionString));
         }
-
+         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
