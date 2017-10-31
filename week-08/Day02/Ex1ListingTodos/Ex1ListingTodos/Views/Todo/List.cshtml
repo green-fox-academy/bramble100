@@ -1,4 +1,19 @@
 ﻿@model Microsoft.EntityFrameworkCore.DbSet<Ex1ListingTodos.Models.Todo>
+<style>
+    table {
+        border-collapse: collapse
+    }
+    thead {
+        background-color: aliceblue;
+    }
+
+    td {
+        border-bottom: 1px dotted grey;
+    }
+    td.urgent{
+        font-weight: bold;
+    }
+</style>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Todo App</title>
@@ -18,10 +33,10 @@
         @foreach (var todo in @Model)
         {
             <tr>
-                <td>@todo.Id</td>
-                <td>@todo.Title</td>
-                <td>@todo.IsUrgent</td>
-                <td>@todo.IsDone</td>
+                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.Id</td>
+                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.Title</td>
+                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.IsUrgent</td>
+                <td class="@(@todo.IsUrgent? "urgent": "not-urgent")">@todo.IsDone</td>
             </tr>
         }
     </table>

@@ -18,7 +18,7 @@ namespace Ex1ListingTodos.Controllers
         public TodoController(TodoRepository todoRepository) => this.todoRepository = todoRepository;
 
         [Route("/listone")]
-        public IActionResult ListOne()
+        public IActionResult ListOneItem()
         {
             return View(todoRepository.todoContext.Todos.Last());
         }
