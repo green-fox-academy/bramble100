@@ -1,0 +1,20 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@model DbSet<Recipes2.Models.Recipe>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>List of recipes</h2>
+
+<div>There are currently @(Model.Count()) recipe(s) in the database.</div>
+<div>
+    <a href="/add">Add new recipe</a>
+</div>
+<div>
+    <ul>
+        @foreach (var recipe in Model)
+        {
+            <li>@recipe.Name</li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,15 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@model DbSet<Recipes2.Models.Recipe>
+@{
+    ViewData["Title"] = "Add new recipe";
+}
+<h2>
+    Add new recipe
+</h2>
+<div>
+    <form action="/add" method="post">
+        <label for="recipe">Recipe name:</label>
+        <input type="text" name="recipename" placeholder="Enter the name of the recipe" />
+        <input type="submit" name="add" value="Add new recipe" />
+    </form>
+</div>

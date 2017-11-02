@@ -6,13 +6,9 @@ namespace Recipes.Entities
     public class RecipeContext : DbContext
     {
         /// <summary>
-        /// The actual recipes collections.
+        /// The recipes collections.
         /// </summary>
-        private DbSet<Recipe> recipes;
-        /// <summary>
-        /// Getter method for recipe collection.
-        /// </summary>
-        public DbSet<Recipe> Recipes => recipes;
+        public DbSet<Recipe> Recipes { get; set; }
         /// <summary>
         /// Constructor for context object.
         /// </summary>

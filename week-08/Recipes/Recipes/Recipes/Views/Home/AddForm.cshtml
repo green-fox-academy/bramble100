@@ -1,0 +1,36 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Recipes</title>
+</head>
+<body>
+    <h1>
+        Recipes
+    </h1>
+    <h2>
+        Add new recipe
+    </h2>
+    <div>
+        <form action="/add" method="post">
+            <div>
+                <label for="recipe" >Recipe name</label>
+                <input type="text" name="recipe" placeholder="Type here the recipe name" />
+            </div>
+            <div>
+                <label for="cuisine">Cuisine</label>
+                <input type="text" name="cuisine" placeholder="Type here the cuisine name" />
+            </div>
+            <div>
+                <label for="preptime">Preparation time</label>
+                <input type="text" name="preptime" placeholder="Enter the time (in minutes)" />
+            </div>
+            <div>
+                <label for="isvegetarian">Vegatarian?</label>
+                <input type="checkbox" name="isvegetarian" />
+            </div>
+            <div>
+                <input type="submit" name="add" value="Add recipe" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>

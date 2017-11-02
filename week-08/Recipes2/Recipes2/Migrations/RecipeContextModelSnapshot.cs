@@ -1,0 +1,44 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Recipes2.Entities;
+
+namespace Recipes2.Migrations
+{
+    [DbContext(typeof(RecipeContext))]
+    partial class RecipeContextModelSnapshot : ModelSnapshot
+    {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .HasAnnotation("ProductVersion", "1.1.3")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Recipes2.Models.Recipe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Cuisine")
+                        .HasMaxLength(50);
+
+                    b.Property<bool>("IsVegetarian");
+
+                    b.Property<string>("Level")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("PreparationTimeInMinutes");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recipes");
+                });
+        }
+    }
+}

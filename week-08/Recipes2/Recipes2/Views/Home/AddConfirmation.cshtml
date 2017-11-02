@@ -1,0 +1,14 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@model Recipes2.Models.Recipe
+@{
+    ViewData["Title"] = "New recipe added";
+}
+<h2>
+    The following recipe has been added to collection
+</h2>
+<div>
+    @Model.Name
+</div>
+<div>
+    <a href="/list">Back to list of recipes</a>
+</div>
