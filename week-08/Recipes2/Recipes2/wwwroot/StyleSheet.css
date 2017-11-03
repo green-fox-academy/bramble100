@@ -1,0 +1,46 @@
+﻿/*
+    http://www.color-hex.com/color/ffebcd
+*/ 
+
+body {
+    background-color: blanchedalmond;
+}
+
+* {
+    font-family: Corbel;
+    color: darkred;
+}
+
+div.upper {
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #ffd2cd;
+    border-bottom: 1px solid #b2a48f;
+}
+
+tr:nth-of-type(2n+1) {
+    background-color: #e5d3b8;
+}
+
+tr:nth-of-type(2n) {
+    background-color: #ccbca4;
+}
+
+td{
+    padding: 5px;
+}
+
+a.addnew, a.modify {
+    font-weight: bolder;
+    font-size: smaller;
+    color: whitesmoke;
+    background-color: dodgerblue;
+    padding: 2px;
+    border-radius: 5px;
+}

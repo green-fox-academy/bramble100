@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Recipes2.Repositories;
 using Recipes2.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Recipes2
 {
@@ -59,6 +60,12 @@ namespace Recipes2
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            });
+
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@model Recipes2.Models.Recipe
+@{
+    ViewData["Title"] = "Modify existing recipe";
+}
+<h2>
+    Modify existing recipe
+</h2>
+<div>
+    <form action="/edit" method="post">
+        <label for="recipe">Recipe name:</label>
+        <input type="text" name="recipename" placeholder="Enter the name of the recipe" value="@Model.Name"/>
+        <input type="hidden" name="id" value="@Model.Id" />
+        <input type="submit" name="add" value="Edit recipe" />
+    </form>
+</div>
