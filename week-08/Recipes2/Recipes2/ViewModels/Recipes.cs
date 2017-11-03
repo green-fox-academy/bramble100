@@ -13,6 +13,7 @@ namespace Recipes2.ViewModels
         public CommentContext commentContext;
         public int Count => Lines.Count;
         public List<RecipeLine> Lines { get; set; } = new List<RecipeLine>();
+        Random random = new Random();
 
         public Recipes(RecipeContext recipeContext, CommentContext commentContext)
         {
@@ -24,7 +25,8 @@ namespace Recipes2.ViewModels
                 Lines.Add(new RecipeLine()
                 {
                     Recipe = recipe,
-                    NumberOfComments = 4
+                    //NumberOfComments = commentContext.Comments.Where(c => c.RecipeId == recipe.Id).Count()
+                    NumberOfComments = random.Next(5)
                 });
             }
         }
