@@ -9,7 +9,7 @@ namespace Recipes2.Models
     /// <summary>
     /// Data for one comment regarding a recipe.
     /// </summary>
-    public class Comments
+    public class Comment
     {
         /// <summary>
         /// Primary Key for comment.

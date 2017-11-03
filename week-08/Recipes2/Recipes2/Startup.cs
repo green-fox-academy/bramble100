@@ -32,6 +32,8 @@ namespace Recipes2
             services.AddScoped<RecipeRepository>();
             services.AddDbContext<RecipeContext>(
                 options => options.UseSqlServer(connectionString));
+            services.AddDbContext<CommentContext>(
+                options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

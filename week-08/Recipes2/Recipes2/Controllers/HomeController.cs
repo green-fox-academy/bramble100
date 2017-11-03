@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Recipes2.Repositories;
 using Microsoft.AspNetCore.Http;
 using Recipes2.Models;
+using Recipes2.ViewModels;
 
 namespace Recipes2.Controllers
 {
@@ -17,7 +18,10 @@ namespace Recipes2.Controllers
 
         [Route("")]
         [Route("/list")]
-        public IActionResult Index() => View(recipeRepository.RecipeContext.Recipes);
+        public IActionResult Index()
+        {
+            return View(recipeRepository.RecipeContext.Recipes);
+        }
 
         [Route("/add")]
         [HttpGet]
