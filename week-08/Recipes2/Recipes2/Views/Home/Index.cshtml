@@ -6,7 +6,7 @@
 
 <h2>List of recipes</h2>
 
-<div class="upper">There are currently @(Model.recipeContext.Recipes.Count()) recipe(s) in the database.</div>
+<div class="upper">There are currently @(Model.Count) recipe(s) in the database.</div>
 <div class="upper">
     <a href="/add" class="modify">Add new recipe</a>
 </div>
@@ -22,22 +22,25 @@
                 <th>
                     Votes
                 </th>
+                <th>
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var recipe in Model.recipeContext.Recipes.OrderBy(r => -r.Votes))
+            @foreach (var recipe in Model.Lines)
             {
                 <tr>
                     <td>
-                        @recipe.Name
+                        @recipe.Recipe.Name
                     </td>
                     <td>
-                        <a href="/edit/@recipe.Id" title="Edit the recipe" class="modify">Modify</a>
-                        <a href="/delete/@recipe.Id" title="Delete the recipe" class="modify">Delete</a>
-                        <a href="/vote/up/@recipe.Id" title="I like it" class="modify">+</a>
-                        <a href="/vote/down/@recipe.Id" title="I hate it" class="modify">-</a>
+                        <a href="/edit/@recipe.Recipe.Id" title="Edit the recipe" class="modify">Modify</a>
+                        <a href="/delete/@recipe.Recipe.Id" title="Delete the recipe" class="modify">Delete</a>
+                        <a href="/vote/up/@recipe.Recipe.Id" title="I like it" class="modify">+</a>
+                        <a href="/vote/down/@recipe.Recipe.Id" title="I hate it" class="modify">-</a>
                     </td>
-                    <td>@recipe.Votes</td>
+                    <td>@recipe.Recipe.Votes</td>
+                    <td>@(recipe.ThereAreComments? $"{recipe.NumberOfComments} comment(s)" : "No comments")</td>
                 </tr>
             }
         </tbody>
