@@ -8,9 +8,10 @@ using Recipes2.Entities;
 namespace Recipes2.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20171103093344_UpdateRecipeWithVotes")]
+    partial class UpdateRecipeWithVotes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.3")

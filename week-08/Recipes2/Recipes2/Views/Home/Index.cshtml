@@ -19,10 +19,13 @@
                 </th>
                 <th>
                 </th>
+                <th>
+                    Votes
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var recipe in Model)
+            @foreach (var recipe in Model.OrderBy(r => -r.Votes))
             {
                 <tr>
                     <td>
@@ -34,6 +37,7 @@
                         <a href="/vote/up/@recipe.Id" title="I like it" class="modify">+</a>
                         <a href="/vote/down/@recipe.Id" title="I hate it" class="modify">-</a>
                     </td>
+                    <td>@recipe.Votes</td>
                 </tr>
             }
         </tbody>

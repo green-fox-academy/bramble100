@@ -35,7 +35,18 @@ namespace Recipes2.Repositories
 
         internal void Vote(string direction, int id)
         {
-            throw new NotImplementedException();
+            var recipe = RecipeContext.Recipes.Where(r => r.Id == id).FirstOrDefault();
+            if (direction.Equals("up"))
+            {
+                recipe.Votes++;
+            }
+            else if (direction.Equals("down"))
+            {
+                recipe.Votes--;
+            }
+            
+            RecipeContext.Update(recipe);
+            RecipeContext.SaveChanges();
         }
     }
 }

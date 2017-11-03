@@ -83,6 +83,13 @@ namespace Recipes2.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("vote/down/{id}")]
+        public IActionResult VoteDown(int id)
+        {
+            recipeRepository.Vote("down", id);
+            return RedirectToAction("Index");
+        }
+
         [Route("/error")]
         public IActionResult Error() => View();
     }

@@ -39,7 +39,11 @@ namespace Recipes2.Models
         /// <summary>
         /// True if the recipe is vegetarian.
         /// </summary>
-        [Required]
         public bool IsVegetarian { get; set; } = false;
+
+        /// <summary>
+        /// Counts the total sum of votes. Increases by one when the recipe is liked, decreases by one, when recipe is disliked.
+        /// </summary>
+        public int Votes { get; set; }
     }
 }
