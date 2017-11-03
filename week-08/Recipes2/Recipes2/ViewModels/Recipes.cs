@@ -11,10 +11,6 @@ namespace Recipes2.ViewModels
         public RecipeContext recipeContext;
         public CommentContext commentContext;
 
-        public Recipes()
-        {
-        }
-
         public Recipes(RecipeContext recipeContext, CommentContext commentContext)
         {
             this.recipeContext = recipeContext;

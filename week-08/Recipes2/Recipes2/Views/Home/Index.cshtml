@@ -1,4 +1,4 @@
-﻿@model Microsoft.EntityFrameworkCore.DbSet<Recipes2.Models.Recipe>
+﻿@model Recipes2.ViewModels.Recipes
 
 @{
     ViewData["Title"] = "Home Page";
@@ -6,7 +6,7 @@
 
 <h2>List of recipes</h2>
 
-<div class="upper">There are currently @(Model.Count()) recipe(s) in the database.</div>
+<div class="upper">There are currently @(Model.recipeContext.Recipes.Count()) recipe(s) in the database.</div>
 <div class="upper">
     <a href="/add" class="modify">Add new recipe</a>
 </div>
@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var recipe in Model.OrderBy(r => -r.Votes))
+            @foreach (var recipe in Model.recipeContext.Recipes.OrderBy(r => -r.Votes))
             {
                 <tr>
                     <td>

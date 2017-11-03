@@ -28,7 +28,7 @@ namespace Recipes2.Controllers
         public IActionResult Index()
         {
             var recipes = new Recipes(recipeRepository.RecipeContext, commentRepository.CommentContext);
-            return View(recipeRepository.RecipeContext.Recipes);
+            return View(recipes);
         }
 
         [Route("/add")]
