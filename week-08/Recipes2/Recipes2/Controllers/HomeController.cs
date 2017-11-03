@@ -40,6 +40,56 @@ namespace Recipes2.Controllers
             return View(recipe);
         }
 
+        [Route("/edit/{id}")]
+        [HttpGet]
+        public IActionResult ModifyForm(int id) => View(recipeRepository.RecipeContext.Recipes.Find(id));
+
+        [Route("/edit")]
+        [HttpPost]
+        public IActionResult ModifyConfirmation(IFormCollection formCollection)
+        {
+            if (String.IsNullOrEmpty(formCollection["recipename"]))
+            {
+                return View("Error");
+            }
+
+            var recipe = new Recipe()
+            {
+                Name = formCollection["recipename"],
+                Id = Convert.ToInt32(formCollection["id"])
+            };
+            recipeRepository.Edit(recipe);
+            return View(recipe);
+        }
+
+        [Route("/delete/{id}")]
+        [HttpGet]
+        public IActionResult DeleteConfirmation(int id)
+        {
+            var recipe = recipeRepository
+                .RecipeContext
+                .Recipes
+                .Where(r => r.Id == id)
+                .FirstOrDefault();
+
+            recipeRepository.Delete(id);
+            return View(recipe);
+        }
+
+        [Route("vote/up/{id}")]
+        public IActionResult VoteUp(int id)
+        {
+            recipeRepository.Vote("up", id);
+            return RedirectToAction("Index");
+        }
+
+        [Route("vote/down/{id}")]
+        public IActionResult VoteDown(int id)
+        {
+            recipeRepository.Vote("down", id);
+            return RedirectToAction("Index");
+        }
+
         [Route("/error")]
         public IActionResult Error() => View();
     }

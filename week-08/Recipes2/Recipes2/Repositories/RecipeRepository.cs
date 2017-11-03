@@ -14,9 +14,38 @@ namespace Recipes2.Repositories
 
         public RecipeRepository(RecipeContext recipeContext) => RecipeContext = recipeContext;
 
-        internal void Add(Recipe recipe)
+        public void Add(Recipe recipe)
         {
             RecipeContext.Add(recipe);
+            RecipeContext.SaveChanges();
+        }
+
+        public void Edit(Recipe inputRecipe)
+        {
+            RecipeContext.Update(inputRecipe);
+            RecipeContext.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            var recipe = RecipeContext.Recipes.Where(r => r.Id == id).FirstOrDefault();
+            RecipeContext.Remove(recipe);
+            RecipeContext.SaveChanges();
+        }
+
+        internal void Vote(string direction, int id)
+        {
+            var recipe = RecipeContext.Recipes.Where(r => r.Id == id).FirstOrDefault();
+            if (direction.Equals("up"))
+            {
+                recipe.Votes++;
+            }
+            else if (direction.Equals("down"))
+            {
+                recipe.Votes--;
+            }
+            
+            RecipeContext.Update(recipe);
             RecipeContext.SaveChanges();
         }
     }

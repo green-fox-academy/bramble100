@@ -6,15 +6,40 @@
 
 <h2>List of recipes</h2>
 
-<div>There are currently @(Model.Count()) recipe(s) in the database.</div>
-<div>
-    <a href="/add">Add new recipe</a>
+<div class="upper">There are currently @(Model.Count()) recipe(s) in the database.</div>
+<div class="upper">
+    <a href="/add" class="modify">Add new recipe</a>
 </div>
 <div>
-    <ul>
-        @foreach (var recipe in Model)
-        {
-            <li>@recipe.Name</li>
-        }
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Recipe name
+                </th>
+                <th>
+                </th>
+                <th>
+                    Votes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recipe in Model.OrderBy(r => -r.Votes))
+            {
+                <tr>
+                    <td>
+                        @recipe.Name
+                    </td>
+                    <td>
+                        <a href="/edit/@recipe.Id" title="Edit the recipe" class="modify">Modify</a>
+                        <a href="/delete/@recipe.Id" title="Delete the recipe" class="modify">Delete</a>
+                        <a href="/vote/up/@recipe.Id" title="I like it" class="modify">+</a>
+                        <a href="/vote/down/@recipe.Id" title="I hate it" class="modify">-</a>
+                    </td>
+                    <td>@recipe.Votes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
