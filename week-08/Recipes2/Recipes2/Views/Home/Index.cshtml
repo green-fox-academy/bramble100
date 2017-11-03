@@ -4,13 +4,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h2>List of recipes</h2>
-
-<div class="upper">There are currently @(Model.Count) recipe(s) in the database.</div>
 <div class="upper">
+    <h2>List of recipes</h2>
+</div>
+<div class="upper">
+    There are currently @(Model.Count) recipe(s) in the database.
     <a href="/add" class="modify">Add new recipe</a>
 </div>
-<div>
+<div class="tablecontainer">
     <table>
         <thead>
             <tr>
@@ -36,11 +37,11 @@
                     <td>
                         <a href="/edit/@recipe.Recipe.Id" title="Edit the recipe" class="modify">Modify</a>
                         <a href="/delete/@recipe.Recipe.Id" title="Delete the recipe" class="modify">Delete</a>
-                        <a href="/vote/up/@recipe.Recipe.Id" title="I like it" class="modify">+</a>
-                        <a href="/vote/down/@recipe.Recipe.Id" title="I hate it" class="modify">-</a>
+                        <a href="/vote/up/@recipe.Recipe.Id" title="I like it" class="upvote">+</a>
+                        <a href="/vote/down/@recipe.Recipe.Id" title="I hate it" class="downvote">&nbsp-&nbsp</a>
                     </td>
                     <td>@recipe.Recipe.Votes</td>
-                    <td>@(recipe.ThereAreComments? $"{recipe.NumberOfComments} comment(s)" : "No comments")</td>
+                    <td class="comments-in-list">@(recipe.ThereAreComments? $"{recipe.NumberOfComments} comment(s)" : "No comments")</td>
                 </tr>
             }
         </tbody>
