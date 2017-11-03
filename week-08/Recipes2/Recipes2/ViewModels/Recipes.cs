@@ -8,8 +8,12 @@ namespace Recipes2.ViewModels
 {
     public class Recipes
     {
-        private RecipeContext recipeContext;
-        private CommentContext commentContext;
+        public RecipeContext recipeContext;
+        public CommentContext commentContext;
+
+        public Recipes()
+        {
+        }
 
         public Recipes(RecipeContext recipeContext, CommentContext commentContext)
         {
