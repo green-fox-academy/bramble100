@@ -6,18 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 using Recipes2.Repositories;
 using Microsoft.AspNetCore.Http;
 using Recipes2.Models;
+using Recipes2.ViewModels;
 
 namespace Recipes2.Controllers
 {
     public class HomeController : Controller
     {
         private RecipeRepository recipeRepository;
+        private CommentRepository commentRepository;
 
-        public HomeController(RecipeRepository recipeRepository) => this.recipeRepository = recipeRepository;
+        public HomeController(
+            RecipeRepository recipeRepository,
+            CommentRepository commentRepository)
+        {
+            this.recipeRepository = recipeRepository;
+            this.commentRepository = commentRepository;
+        }
 
         [Route("")]
         [Route("/list")]
-        public IActionResult Index() => View(recipeRepository.RecipeContext.Recipes);
+        public IActionResult Index()
+        {
+            var recipes = new Recipes(recipeRepository.RecipeContext, commentRepository.CommentContext);
+            return View(recipes);
+        }
 
         [Route("/add")]
         [HttpGet]

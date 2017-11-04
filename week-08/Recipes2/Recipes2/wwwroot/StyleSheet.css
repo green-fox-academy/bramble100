@@ -1,9 +1,11 @@
 ﻿/*
     http://www.color-hex.com/color/ffebcd
-*/ 
+*/
 
 body {
+    background-image: url(images/brenda-godinez-373449-crop3.png);
     background-color: blanchedalmond;
+    font-size: larger;
 }
 
 * {
@@ -11,12 +13,26 @@ body {
     color: darkred;
 }
 
+div.uppertranslucent {
+    background-color: rgba(255,255,255,0.2);
+}
+
 div.upper {
     padding: 10px;
+    width: 620px;
+    margin: 10px auto;
+    background-color: rgba(255,255,255,0.2);
+}
+
+div.tablecontainer {
+    width: 620px;
+    margin: 0 auto;
 }
 
 table {
     border-collapse: collapse;
+    width: auto;
+    margin: 0 auto;
 }
 
 th {
@@ -32,8 +48,12 @@ tr:nth-of-type(2n) {
     background-color: #ccbca4;
 }
 
-td{
+td {
     padding: 5px;
+}
+
+td.comments-in-list{
+    font-size: smaller;
 }
 
 a.addnew, a.modify {
@@ -41,6 +61,27 @@ a.addnew, a.modify {
     font-size: smaller;
     color: whitesmoke;
     background-color: dodgerblue;
-    padding: 2px;
+    padding: 4px;
     border-radius: 5px;
+    text-decoration: none;
+}
+
+a.upvote {
+    font-weight: bolder;
+    font-size: smaller;
+    color: whitesmoke;
+    background-color: lightseagreen;
+    padding: 4px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+a.downvote {
+    font-weight: bolder;
+    font-size: smaller;
+    color: whitesmoke;
+    background-color: orangered;
+    padding: 4px;
+    border-radius: 5px;
+    text-decoration: none;
 }

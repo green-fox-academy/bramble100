@@ -30,7 +30,10 @@ namespace Recipes2
                 "MultiSubnetFailover = False";
             services.AddMvc();
             services.AddScoped<RecipeRepository>();
+            services.AddScoped<CommentRepository>();
             services.AddDbContext<RecipeContext>(
+                options => options.UseSqlServer(connectionString));
+            services.AddDbContext<CommentContext>(
                 options => options.UseSqlServer(connectionString));
         }
 

@@ -1,16 +1,17 @@
-﻿@using Microsoft.EntityFrameworkCore;
-@model DbSet<Recipes2.Models.Recipe>
+﻿@model Recipes2.ViewModels.Recipes
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<h2>List of recipes</h2>
-
-<div class="upper">There are currently @(Model.Count()) recipe(s) in the database.</div>
 <div class="upper">
+    <h2>List of recipes</h2>
+</div>
+<div class="upper">
+    There are currently @(Model.Count) recipe(s) in the database.
     <a href="/add" class="modify">Add new recipe</a>
 </div>
-<div>
+<div class="tablecontainer">
     <table>
         <thead>
             <tr>
@@ -22,22 +23,25 @@
                 <th>
                     Votes
                 </th>
+                <th>
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var recipe in Model.OrderBy(r => -r.Votes))
+            @foreach (var recipe in Model.Lines)
             {
                 <tr>
                     <td>
-                        @recipe.Name
+                        @recipe.Recipe.Name
                     </td>
                     <td>
-                        <a href="/edit/@recipe.Id" title="Edit the recipe" class="modify">Modify</a>
-                        <a href="/delete/@recipe.Id" title="Delete the recipe" class="modify">Delete</a>
-                        <a href="/vote/up/@recipe.Id" title="I like it" class="modify">+</a>
-                        <a href="/vote/down/@recipe.Id" title="I hate it" class="modify">-</a>
+                        <a href="/edit/@recipe.Recipe.Id" title="Edit the recipe" class="modify">Modify</a>
+                        <a href="/delete/@recipe.Recipe.Id" title="Delete the recipe" class="modify">Delete</a>
+                        <a href="/vote/up/@recipe.Recipe.Id" title="I like it" class="upvote">+</a>
+                        <a href="/vote/down/@recipe.Recipe.Id" title="I hate it" class="downvote">&nbsp-&nbsp</a>
                     </td>
-                    <td>@recipe.Votes</td>
+                    <td>@recipe.Recipe.Votes</td>
+                    <td class="comments-in-list">@(recipe.ThereAreComments? $"{recipe.NumberOfComments} comment(s)" : "No comments")</td>
                 </tr>
             }
         </tbody>
