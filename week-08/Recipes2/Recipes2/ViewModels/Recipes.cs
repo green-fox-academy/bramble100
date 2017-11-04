@@ -25,8 +25,8 @@ namespace Recipes2.ViewModels
                 Lines.Add(new RecipeLine()
                 {
                     Recipe = recipe,
-                    //NumberOfComments = commentContext.Comments.Where(c => c.RecipeId == recipe.Id).Count()
-                    NumberOfComments = random.Next(5)
+                    NumberOfComments = commentContext.Comments.Where(c => c.RecipeId == recipe.Id).Count()
+                    //NumberOfComments = random.Next(5)
                 });
             }
         }
