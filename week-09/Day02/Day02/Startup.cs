@@ -48,7 +48,7 @@ namespace Day02
             }
 
             app.UseStaticFiles();
-
+            //app.UseDefaultFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

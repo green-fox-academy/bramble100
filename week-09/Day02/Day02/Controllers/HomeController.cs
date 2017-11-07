@@ -46,5 +46,12 @@ namespace Day02.Controllers
             public string name { get; set; }
             public string title { get; set; }
         }
+
+        [HttpGet]
+        [Route("/appenda/{inputString}")]
+        public IActionResult AppendA(string inputString) 
+            => String.IsNullOrEmpty(inputString) ?
+            (IActionResult)NotFound() :
+            Json(new { appended = $"{inputString}a" });
     }
 }
