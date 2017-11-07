@@ -21,7 +21,15 @@ namespace Recipes2
         {
             // Add framework services.
             var connectionString = @"Data Source = (localdb)\ProjectsV13;" +
-                "Initial Catalog = master;" +
+                "Initial Catalog = Recipes;" +
+                "Integrated Security = True;" +
+                "Connect Timeout = 30;" +
+                "Encrypt = False;" +
+                "TrustServerCertificate = True;" +
+                "ApplicationIntent = ReadWrite;" +
+                "MultiSubnetFailover = False";
+            var connectionStringForHeroku = @"Data Source = (localdb)\ProjectsV13;" +
+                "Initial Catalog = Recipes;" +
                 "Integrated Security = True;" +
                 "Connect Timeout = 30;" +
                 "Encrypt = False;" +
