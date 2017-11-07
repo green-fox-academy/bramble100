@@ -24,11 +24,27 @@ namespace Day02.Controllers
             }
             return Json(new { received = input, result = input * 2 });
         }
-    }
 
-    //public class DTO
-    //{
-    //    public int Received { get; set; }
-    //    public int Result => Received * 2;
-    //}
+        [HttpGet]
+        [Route("greeter")]
+        public IActionResult Greeter( DTO input)
+        {
+            if (String.IsNullOrEmpty(input.name))
+            {
+                return Json(new { error = "Please provide a name!" });
+            }
+            else if (String.IsNullOrEmpty(input.title))
+            {
+                return Json(new { error = "Please provide a title!" });
+            }
+
+            return Json(new { welcome_message = $"Oh, hi there {input.name}, my dear {input.title}!" });
+        }
+
+        public class DTO
+        {
+            public string name { get; set; }
+            public string title { get; set; }
+        }
+    }
 }
