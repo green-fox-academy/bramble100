@@ -59,7 +59,7 @@ namespace Day02.Controllers
         public IActionResult DoUntil([FromBody] DTO2 dto)
         {
             int result2 = 0;
-            if (dto.until == null)
+            if (dto == null || dto.until == null)
             {
                 return Json(new { error = "Please provide a number!" });
             }
