@@ -94,5 +94,45 @@ namespace Day02.Controllers
         {
             public int? until { get; set; }
         }
+
+        [HttpPost]
+        [Route("/arrays")]
+        public IActionResult Arrays([FromBody] DTO3 dto)
+        {
+            //if (dto == null)
+            //{
+            //    return NotFound();
+            //}
+
+            if (dto.what == "sum")
+            {
+                return Json(new { result = dto.numbers.ToList().Sum() });
+            }
+            else if (dto.what == "multiply")
+            {
+                int result = 1;
+                for (int i = 0; i < dto.numbers.Length; i++)
+                {
+                    result *= dto.numbers[i];
+                }
+                return Json(new { result = result });
+            }
+            else if (dto.what == "double")
+            {
+                for (int i = 0; i < dto.numbers.Length; i++)
+                {
+                    dto.numbers[i] *= 2;
+                }
+                return Json(new { result = dto.numbers});
+            }
+            return NotFound();
+        }
+
+        public class DTO3
+        {
+            public string what { get; set; }
+            public int[] numbers { get; set; }
+        }
     }
+
 }
