@@ -18,7 +18,7 @@ namespace Day02.Controllers
         [Route("doubling")]
         public IActionResult Doubling(int? input)
         {
-            if (input== null)
+            if (input == null)
             {
                 return Json(new { error = "Please provide an input!" });
             }
@@ -27,7 +27,7 @@ namespace Day02.Controllers
 
         [HttpGet]
         [Route("greeter")]
-        public IActionResult Greeter( DTO input)
+        public IActionResult Greeter(DTO input)
         {
             if (String.IsNullOrEmpty(input.name))
             {
@@ -49,9 +49,50 @@ namespace Day02.Controllers
 
         [HttpGet]
         [Route("/appenda/{inputString}")]
-        public IActionResult AppendA(string inputString) 
+        public IActionResult AppendA(string inputString)
             => String.IsNullOrEmpty(inputString) ?
             (IActionResult)NotFound() :
             Json(new { appended = $"{inputString}a" });
+
+        [HttpPost]
+        [Route("/dountil/{what}")]
+        public IActionResult DoUntil([FromBody] DTO2 dto)
+        {
+            int result2 = 0;
+            if (dto.until == null)
+            {
+                return Json(new { error = "Please provide a number!" });
+            }
+
+            if (RouteData.Values["what"].ToString() == "sum")
+            {
+                for (int i = (int)dto.until; i > 0; i--)
+                {
+                    result2 += i;
+                }
+            }
+            else if (RouteData.Values["what"].ToString() == "factor")
+            {
+                result2 = 1;
+                for (int i = (int)dto.until; i > 0; i--)
+                {
+                    result2 *= i;
+                }
+            }
+
+            return Json(new { result = result2 });
+        }
+
+
+        [Route("/dountil/{what}")]
+        public IActionResult DoUntilWithEmptyJSON(int? until)
+        {
+            return Json(new { error = "Please provide a number!" });
+        }
+
+        public class DTO2
+        {
+            public int? until { get; set; }
+        }
     }
 }
