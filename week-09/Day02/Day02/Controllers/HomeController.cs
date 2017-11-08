@@ -96,13 +96,13 @@ namespace Day02.Controllers
         }
 
         [HttpPost]
-        [Route("/arrays")]
+        [Route("arrays")]
         public IActionResult Arrays([FromBody] DTO3 dto)
         {
-            //if (dto == null)
-            //{
-            //    return NotFound();
-            //}
+            if (dto == null)
+            {
+                return NotFound();
+            }
 
             if (dto.what == "sum")
             {
@@ -123,7 +123,7 @@ namespace Day02.Controllers
                 {
                     dto.numbers[i] *= 2;
                 }
-                return Json(new { result = dto.numbers});
+                return Json(new { result = dto.numbers });
             }
             return NotFound();
         }
