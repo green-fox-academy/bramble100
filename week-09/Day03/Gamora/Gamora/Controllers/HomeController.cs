@@ -33,7 +33,7 @@ namespace Gamora.Controllers
         public IActionResult Add([FromBody] Song song)
         {
             songRepository.Add(song);
-            return Json(new { status = "Add new song" , song});
+            return Json(new { status = "Add new song", song });
         }
 
         [Route("remove")]
@@ -43,36 +43,70 @@ namespace Gamora.Controllers
             return Json(new { status = "Delete song" });
         }
 
-        [Route("changerating")]
-        [HttpPatch]
-        public IActionResult ChangeRating()
+        [Route("changerating/{id?}/{newrating?}")]
+        [HttpGet]
+        public IActionResult ChangeRating(int id, int newRating)
         {
-            return Json(new { status = "Change song rating" });
+            if (id == 0)
+            {
+                return Json(new { error = "Please provide an ID" });
+            }
+            else if (newRating < 1)
+            {
+                return Json(new { error = "Please provide a valid rating, at least 1" });
+            }
+            else if (newRating > 5)
+            {
+                return Json(new { error = "Please provide a valid rating, not more than 5" });
+            }
+
+            try
+            {
+                songRepository.ChangeRating(id, newRating);
+                return Json(new { status = "Change song rating", id = id, rating = newRating });
+            }
+            catch (Exception e)
+            {
+                return Json(new { error = e.Message });
+            }
         }
 
-        [Route("list/favorites")]
-        [HttpPatch]
-        public IActionResult ListFavorites()
+        [Route("list/favorites/{numberOfSongs?}")]
+        [HttpGet]
+        public IActionResult ListFavorites(int numberOfSongs)
         {
-            return Json(new { status = "List favourite X songs" });
+            if (numberOfSongs == 0)
+            {
+                return Json(new { error = "Please provide how many songs would you like to see" });
+            }
+
+            return Json(new
+            {
+                status = $"List favourite {numberOfSongs} songs",
+                favouriteSongs = songRepository.FavouriteSongs(numberOfSongs)
+            });
         }
 
-        [Route("list/sameauthors")]
-        [HttpPatch]
-        public IActionResult ListSameAuthors()
+        [Route("list/sameauthors/{author?}")]
+        [HttpGet]
+        public IActionResult ListSameAuthors(string author)
         {
-            return Json(new { status = "List songs by same author" });
+            return Json(new
+            {
+                status = "List songs by same author",
+                songs = songRepository.SongsFromSameAuthor(author)
+            });
         }
 
         [Route("list/samegenre")]
-        [HttpPatch]
+        [HttpGet]
         public IActionResult ListSameGenre()
         {
             return Json(new { status = "List songs of same genre" });
         }
 
         [Route("list/sameyear")]
-        [HttpPatch]
+        [HttpGet]
         public IActionResult ListSameYear()
         {
             return Json(new { status = "List songs from same year" });
