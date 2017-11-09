@@ -15,5 +15,6 @@ namespace Gamora.Models
         public string Genre { get; set; }
         public int Year { get; set; }
         public int Rating { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

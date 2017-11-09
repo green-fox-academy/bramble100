@@ -8,9 +8,10 @@ using Gamora.Entities;
 namespace Gamora.Migrations
 {
     [DbContext(typeof(SongContext))]
-    partial class SongContextModelSnapshot : ModelSnapshot
+    [Migration("20171109103548_UpdateWithIsDeleted")]
+    partial class UpdateWithIsDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.3")
