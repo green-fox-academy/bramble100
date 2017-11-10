@@ -167,5 +167,31 @@ namespace Gamora.Repositories
                 where song.IsDeleted == false && song.Year == year
                 orderby song.Id
                 select song);
+
+        /// <summary>
+        /// Returns a list with all the not deleted songs if the same genre.
+        /// </summary>
+        /// <param name="genre">The name of the genre.</param>
+        /// <returns>HashSet object with the list.</returns>
+        public HashSet<Song> SongsFromSameGenre(string genre)
+            => new HashSet<Song>(
+                from song in SongContext.Songs
+                where song.IsDeleted == false && song.Genre==genre
+                orderby song.Id
+                select song);
+
+        /// <summary>
+        /// Returns a list with all the not 
+        /// deleted songs if the same year.
+        /// </summary>
+        /// <param name="year">The name of the year.</param>
+        /// <returns>HashSet object with the list.</returns>
+        public object SongsFromSameYear(int year)
+            => new HashSet<Song>(
+                from song in SongContext.Songs
+                where song.IsDeleted == false 
+                    && song.Year == year
+                orderby song.Id
+                select song);
     }
 }
