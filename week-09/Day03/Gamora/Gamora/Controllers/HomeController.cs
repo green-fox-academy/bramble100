@@ -10,39 +10,163 @@ using Gamora.Models;
 
 namespace Gamora.Controllers
 {
+    /// <summary>
+    /// Controller object for HTML pages.
+    /// </summary>
     [Route("")]
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Repository for songs.
+        /// </summary>
         public SongRepository songRepository;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="songRepository">The song repository comes from Dependency Injection.</param>
         public HomeController(SongRepository songRepository)
-        {
-            this.songRepository = songRepository;
-        }
+            => this.songRepository = songRepository;
 
-        [Route("")]
-        [Route("awesome")]
+        /// <summary>
+        /// Lists all the songs (that are not deleted).
+        /// </summary>
+        /// <returns>View object with the songs.</returns>
         [HttpGet]
-        public IActionResult Index()
+        [Route(""), Route("show")]
+        public IActionResult List()
+            => View(songRepository.SongContext.Songs);
+
+        /// <summary>
+        /// Lists one song (if not deleted).
+        /// </summary>
+        /// <param name="id">The ID of the requested number.</param>
+        /// <returns>View object with the song.</returns>
+        [Route("show/{id}")]
+        [HttpGet]
+        public IActionResult List(int id)
         {
-            return Json(songRepository.SongContext.Songs);
+            try
+            {
+                return View("ShowOne", songRepository.GetOneSong(id));
+            }
+            catch (Exception)
+            {
+                return RedirectToRoute("/error/");
+            }
         }
 
+        /// <summary>
+        /// Shows a form for adding a new song.
+        /// </summary>
+        /// <returns>View object with the form.</returns>
+        [Route("add")]
+        [HttpGet]
+        public IActionResult AddForm() => View(new Song());
+
+        /// <summary>
+        /// Gives a confirmation with the added song's data.
+        /// </summary>
+        /// <param name="song">Empty Song object.</param>
+        /// <returns>View object with the confirmation.</returns>
         [Route("add")]
         [HttpPost]
-        public IActionResult Add([FromBody] Song song)
+        public IActionResult AddConfirmation(Song song)
         {
-            songRepository.Add(song);
-            return Json(new { status = "Add new song", song });
+            if (!ModelState.IsValid)
+            {
+                songRepository.Add(song);
+                return View(song);
+            }
+            return View("AddForm", song);
         }
 
-        [Route("remove")]
+        /// <summary>
+        /// Shows a form for updating a new song.
+        /// </summary>
+        /// <returns>View object with the form.</returns>
+        [Route("update/{id}")]
+        [HttpGet]
+        public IActionResult UpdateForm(int id)
+        {
+            try
+            {
+                return View(songRepository.GetOneSong(id));
+            }
+            catch (Exception)
+            {
+                return RedirectToRoute("/error/");
+            }
+        }
+
+        /// <summary>
+        /// Gives a confirmation with the song's updated data.
+        /// </summary>
+        /// <param name="song">Empty Song object.</param>
+        /// <returns>View object with the confirmation.</returns>
+        [Route("update")]
+        [HttpPost]
+        public IActionResult UpdateConfirmation(Song song)
+        {
+            if (ModelState.IsValid)
+            {
+                songRepository.Update(song);
+                return View(song);
+            }
+            return View("UpdateForm", song);
+        }
+
+        /// <summary>
+        /// Deletes a song from collection (soft delete).
+        /// </summary>
+        /// <param name="id">The ID of the song to be deleted.</param>
+        /// <returns>View object with confirmation.</returns>
+        [Route("delete/{id}")]
         [HttpDelete]
-        public IActionResult Delete()
+        public IActionResult DeleteConfirmation(int id)
         {
-            return Json(new { status = "Delete song" });
+            try
+            {
+                songRepository.DeleteSong(id);
+                var song = songRepository.LastDeletedSong;
+                return View(song);
+            }
+            catch (Exception)
+            {
+                return RedirectToRoute("error");
+            }
         }
 
+        /// <summary>
+        /// Returns a list of authors.
+        /// </summary>
+        /// <returns>List of the authors.</returns>
+        [Route("list/authors")]
+        public IActionResult ListOfAuthors() 
+            => View(songRepository.ListOfAuthors());
+
+        /// <summary>
+        /// Returns a list of genres.
+        /// </summary>
+        /// <returns>List of the genres.</returns>
+        [Route("list/genres")]
+        public IActionResult ListOfGenres()
+            => View(songRepository.ListOfGenres());
+
+        /// <summary>
+        /// Returns a list of years.
+        /// </summary>
+        /// <returns>List of the years.</returns>
+        [Route("list/years")]
+        public IActionResult ListOfYears()
+            => View(songRepository.ListOfYears());
+
+        /// <summary>
+        /// Change the rating of a song.
+        /// </summary>
+        /// <param name="id">The ID of the song.</param>
+        /// <param name="newRating">The new rating.</param>
+        /// <returns>View object.</returns>
         [Route("changerating/{id?}/{newrating?}")]
         [HttpGet]
         public IActionResult ChangeRating(int id, int newRating)
@@ -71,6 +195,11 @@ namespace Gamora.Controllers
             }
         }
 
+        /// <summary>
+        /// Lists the favorite songs.
+        /// </summary>
+        /// <param name="numberOfSongs">The number of songs to show.</param>
+        /// <returns>View object with the list.</returns>
         [Route("list/favorites/{numberOfSongs?}")]
         [HttpGet]
         public IActionResult ListFavorites(int numberOfSongs)
@@ -87,29 +216,39 @@ namespace Gamora.Controllers
             });
         }
 
-        [Route("list/sameauthors/{author?}")]
+        /// <summary>
+        /// Lists all the not deleted songs from the same author.
+        /// </summary>
+        /// <param name="author">The name of the author.</param>
+        /// <returns>View object with the list.</returns>
+        [Route("list/sameauthor/{author?}")]
         [HttpGet]
-        public IActionResult ListSameAuthors(string author)
-        {
-            return Json(new
-            {
-                status = "List songs by same author",
-                songs = songRepository.SongsFromSameAuthor(author)
-            });
-        }
+        public IActionResult ListSameAuthors(string author) 
+            => View(songRepository.SongsFromSameAuthor(author));
 
+        /// <summary>
+        /// Lists all the not deleted songs of the same genre.
+        /// </summary>
+        /// <param name="genre">The genre (pop, rock, etc).</param>
+        /// <returns>View object with the list.</returns>
         [Route("list/samegenre")]
         [HttpGet]
-        public IActionResult ListSameGenre()
+        public IActionResult ListSameGenre(string genre)
         {
             return Json(new { status = "List songs of same genre" });
         }
 
+        /// <summary>
+        /// Lists all the not deleted songs from the same year.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <returns>View object with the list.</returns>
         [Route("list/sameyear")]
         [HttpGet]
-        public IActionResult ListSameYear()
+        public IActionResult ListSameYear(int year)
         {
             return Json(new { status = "List songs from same year" });
         }
+
     }
 }

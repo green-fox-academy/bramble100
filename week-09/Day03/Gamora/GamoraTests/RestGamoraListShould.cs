@@ -11,12 +11,12 @@ using Xunit;
 
 namespace GamoraIntegrationTests
 {
-    public class RestGamoraListShould
+    public class RestGamoraHomeControllerShould
     {
         private readonly TestServer Server;
         private readonly HttpClient Client;
 
-        public RestGamoraListShould()
+        public RestGamoraHomeControllerShould()
         {
             Server = new TestServer(
                 new WebHostBuilder()
@@ -28,15 +28,20 @@ namespace GamoraIntegrationTests
         public async Task ReturnOkStatusWhenEmptyRoute()
         {
             var response = await Client.GetAsync("/");
-
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         [Fact]
-        public async Task ReturnOkStatusWhenAwesomeRoute()
+        public async Task ReturnOkStatusWhenShowRoute()
         {
-            var response = await Client.GetAsync("/awesome");
+            var response = await Client.GetAsync("/show");
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
 
+        [Fact]
+        public async Task ReturnOkStatusWhenShow()
+        {
+            var response = await Client.GetAsync("/show");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
     }

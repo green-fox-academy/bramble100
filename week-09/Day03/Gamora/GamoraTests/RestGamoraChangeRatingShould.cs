@@ -2,6 +2,7 @@ using Gamora;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Newtonsoft.Json.Serialization;
 
 // https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
 
@@ -31,26 +33,20 @@ namespace GamoraIntegrationTests
         public async Task ReturnOkStatusWhenNoIDGiven()
         {
             var response = await Client.GetAsync("/changerating");
-            var expectedResult = new JsonResult(new { error = "Please provide an ID" });
 
-            var e = expectedResult.SerializerSettings;
-            var fffffff = new Message() { error = "Please provide an ID" };
+            var expectedResult3 = JsonConvert.SerializeObject(new ErrorMessage() { error = "Please provide an ID" });
+
             Assert.Equal(HttpStatusCode.OK, 
                 response.StatusCode);
-            Assert.Equal(new JsonResult(fffffff),
+            Assert.Equal(expectedResult3,
                 await response.Content.ReadAsStringAsync());
-        }
-
-        public class Message
-        {
-            public string error { get; set; }
         }
 
         [Fact]
         public async Task ReturnOkStatusWhenTooLowRatingGiven()
         {
             var response = await Client.GetAsync("/changerating/1/0");
-            var expectedResult = new JsonResult(new { error = "Please provide a valid rating, at least 1" });
+            var expectedResult = new JsonResult(new ErrorMessage() { error = "Please provide a valid rating, at least 1" });
 
             Assert.Equal(HttpStatusCode.OK,
                 response.StatusCode);
@@ -62,7 +58,7 @@ namespace GamoraIntegrationTests
         public async Task ReturnOkStatusWhenTooHighRatingGiven()
         {
             var response = await Client.GetAsync("/changerating/1/6");
-            var expectedResult = new JsonResult(new { error = "Please provide a valid rating, not more than 5" });
+            var expectedResult = new JsonResult(new ErrorMessage() { error = "Please provide a valid rating, not more than 5" });
 
             Assert.Equal(HttpStatusCode.OK,
                 response.StatusCode);
@@ -80,4 +76,9 @@ namespace GamoraIntegrationTests
 
 
     }
+    class ErrorMessage
+    {
+        public string error { get; set; }
+    }
+
 }

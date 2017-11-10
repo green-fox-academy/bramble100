@@ -1,0 +1,18 @@
+﻿@model Gamora.Models.Song
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    @Html.ValidationSummary()
+    <form action="/add" method="post">
+        <div><label for="Author">Author</label><input id="Author" name="Author" type="text" value="@Model.Author"/></div>
+        <div><label for="Title">Title</label><input id="Title" name="Title" type="text" value="@Model.Title"/></div>
+        <div><label for="Genre">Genre</label><input id="Genre" name="Genre" type="text" value="@Model.Genre"/></div>
+        <div><label for="Year">Year</label><input id="Year" name="Year" type="text" value="@Model.Year"/></div>
+        <div><label for="Rating">Rating</label><input id="Rating" name="Rating" type="number" value="@Model.Rating"/></div>
+        <div><input type="submit" />Add Song</div>
+    </form>
+</body>
+</html>
