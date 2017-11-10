@@ -221,7 +221,7 @@ namespace Gamora.Controllers
         /// </summary>
         /// <param name="author">The name of the author.</param>
         /// <returns>View object with the list.</returns>
-        [Route("list/sameauthor/{author?}")]
+        [Route("list/author/{author}")]
         [HttpGet]
         public IActionResult ListSameAuthors(string author) 
             => View(songRepository.SongsFromSameAuthor(author));
@@ -231,7 +231,7 @@ namespace Gamora.Controllers
         /// </summary>
         /// <param name="genre">The genre (pop, rock, etc).</param>
         /// <returns>View object with the list.</returns>
-        [Route("list/samegenre")]
+        [Route("list/genre/{genre}")]
         [HttpGet]
         public IActionResult ListSameGenre(string genre)
         {
@@ -243,7 +243,7 @@ namespace Gamora.Controllers
         /// </summary>
         /// <param name="year">The year.</param>
         /// <returns>View object with the list.</returns>
-        [Route("list/sameyear")]
+        [Route("list/year/{year}")]
         [HttpGet]
         public IActionResult ListSameYear(int year)
         {
