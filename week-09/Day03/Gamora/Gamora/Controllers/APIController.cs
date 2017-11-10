@@ -52,7 +52,7 @@ namespace Gamora.Controllers
             }
             catch (Exception)
             {
-                return RedirectToRoute("/error/");
+                return BadRequest();
             }
         }
 
@@ -107,5 +107,115 @@ namespace Gamora.Controllers
             }
         }
 
+        /// <summary>
+        /// Returns a list of authors.
+        /// </summary>
+        /// <returns>List of the authors.</returns>
+        [Route("list/authors")]
+        public IActionResult ListOfAuthors()
+            => Json(songRepository.ListOfAuthors());
+
+        /// <summary>
+        /// Returns a list of genres.
+        /// </summary>
+        /// <returns>List of the genres.</returns>
+        [Route("list/genres")]
+        public IActionResult ListOfGenres()
+            => Json(songRepository.ListOfGenres());
+
+        /// <summary>
+        /// Returns a list of years.
+        /// </summary>
+        /// <returns>List of the years.</returns>
+        [Route("list/years")]
+        public IActionResult ListOfYears()
+            => Json(songRepository.ListOfYears());
+
+        /// <summary>
+        /// Change the rating of a song.
+        /// </summary>
+        /// <param name="id">The ID of the song.</param>
+        /// <param name="newRating">The new rating.</param>
+        /// <returns>View object.</returns>
+        [Route("changerating/{id?}/{newrating?}")]
+        [HttpGet]
+        public IActionResult ChangeRating(int id, int newRating)
+        {
+            if (id == 0)
+            {
+                return BadRequest(new { error = "Please provide an ID" });
+            }
+            else if (newRating < 1)
+            {
+                return BadRequest(new { error = "Please provide a valid rating, at least 1" });
+            }
+            else if (newRating > 5)
+            {
+                return BadRequest(new { error = "Please provide a valid rating, not more than 5" });
+            }
+
+            try
+            {
+                songRepository.ChangeRating(id, newRating);
+                return Json(new { status = "Change song rating", id = id, rating = newRating });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { error = e.Message });
+            }
+        }
+
+        /// <summary>
+        /// Lists the favorite songs.
+        /// </summary>
+        /// <param name="numberOfSongs">The number of songs to show.</param>
+        /// <returns>View object with the list.</returns>
+        [Route("list/favorites/{numberOfSongs}")]
+        [HttpGet]
+        public IActionResult ListFavorites(int numberOfSongs)
+        {
+            if (numberOfSongs == 0)
+            {
+                return BadRequest(new { error = "Please provide how many songs would you like to see" });
+            }
+
+            return Json(new
+            {
+                status = $"List favourite {numberOfSongs} songs",
+                favouriteSongs = songRepository.FavouriteSongs(numberOfSongs)
+            });
+        }
+
+        /// <summary>
+        /// Lists all the not deleted songs from the same author.
+        /// </summary>
+        /// <param name="author">The name of the author.</param>
+        /// <returns>View object with the list.</returns>
+        [Route("list/author/{author}")]
+        [HttpGet]
+        public IActionResult ListSameAuthors(string author)
+            => Json(songRepository.SongsFromSameAuthor(author));
+
+        /// <summary>
+        /// Lists all the not deleted songs of the same genre.
+        /// </summary>
+        /// <param name="genre">The genre (pop, rock, etc).</param>
+        /// <returns>View object with the list.</returns>
+        [Route("list/genre/{genre}")]
+        [HttpGet]
+        public IActionResult ListSameGenre(string genre)
+        {
+            return Json(songRepository.SongsFromSameGenre(genre));
+        }
+
+        /// <summary>
+        /// Lists all the not deleted songs from the same year.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <returns>View object with the list.</returns>
+        [Route("list/year/{year}")]
+        [HttpGet]
+        public IActionResult ListSameYear(int year) 
+            => Json(songRepository.SongsFromSameYear(year));
     }
 }
