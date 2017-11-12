@@ -34,7 +34,7 @@ namespace GamoraIntegrationTests
         {
             var response = await Client.GetAsync("/changerating");
 
-            var expectedResult3 = JsonConvert.SerializeObject(new ErrorMessage() { error = "Please provide an ID" });
+            var expectedResult3 = JsonConvert.SerializeObject(new { error = "Please provide an ID" });
 
             Assert.Equal(HttpStatusCode.OK, 
                 response.StatusCode);
@@ -46,7 +46,8 @@ namespace GamoraIntegrationTests
         public async Task ReturnOkStatusWhenTooLowRatingGiven()
         {
             var response = await Client.GetAsync("/changerating/1/0");
-            var expectedResult = new JsonResult(new ErrorMessage() { error = "Please provide a valid rating, at least 1" });
+            var expectedResult = new JsonResult(
+                new { error = "Please provide a valid rating, at least 1" });
 
             Assert.Equal(HttpStatusCode.OK,
                 response.StatusCode);
@@ -58,7 +59,9 @@ namespace GamoraIntegrationTests
         public async Task ReturnOkStatusWhenTooHighRatingGiven()
         {
             var response = await Client.GetAsync("/changerating/1/6");
-            var expectedResult = new JsonResult(new ErrorMessage() { error = "Please provide a valid rating, not more than 5" });
+            var expectedResult = new JsonResult(
+                new ErrorMessage() {
+                    error = "Please provide a valid rating, not more than 5" });
 
             Assert.Equal(HttpStatusCode.OK,
                 response.StatusCode);

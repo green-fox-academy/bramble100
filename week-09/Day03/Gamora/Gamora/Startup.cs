@@ -43,6 +43,7 @@ namespace Gamora
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseMvc();
 
             app.Run(async (context) =>

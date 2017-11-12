@@ -1,0 +1,24 @@
+﻿a {
+    text-decoration: none;
+    color: inherit;
+}
+
+table{
+    margin: 10px;
+}
+
+thead > tr {
+    background-color: aquamarine;
+}
+
+div.rounded {
+    border-radius: 100%;
+}
+
+th, td {
+    padding: 0 10px;
+}
+
+    th.center, td.center {
+        text-align: center;
+    }
