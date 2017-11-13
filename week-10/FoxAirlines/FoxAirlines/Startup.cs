@@ -20,7 +20,7 @@ namespace FoxAirlines
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connectionString = 
+            var connectionString =
                 @"Data Source = (localdb)\ProjectsV13;" +
                 "Initial Catalog = FoxAirlines;" +
                 "Integrated Security = True;" +
@@ -30,9 +30,11 @@ namespace FoxAirlines
                 "ApplicationIntent = ReadWrite;" +
                 "MultiSubnetFailover = False";
 
+            services.AddSingleton<Random>();
             services.AddScoped<UserRepository>();
+            services.AddScoped<FlightTicketRepository>();
+            services.AddDbContext<FlightTicketContext>(options => options.UseSqlServer(connectionString));
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

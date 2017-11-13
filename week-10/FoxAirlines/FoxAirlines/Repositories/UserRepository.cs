@@ -10,7 +10,7 @@ namespace FoxAirlines.Repositories
         public UserRepository(UserContext userContext) 
             => UserContext = userContext;
 
-        public bool UserExists(string userInput) 
+        public bool ContainsUser(string userInput) 
             => UserContext.Users.Any(u => u.LoginName == userInput);
     }
 }

@@ -9,13 +9,13 @@ namespace FoxAirlines.Collections
     {
         public static readonly HashSet<string> Names = new HashSet<string>()
         {
-            "Budapest",
-            "Wien",
-            "Bratislava",
-            "Prague",
-            "Madrid",
             "Berlin",
-            "Copenhagen"
+            "Bratislava",
+            "Budapest",
+            "Copenhagen",
+            "Madrid",
+            "Prague",
+            "Wien"
         };
 
         public static HashSet<string> OtherAirports(string airport)

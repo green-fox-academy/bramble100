@@ -9,24 +9,33 @@ namespace FoxAirlines.Models
     public class FlightTicket
     {
         /// <summary>
+        /// Parameterless constructor.
+        /// </summary>
+        public FlightTicket()
+        {
+        }
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        public FlightTicket(string destination, 
+            DateTime takeOffDate)
+        {
+            Destination = destination;
+            TakeOffDate = takeOffDate;
+        }
+        /// <summary>
         /// Ticket ID.
         /// </summary>
         [Key]
         public int Id { get; set; }
-        /// <summary>
-        /// The airport from where flight travels.
-        /// </summary>
-        [Required]
-        public string Origin { get; private set; }
         /// <summary>
         /// The airport to where flight travels.
         /// </summary>
         [Required]
         public string Destination { get; private set; }
         /// <summary>
-        /// The ID of the buyer.
+        /// The date on which the plane takes off.
         /// </summary>
-        [Required]
-        public int  BuyerId { get; set; }
+        public DateTime TakeOffDate { get; set; }
     }
 }

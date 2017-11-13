@@ -11,7 +11,7 @@ namespace FoxAirlines.Entities
     {
         public DbSet<User> Users { get; set; }
 
-        public UserContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public UserContext(DbContextOptions<UserContext> dbContextOptions) : base(dbContextOptions)
         {
         }
     }

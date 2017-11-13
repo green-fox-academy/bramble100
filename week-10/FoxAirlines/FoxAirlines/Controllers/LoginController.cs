@@ -18,12 +18,12 @@ namespace FoxAirlines.Controllers
             return View(new User());
         }
 
-        [Route("login"), HttpPost]
+        [Route("/login"), HttpPost]
         public IActionResult LoginResult(User user)
         {
             if(Collections.GitHubHandlesAlpaga.Contains(user.LoginName))
             {
-                return View("WelcomeFirst", user);
+                return LocalRedirect("/airport");
             }
             return View("UnsuccessfulLogin");
         }
