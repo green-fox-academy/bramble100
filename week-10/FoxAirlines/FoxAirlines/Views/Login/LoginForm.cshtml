@@ -1,14 +1,9 @@
 ﻿@model FoxAirlines.Models.User
+@{
+    Layout = "_Layout";
+}
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Fox Airlines Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="~/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container">
+<div class="container">
     <form action="/login" method="post" class="form-horizontal">
         <div class="form-group">
             <label for="username" class="control-label">User Name</label>
@@ -20,6 +15,4 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
-    </div>
-</body>
-</html>
+</div>
