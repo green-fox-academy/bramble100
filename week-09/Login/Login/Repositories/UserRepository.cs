@@ -11,10 +11,9 @@ namespace Login.Repositories
     {
         public UserContext UserContext { get; set; }
 
-        public UserRepository(UserContext userContext)
-        {
-            UserContext = userContext;
-        }
+        public UserRepository(UserContext userContext) 
+            => UserContext = userContext;
+
         public bool UserExists(string userInput) 
             => UserContext.Users.Any(u => u.LoginName == userInput);
     }
