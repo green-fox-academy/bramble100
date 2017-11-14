@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="ModelViews\" />
     <Folder Include="Entities\" />
@@ -20,6 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.SqlServer" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.Tools" Version="1.1.2" />
