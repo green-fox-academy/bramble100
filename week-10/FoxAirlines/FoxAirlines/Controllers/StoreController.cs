@@ -12,16 +12,16 @@ namespace FoxAirlines.Controllers
     [Route("")]
     public class StoreController : Controller
     {
-        private FlightTicketRepository flightTicketRepository;
+        private FoxAirlinesRepository flightTicketRepository;
 
-        public StoreController(FlightTicketRepository flightTicketRepository)
+        public StoreController(FoxAirlinesRepository flightTicketRepository)
         {
             this.flightTicketRepository = flightTicketRepository;
         }
 
         public IActionResult Summary()
         {
-            return View(new ViewModels.FlightTicketsOverview(flightTicketRepository.flightTicketContext));
+            return View(new ViewModels.FlightTicketsOverview(flightTicketRepository.FlightTickets));
         }
     }
 }

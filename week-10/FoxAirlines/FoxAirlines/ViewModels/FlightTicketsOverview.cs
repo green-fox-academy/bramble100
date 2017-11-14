@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FoxAirlines.Entities;
 using System.Collections;
+using FoxAirlines.Models;
 
 namespace FoxAirlines.ViewModels
 {
@@ -11,10 +12,9 @@ namespace FoxAirlines.ViewModels
     {
         public HashSet<FlightTicketsOverviewLine> Lines { get; set; } = new HashSet<FlightTicketsOverviewLine>();
 
-        public FlightTicketsOverview(FlightTicketContext flightTicketContext)
+        public FlightTicketsOverview(HashSet<FlightTicket> flightTickets)
         {
-            var tickets = flightTicketContext
-                .FlightTickets
+            var tickets = flightTickets
                 .OrderBy(t => t.Destination)
                 .OrderBy(t => t.TakeOffDate);
 
