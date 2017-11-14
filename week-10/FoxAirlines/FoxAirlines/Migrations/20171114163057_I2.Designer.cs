@@ -7,9 +7,9 @@ using FoxAirlines.Entities;
 
 namespace FoxAirlines.Migrations
 {
-    [DbContext(typeof(FlightTicketContext))]
-    [Migration("20171114133409_InitialMigration")]
-    partial class InitialMigration
+    [DbContext(typeof(FoxAirlinesContext))]
+    [Migration("20171114163057_I2")]
+    partial class I2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

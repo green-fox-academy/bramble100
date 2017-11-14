@@ -7,8 +7,8 @@ using FoxAirlines.Entities;
 
 namespace FoxAirlines.Migrations
 {
-    [DbContext(typeof(FlightTicketContext))]
-    partial class FlightTicketContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(FoxAirlinesContext))]
+    partial class FoxAirlinesContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

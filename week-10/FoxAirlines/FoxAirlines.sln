@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxAirlines", "FoxAirlines\FoxAirlines.csproj", "{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxAirlinesIntegrationTests", "FoxAirlinesIntegrationTests\FoxAirlinesIntegrationTests.csproj", "{64C1D534-2D7B-484B-86D1-5A9E66766242}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64C1D534-2D7B-484B-86D1-5A9E66766242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64C1D534-2D7B-484B-86D1-5A9E66766242}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64C1D534-2D7B-484B-86D1-5A9E66766242}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64C1D534-2D7B-484B-86D1-5A9E66766242}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

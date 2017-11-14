@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FoxAirlines.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class I2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
