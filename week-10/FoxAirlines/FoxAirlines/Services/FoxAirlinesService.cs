@@ -3,6 +3,7 @@ using System.Linq;
 using FoxAirlines.Repositories;
 using FoxAirlines.Models;
 using FoxAirlines.Collections;
+using System.Collections.Generic;
 
 namespace FoxAirlines.Services
 {
@@ -26,11 +27,19 @@ namespace FoxAirlines.Services
         private bool NeedGenerateMoreFlightTickets
             => foxAirlinesRepository.FlightTickets.Count() < MinimumNumberOfTickets;
 
+        public HashSet<FlightTicket> FlightTickets 
+            => foxAirlinesRepository.FlightTickets;
+
         public bool ThereIsFreeSeat(DateTime date, string destination)
             => foxAirlinesRepository.FlightTickets.Count(
                 ticket => ticket.Destination == destination 
                 && ticket.TakeOffDate == date)
             < MaximumNumberOfSeatsOnPlane;
+
+        public void AddNewFlightTicket(FlightTicket flightTicket)
+        {
+            foxAirlinesRepository.AddNewFlightTicket(flightTicket.TakeOffDate, flightTicket.Destination);
+        }
 
         public void AddNewFlightTicket(DateTime date, string destination)
             => foxAirlinesRepository.AddNewFlightTicket(date, destination);

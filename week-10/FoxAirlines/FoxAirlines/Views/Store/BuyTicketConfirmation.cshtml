@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model FoxAirlines.Models.FlightTicket
+
+<div class="container">
+    <h2>Booking Confirmation</h2>
+    <table class="table table-striped">
+        <caption>Ticket details</caption>
+        <tbody>
+            <tr>
+                <td>Destination</td>
+                <td>@Model.Destination</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>@Model.TakeOffDate.ToString("D")</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

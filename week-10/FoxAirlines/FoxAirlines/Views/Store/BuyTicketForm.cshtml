@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model FoxAirlines.Models.FlightTicket
+
+<div class="container">
+    <h2>Flight Ticket details</h2>
+    <form action="/new" method="post">
+        <div class="form-group">
+            <label for="take-off-date">Take-off date</label>
+            <select id="take-off-date" name="TakeOffDate" class="form-control">
+                @for (int i = 0; i < 7; i++)
+                {
+                    <option value="@DateTime.Now.AddDays(i).Date.ToString("D")">@DateTime.Now.AddDays(i).Date.ToString("D")</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <select id="destination" name="Destination" class="form-control">
+                @foreach (var option in FoxAirlines.Collections.Airports.OtherAirports("Wien"))
+                {
+                    <option value="@option">@option</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Buy ticket</button>
+    </form>
+</div>
