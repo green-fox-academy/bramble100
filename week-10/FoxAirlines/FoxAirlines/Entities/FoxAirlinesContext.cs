@@ -9,7 +9,7 @@ namespace FoxAirlines.Entities
 {
     public class FlightTicketContext : DbContext
     {
-        public DbSet<FlightTicket> FlightTickets { get; set; }
+        public DbSet<FlightTicket> FlightTickets { get; private set; }
         private int MinimumNumberOfTickets = 50;
         private int MaximumNumberOfSeatsOnPlane = 50;
         Random random = new Random();
@@ -43,6 +43,22 @@ namespace FoxAirlines.Entities
                 });
                 SaveChanges();
             }
+        }
+
+        public FlightTicket FlightTicket(int id) 
+            => FlightTickets.FirstOrDefault(t => t.Id == id);
+
+        public void UpdateFlightTicket(FlightTicket flightTicket)
+        {
+            FlightTickets.Update(flightTicket);
+            SaveChanges();
+        }
+
+        public void DeleteFlightTicket(int id)
+        {
+            var ticket = FlightTickets.Find(id);
+            FlightTickets.Remove(ticket);
+            SaveChanges();
         }
 
         private bool NeedGenerateMore => FlightTickets.Count() < MinimumNumberOfTickets;
