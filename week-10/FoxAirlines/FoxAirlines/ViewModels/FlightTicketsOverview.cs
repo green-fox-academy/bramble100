@@ -32,7 +32,7 @@ namespace FoxAirlines.ViewModels
 
             foreach (var line in Lines)
             {
-                line.NumberOfFreeSeats = tickets.Count(t => line.TakeOffDate.Date == t.TakeOffDate.Date && line.Destination == t.Destination);
+                line.NumberOfFreeSeats = 12 - tickets.Count(t => line.TakeOffDate.Date == t.TakeOffDate.Date && line.Destination == t.Destination);
             }
         }
     }
