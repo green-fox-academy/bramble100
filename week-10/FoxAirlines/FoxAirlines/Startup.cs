@@ -11,6 +11,7 @@ using FoxAirlines;
 using FoxAirlines.Entities;
 using FoxAirlines.Repositories;
 using Microsoft.EntityFrameworkCore;
+using FoxAirlines.Services;
 
 namespace FoxAirlines
 {
@@ -32,8 +33,9 @@ namespace FoxAirlines
                 "MultiSubnetFailover = False";
 
             services.AddSingleton<Random>();
-            services.AddScoped<FlightTicketRepository>();
-            services.AddDbContext<FlightTicketContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<FoxAirlinesService>();
+            services.AddScoped<FoxAirlinesRepository>();
+            services.AddDbContext<FoxAirlinesContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
