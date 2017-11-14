@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using FoxAirlines.Repositories;
-using FoxAirlines.Entities;
-using Microsoft.EntityFrameworkCore;
+using FoxAirlines;
 
 namespace FoxAirlines
 {
@@ -20,21 +18,6 @@ namespace FoxAirlines
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connectionString =
-                @"Data Source = (localdb)\ProjectsV13;" +
-                "Initial Catalog = FoxAirlines;" +
-                "Integrated Security = True;" +
-                "Connect Timeout = 30;" +
-                "Encrypt = False;" +
-                "TrustServerCertificate = True;" +
-                "ApplicationIntent = ReadWrite;" +
-                "MultiSubnetFailover = False";
-
-            services.AddSingleton<Random>();
-            services.AddScoped<UserRepository>();
-            services.AddScoped<FlightTicketRepository>();
-            services.AddDbContext<FlightTicketContext>(options => options.UseSqlServer(connectionString));
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +30,8 @@ namespace FoxAirlines
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
             app.UseStaticFiles();
+            app.UseMvc();
 
             app.Run(async (context) =>
             {

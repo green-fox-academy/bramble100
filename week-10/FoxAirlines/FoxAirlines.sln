@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxAirlines", "FoxAirlines\FoxAirlines.csproj", "{C0673F1A-71F2-4667-AF9A-4F26CB3E0758}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxAirlines", "FoxAirlines\FoxAirlines.csproj", "{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C0673F1A-71F2-4667-AF9A-4F26CB3E0758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0673F1A-71F2-4667-AF9A-4F26CB3E0758}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0673F1A-71F2-4667-AF9A-4F26CB3E0758}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0673F1A-71F2-4667-AF9A-4F26CB3E0758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7CD37D-C0EE-4096-AC85-1E27EDA48878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0FA34D06-12C1-4570-8983-9B0AB5E0AEC9}
+		SolutionGuid = {74167E23-4418-4AE5-957C-10D9A89B2DC4}
 	EndGlobalSection
 EndGlobal
