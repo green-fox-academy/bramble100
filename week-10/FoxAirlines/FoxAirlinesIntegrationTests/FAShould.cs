@@ -2,6 +2,7 @@ using FoxAirlines;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -16,18 +17,19 @@ namespace FoxAirlinesIntegrationTests
 
         public FAShould()
         {
+            // Arrange
             Server = new TestServer(
-                new WebHostBuilder()
+            new WebHostBuilder()
                 .UseStartup<Startup>());
+
             Client = Server.CreateClient();
         }
 
         [Fact]
         public async Task ReturnOKWhenEmptyRoute()
         {
-            var response = await Client.GetAsync("");
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            // Act
+            Assert.Equal(HttpStatusCode.OK, (await Client.GetAsync("")).StatusCode);
         }
     }
 }

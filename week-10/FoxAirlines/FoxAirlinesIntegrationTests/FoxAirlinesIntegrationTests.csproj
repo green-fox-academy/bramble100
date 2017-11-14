@@ -17,4 +17,8 @@
     <ProjectReference Include="..\FoxAirlines\FoxAirlines.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TextFixtures\" />
+  </ItemGroup>
+
 </Project>

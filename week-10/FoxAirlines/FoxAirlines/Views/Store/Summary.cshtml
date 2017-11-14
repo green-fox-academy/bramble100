@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model FoxAirlines.ViewModels.FlightTicketsOverview
+
+<div class="container">
+    <h2>Airport Operations</h2>
+    <div class="col-sm-6">
+        <table class="table table-striped">
+            <caption>
+                Ticket Store
+            </caption>
+            <thead>
+                <tr>
+                    <th>Take-Off</th>
+                    <th>Destination</th>
+                    <th class="text-center">Free Seats</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var flight in Model.Lines)
+            {
+                    <tr>
+                        <td>@flight.TakeOffDate.ToString("yyyy MMM d")</td>
+                        <td>@flight.Destination</td>
+                        <td class="text-center">@flight.NumberOfFreeSeats</td>
+                        <td><a href="/store/new/@flight.TakeOffDate.Year/@flight.TakeOffDate.Month/@flight.TakeOffDate.Day/@flight.Destination" class="btn btn-success" role="button">Sell ticket</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
