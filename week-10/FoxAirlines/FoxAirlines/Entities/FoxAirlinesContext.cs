@@ -1,9 +1,7 @@
 ﻿using FoxAirlines.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FoxAirlines.Entities
 {
@@ -43,6 +41,12 @@ namespace FoxAirlines.Entities
         {
             var ticket = FlightTickets.Find(id);
             FlightTickets.Remove(ticket);
+            SaveChanges();
+        }
+
+        internal void DeleteFlightTicket(FlightTicket flightTicket)
+        {
+            FlightTickets.Remove(flightTicket);
             SaveChanges();
         }
     }
