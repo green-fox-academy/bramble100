@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FoxAirlines.Repositories;
+using FoxAirlines.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,16 +12,16 @@ namespace FoxAirlines.Controllers
     [Route("")]
     public class StoreController : Controller
     {
-        private FoxAirlinesRepository flightTicketRepository;
+        private FoxAirlinesService foxAirlinesService;
 
-        public StoreController(FoxAirlinesRepository flightTicketRepository)
+        public StoreController(FoxAirlinesService foxAirlinesService)
         {
-            this.flightTicketRepository = flightTicketRepository;
+            this.foxAirlinesService = foxAirlinesService;
         }
 
         public IActionResult Summary()
         {
-            return View(new ViewModels.FlightTicketsOverview(flightTicketRepository.FlightTickets));
+            return View(new ViewModels.FlightTicketsOverview(foxAirlinesService.FlightTickets));
         }
     }
 }
