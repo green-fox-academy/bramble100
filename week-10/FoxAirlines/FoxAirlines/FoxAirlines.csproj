@@ -14,6 +14,7 @@
     <PackageReference Include="MicroSoft.EntityFrameworkCore.SqlServer" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.Tools" Version="1.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
 </Project>
