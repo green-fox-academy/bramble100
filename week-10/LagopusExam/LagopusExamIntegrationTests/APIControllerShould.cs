@@ -26,5 +26,12 @@ namespace LagopusExamIntegrationTests
             var response = await Client.GetAsync("/questions");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
+
+        [Fact]
+        public async System.Threading.Tasks.Task ReturnOKWhenHttpPostAnswersAsync()
+        {
+            var response = await Client.GetAsync("/answers");
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
     }
 }
