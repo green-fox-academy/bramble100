@@ -15,10 +15,8 @@ namespace FoxAirlines.Controllers
     {
         private FoxAirlinesService foxAirlinesService;
 
-        public StoreController(FoxAirlinesService foxAirlinesService)
-        {
-            this.foxAirlinesService = foxAirlinesService;
-        }
+        public StoreController(FoxAirlinesService foxAirlinesService) 
+            => this.foxAirlinesService = foxAirlinesService;
 
         public IActionResult Summary() 
             => View(new ViewModels.FlightTicketsOverview(foxAirlinesService.FlightTickets));
