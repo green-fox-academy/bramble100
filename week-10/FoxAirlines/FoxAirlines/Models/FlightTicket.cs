@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoxAirlines.Models
 {
-    public class FlightTicket
+    public class FlightTicket : IEquatable<FlightTicket>
     {
         /// <summary>
         /// Parameterless constructor.
@@ -40,5 +40,10 @@ namespace FoxAirlines.Models
         /// The date on which the plane takes off.
         /// </summary>
         public DateTime TakeOffDate { get; set; }
+
+        public bool Equals(FlightTicket other) 
+            => Id.Equals(other.Id) 
+            && Destination.Equals(other.Destination) 
+            && TakeOffDate.Equals(other.TakeOffDate);
     }
 }
