@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace LagopusExam.Models
 {
-    public class Quiz
+    public class QuizQuestions
     {
+        [Key]
         public int Id { get; set; }
-        public List<object> Questions { get; set; }
+        [Required]
+        public List<QuizQuestion> Questions { get; set; }
     }
 }

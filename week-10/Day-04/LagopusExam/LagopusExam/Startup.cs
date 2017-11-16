@@ -8,11 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using LagopusExam.Services;
-using LagopusExam.Repositories;
 using LagopusExam.Entities;
 using Microsoft.EntityFrameworkCore;
-
-// https://github.com/greenfox-academy/lagopus-spring-exam
+using LagopusExam.Repositories;
 
 namespace LagopusExam
 {
@@ -22,7 +20,6 @@ namespace LagopusExam
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             var connectionString =
                 @"Data Source = (localdb)\ProjectsV13;" +
                 "Initial Catalog = LagopusExam;" +
@@ -33,11 +30,12 @@ namespace LagopusExam
                 "ApplicationIntent = ReadWrite;" +
                 "MultiSubnetFailover = False";
 
+            services.AddMvc();
+
             services.AddSingleton<Random>();
             services.AddScoped<LagopusExamService>();
             services.AddScoped<LagopusExamRepository>();
-            services.AddDbContext<LagopusExamContext>(
-                options => options.UseSqlServer(connectionString));
+            services.AddDbContext<LagopusExamContext>(options => options.UseSqlServer(connectionString));
 
         }
 
@@ -52,6 +50,7 @@ namespace LagopusExam
             }
 
             app.UseMvc();
+            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {

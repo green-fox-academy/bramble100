@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Collections\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -14,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.3" />
+    <PackageReference Include="MicroSoft.EntityFrameworkCore.InMemory" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.SqlServer" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.3" />
     <PackageReference Include="MicroSoft.EntityFrameworkCore.Tools" Version="1.1.2" />
