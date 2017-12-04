@@ -33,5 +33,11 @@ namespace LagopusExam.Services
 
         public void AddQuestion(QuestionWithAnswer question)
             => lagopusExamRepository.AddQuestion(question);
+
+        public bool CheckQuizWithAnswerUnChecked(QuizWithAnswerUnChecked quizWithAnswerUnChecked)
+        {
+            int questionId = lagopusExamRepository.GetQuestionIdByQuizId(quizWithAnswerUnChecked.Id);
+            return lagopusExamRepository.IsAnswerCorrectByQuestionId(questionId, quizWithAnswerUnChecked.Answer);
+        }
     }
 }

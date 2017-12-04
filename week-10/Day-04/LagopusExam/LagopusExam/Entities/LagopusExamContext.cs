@@ -39,6 +39,15 @@ namespace LagopusExam.Entities
             return quiz.Entity.Id;
         }
 
+        public int GetQuestionIdByQuizId(int quizId) => (from quiz in Quizes
+                                                         where quiz.Id == quizId
+                                                         select quiz.QuestionId).First();
+
+        public bool IsAnswerCorrectByQuestionId(int questionId, string answer) 
+            => (from question in QuestionsWithAnswer
+                where question.Id == questionId
+                select question.Answer).First().Equals(answer);
+
         public void AddQuestion(QuestionWithAnswer question)
         {
             QuestionsWithAnswer.Add(question);

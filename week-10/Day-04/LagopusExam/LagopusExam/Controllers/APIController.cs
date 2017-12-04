@@ -54,11 +54,24 @@ namespace LagopusExam.Controllers
             }
         }
 
+        [HttpPost]
         [Route("addquestion")]
-        public IActionResult AddQuestion([FromBody]            QuestionWithAnswer question)
+        public IActionResult AddQuestion([FromBody] QuestionWithAnswer question)
         {
             lagopusExamService.AddQuestion(question);
-            return Ok();
+            return Ok(question);
+        }
+
+        [HttpPost]
+        [Route("answers")]
+        public IActionResult CheckQuizWithAnswer([FromBody] QuizWithAnswerUnChecked quizWithAnswerUnChecked)
+        {
+            if (quizWithAnswerUnChecked==null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(lagopusExamService.CheckQuizWithAnswerUnChecked(quizWithAnswerUnChecked));
         }
     }
 }

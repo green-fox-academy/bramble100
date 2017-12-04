@@ -36,5 +36,10 @@ namespace LagopusExam.Repositories
         public void AddQuestion(QuestionWithAnswer question) 
             => lagopusExamContext.AddQuestion(question);
 
+        public int GetQuestionIdByQuizId(int quizId) 
+            => lagopusExamContext.GetQuestionIdByQuizId(quizId);
+
+        public bool IsAnswerCorrectByQuestionId(int questionId, string answer)
+            => lagopusExamContext.IsAnswerCorrectByQuestionId(questionId, answer);
     }
 }
