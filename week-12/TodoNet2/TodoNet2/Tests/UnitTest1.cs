@@ -29,7 +29,7 @@ namespace Tests
                 .Returns(expectedTodoList);
 
             var rESTController = new RESTController(todoRepository.Object);
-            JsonResult result = (JsonResult)rESTController.List();
+            var result = (JsonResult)rESTController.List();
             var resultJson = JsonConvert.SerializeObject(result.Value);
             Assert.AreEqual(expextedResultJson, resultJson);
         }
