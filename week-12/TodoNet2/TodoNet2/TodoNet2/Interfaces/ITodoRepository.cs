@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TodoNet2.Entities;
+﻿using System.Collections.Generic;
 using TodoNet2.Models;
 
 namespace TodoNet2.Interfaces
