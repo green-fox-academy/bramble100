@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TodoNet2.Entities;
 using Microsoft.EntityFrameworkCore;
 using TodoNet2.Repositories;
+using TodoNet2.Interfaces;
 
 namespace TodoNet2
 {
@@ -19,7 +20,7 @@ namespace TodoNet2
             services.AddDbContext<TodoContext>(
                 options => options.UseNpgsql(connectionstring));
             services.AddMvc();
-            services.AddScoped<TodoRepository>();
+            services.AddScoped<ITodoRepository, TodoRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env /*,ILoggerFactory loggerFactory*/)
