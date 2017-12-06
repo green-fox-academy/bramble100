@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TodoNet2.Repositories;
 using TodoNet2.Models;
+using TodoNet2.Interfaces;
 
 namespace TodoNet2.Controllers
 {
     [Route("")]
     public class RESTController : Controller
     {
-        TodoRepository TodoRepository;
+        ITodoRepository TodoRepository;
 
         public RESTController(TodoRepository todoRepository)
         {

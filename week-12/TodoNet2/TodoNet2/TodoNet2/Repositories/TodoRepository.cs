@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TodoNet2.Entities;
+using TodoNet2.Interfaces;
 using TodoNet2.Models;
 
 namespace TodoNet2.Repositories
 {
-    public class TodoRepository
+    public class TodoRepository : ITodoRepository
     {
         private TodoContext TodoContext;
-
-        public List<Todo> GetList()
-        {
-            return TodoContext.Todos.ToList();
-        }
 
         public TodoRepository(TodoContext todoContext)
         {
             TodoContext = todoContext;
+        }
+
+        public List<Todo> GetList()
+        {
+            return TodoContext.Todos.ToList();
         }
 
         public List<Todo> NotDone()
