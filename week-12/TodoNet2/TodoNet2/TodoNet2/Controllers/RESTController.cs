@@ -14,7 +14,7 @@ namespace TodoNet2.Controllers
     {
         ITodoRepository TodoRepository;
 
-        public RESTController(TodoRepository todoRepository)
+        public RESTController(ITodoRepository todoRepository)
         {
             TodoRepository = todoRepository;
         }
