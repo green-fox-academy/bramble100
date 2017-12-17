@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FactoryPattern
 {
@@ -10,8 +6,9 @@ namespace FactoryPattern
     {
         static void Main(string[] args)
         {
-            List<int> list = (List<int>)Factory.Creator();
-            var list2 = (IEnumerable<int>)Factory.Creator();
+            var list = (IEnumerable<int>)Factory.Creator();
+            var list2 = (List<int>)Factory.Creator();
+            IEnumerable<int> list4 = (List<int>)Factory.Creator();
         }
 
         public static class Factory
