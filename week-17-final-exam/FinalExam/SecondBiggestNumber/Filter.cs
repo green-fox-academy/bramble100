@@ -10,5 +10,26 @@ namespace SecondBiggestNumber
         // https://github.com/greenfox-academy/final-exam-mini-exercises#20
 
         public static int SecondBiggestNumberMethod(IEnumerable<int> collection) => collection.OrderByDescending(x => x).ElementAt(1);
+
+        public static int SecondBiggestNumber(IEnumerable<int> collection)
+        {
+            int max=int.MinValue;
+
+            var localCollection = new List<int>(collection);
+
+            foreach (var item in collection)
+            {
+                max = item > max ? item : max;
+            }
+
+            localCollection.Remove(max);
+
+            foreach (var item in collection)
+            {
+                max = item > max ? item : max;
+            }
+
+            return max;
+        }
     }
 }
